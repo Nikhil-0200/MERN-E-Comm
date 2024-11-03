@@ -12,15 +12,11 @@ import {
   ShoppingCartIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 
-const navigation = [
-  { name: "Dashboard", to: "/",  current: true },
-  { name: "Team", href: "#", current: false },
-  { name: "Projects", href: "#", current: false },
-];
+
 
 
 function classNames(...classes) {
@@ -28,7 +24,14 @@ function classNames(...classes) {
 }
 
 const NavBar = () => {
+  const location =  useLocation()
 const navigate = useNavigate();
+
+const navigation = [
+  { name: "Dashboard", to: "/",  current: location.pathname === "/" },
+  { name: "LogIn", to:"/login" , current: location.pathname === "/login" },
+  { name: "SignUp", to:"/signUp" , current: location.pathname === "/signUp" },
+];
 
   return (
     <div>
@@ -143,10 +146,10 @@ const navigate = useNavigate();
         <DisclosurePanel className="sm:hidden">
           <div className="space-y-1 px-2 pb-3 pt-2">
             {navigation.map((item) => (
-              <DisclosureButton
+              <Disclosure.Button
                 key={item.name}
-                as="a"
-                href={item.href}
+                as={Link}
+                to={item.to}
                 aria-current={item.current ? "page" : undefined}
                 className={classNames(
                   item.current
@@ -156,7 +159,7 @@ const navigate = useNavigate();
                 )}
               >
                 {item.name}
-              </DisclosureButton>
+              </Disclosure.Button>
             ))}
           </div>
         </DisclosurePanel>
