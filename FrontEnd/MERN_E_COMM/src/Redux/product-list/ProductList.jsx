@@ -339,6 +339,8 @@ const ProductList = () => {
                   ))}
                 </form>
 
+
+
                 {/* Product grid */}
                 <div className="lg:col-span-3">
                   <div className="bg-white">
