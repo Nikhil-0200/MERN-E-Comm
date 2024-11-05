@@ -31,6 +31,7 @@ const CheckoutPage = () => {
   return (
 
     <div className="mx-auto max-w-5xl px-2 sm:px-6 lg:px-8 my-10">
+        hi
       <div className="grid grid-cols-1 gap-x-8=6 gap-y-10 lg:grid-cols-2">
 
       <div className="shadow-xl px-2">
