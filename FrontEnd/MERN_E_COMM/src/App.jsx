@@ -6,7 +6,6 @@ import AllRoutes from './components/AllRoutes'
 
 function App() {
 
-  const count = useSelector((state)=> state.counter.value)
   const dispatch = useDispatch()
   
   return (
