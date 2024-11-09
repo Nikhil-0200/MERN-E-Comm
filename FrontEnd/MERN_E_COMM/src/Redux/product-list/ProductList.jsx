@@ -23,26 +23,47 @@ import {
 
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { selectAllProducts, fetchAllProductsAsync } from "./productListSlice";
+import { selectAllProducts, fetchAllProductsAsync, fetchAllProductsFilterAsync } from "./productListSlice";
 
 const ProductList = () => {
 
   const dispatch = useDispatch();
   const products = useSelector(selectAllProducts)
+  const [filterData, setFilterData] = useState({});
+
+  const handleFilter = (e, section, option) =>{
+    const newFilterData = {...filterData, [section.id]:option.value}
+    setFilterData(newFilterData)
+    dispatch(fetchAllProductsFilterAsync(newFilterData))
+  }
+
+  const handleSort = (e, option) =>{
+    const newFilterData = {...filterData, _sort:option.sort, _order:option.order}
+    setFilterData(newFilterData)
+    dispatch(fetchAllProductsFilterAsync(newFilterData))
+  }
 
   useEffect(()=>{
     dispatch(fetchAllProductsAsync())
   }, [dispatch])
 
   const sortOptions = [
-    { name: "Most Popular", href: "#", current: true },
-    { name: "Best Rating", href: "#", current: false },
-    { name: "Newest", href: "#", current: false },
-    { name: "Price: Low to High", href: "#", current: false },
-    { name: "Price: High to Low", href: "#", current: false },
+    { name: "Best Rating", sort: "rating", order:"desc" , current: false },
+    { name: "Price: Low to High", sort: "price", order:"asc" , current: false },
+    { name: "Price: High to Low", sort: "price", order:"desc" , current: false },
   ];
 
   const filters = [
+    {
+      id: "category",
+      name: "Category",
+      options: [
+        { value: 'beauty', label: 'Beauty', checked: false },
+        { value: 'fragrances', label: 'Fragrances', checked: false },
+        { value: 'furniture', label: 'Furniture', checked: false },
+        { value: 'groceries', label: 'Groceries', checked: false }
+      ],
+    },
     {
       id: "brand",
       name: "Brands",
@@ -69,28 +90,6 @@ const ProductList = () => {
         { value: 'Furniture Co.', label: 'Furniture Co.', checked: false },
         { value: 'Knoll', label: 'Knoll', checked: false },
         { value: 'Bath Trends', label: 'Bath Trends', checked: false }
-      ],
-    },
-    {
-      id: "category",
-      name: "Category",
-      options: [
-        { value: 'beauty', label: 'Beauty', checked: false },
-        { value: 'fragrances', label: 'Fragrances', checked: false },
-        { value: 'furniture', label: 'Furniture', checked: false },
-        { value: 'groceries', label: 'Groceries', checked: false }
-      ],
-    },
-    {
-      id: "size",
-      name: "Size",
-      options: [
-        { value: "2l", label: "2L", checked: false },
-        { value: "6l", label: "6L", checked: false },
-        { value: "12l", label: "12L", checked: false },
-        { value: "18l", label: "18L", checked: false },
-        { value: "20l", label: "20L", checked: false },
-        { value: "40l", label: "40L", checked: true },
       ],
     },
   ];
@@ -219,8 +218,8 @@ const ProductList = () => {
                     <div className="py-1">
                       {sortOptions.map((option) => (
                         <MenuItem key={option.name}>
-                          <a
-                            href={option.href}
+                          <p
+                            onClick={(e)=>handleSort(e,option)}
                             className={classNames(
                               option.current
                                 ? "font-medium text-gray-900"
@@ -229,7 +228,7 @@ const ProductList = () => {
                             )}
                           >
                             {option.name}
-                          </a>
+                          </p>
                         </MenuItem>
                       ))}
                     </div>
@@ -300,6 +299,7 @@ const ProductList = () => {
                                 id={`filter-${section.id}-${optionIdx}`}
                                 name={`${section.id}[]`}
                                 type="checkbox"
+                                onChange={(e)=> handleFilter(e, section, option)}
                                 className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
                               />
                               <label
