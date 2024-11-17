@@ -28,12 +28,34 @@ import { selectAllProducts, fetchAllProductsAsync, fetchAllProductsFilterAsync }
 const ProductList = () => {
 
   const dispatch = useDispatch();
-  const products = useSelector(selectAllProducts)
+  const products = useSelector((state)=> state.product.products)
   const [filterData, setFilterData] = useState({});
+  const [sort, setSort] = useState({});
+  const [page, setPage] = useState(1);
+  const limit = 10
+  
 
-  const handleFilter = (e, section, option) =>{
-    const newFilterData = {...filterData, [section.id]:option.value}
-    setFilterData(newFilterData)
+  const handleFilter = (e, section, option) =>{  
+    const checkedStatus = e.target.checked
+
+    const newFilterData = {...filterData}
+
+    if(checkedStatus){
+      if(!newFilterData[section.id]){
+        newFilterData[section.id] = []
+      }
+      newFilterData[section.id].push(option.value)
+    }else{
+      if(newFilterData[section.id]){
+        newFilterData[section.id] = newFilterData[section.id].filter((ele)=> ele !== option.value)
+
+        if(newFilterData[section.id].length === 0){
+          delete newFilterData[section.id]
+        }
+      }
+    }
+
+    setFilterData(newFilterData);
     dispatch(fetchAllProductsFilterAsync(newFilterData))
   }
 
@@ -174,6 +196,7 @@ const ProductList = () => {
                                 id={`filter-mobile-${section.id}-${optionIdx}`}
                                 name={`${section.id}[]`}
                                 type="checkbox"
+                                onChange={(e)=>handleFilter(e,section,option)}
                                 className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
                               />
                               <label
@@ -370,5 +393,6 @@ const ProductList = () => {
     </div>
   );
 };
+
 
 export default ProductList;
