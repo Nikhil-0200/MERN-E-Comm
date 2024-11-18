@@ -24,17 +24,20 @@ import { Pagination } from "../../components/Pagination";
 
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { selectAllProducts, fetchAllProductsAsync, fetchAllProductsFilterAsync } from "./productListSlice";
+import { selectAllProducts, fetchAllProductsAsync, fetchAllProductsFilterAsync, fetchCategoryAsync, fetchBrandsAsync } from "./productListSlice";
+import { fetchCategory } from "./productListAPI";
 
 const ProductList = () => {
 
-  const dispatch = useDispatch();
-  const products = useSelector((state)=> state.product.products)
-  const totalItems = useSelector((state)=> state.product.totalItems)
-  const [filterData, setFilterData] = useState({});
-  const [sort, setSort] = useState({});
-  const [page, setPage] = useState(1);
-  const limit = 8
+    const dispatch = useDispatch();
+    const products = useSelector((state)=> state.product.products)
+    const category = useSelector((state) => state.product.category)
+    const brands = useSelector((state) => state.product.brands)
+    const totalItems = useSelector((state)=> state.product.totalItems)
+    const [filterData, setFilterData] = useState({});
+    const [sort, setSort] = useState({});
+    const [page, setPage] = useState(1);
+    const limit = 8
 
 
   const totalPages = Math.ceil(totalItems/limit)
@@ -98,6 +101,11 @@ const ProductList = () => {
   }
 
   useEffect(()=>{
+    dispatch(fetchCategoryAsync())  
+    dispatch(fetchBrandsAsync())  
+  }, [])
+
+  useEffect(()=>{
     centralFn()
   }, [filterData, sort, page])
 
@@ -115,40 +123,12 @@ const ProductList = () => {
     {
       id: "category",
       name: "Category",
-      options: [
-        { value: 'beauty', label: 'Beauty', checked: false },
-        { value: 'fragrances', label: 'Fragrances', checked: false },
-        { value: 'furniture', label: 'Furniture', checked: false },
-        { value: 'groceries', label: 'Groceries', checked: false }
-      ],
+      options: category
     },
     {
       id: "brand",
       name: "Brands",
-      options: [
-        { value: 'Essence', label: 'Essence', checked: false },
-        { value: 'Glamour Beauty', label: 'Glamour Beauty', checked: false },
-        { value: 'Velvet Touch', label: 'Velvet Touch', checked: false },
-        { value: 'Chic Cosmetics', label: 'Chic Cosmetics', checked: false },
-        { value: 'Nail Couture', label: 'Nail Couture', checked: false },
-        { value: 'Calvin Klein', label: 'Calvin Klein', checked: false },
-        { value: 'Chanel', label: 'Chanel', checked: false },
-        { value: 'Dior', label: 'Dior', checked: false },
-        {
-          value: 'Dolce & Gabbana',
-          label: 'Dolce & Gabbana',
-          checked: false
-        },
-        { value: 'Gucci', label: 'Gucci', checked: false },
-        {
-          value: 'Annibale Colombo',
-          label: 'Annibale Colombo',
-          checked: false
-        },
-        { value: 'Furniture Co.', label: 'Furniture Co.', checked: false },
-        { value: 'Knoll', label: 'Knoll', checked: false },
-        { value: 'Bath Trends', label: 'Bath Trends', checked: false }
-      ],
+        options: brands
     },
   ];
 

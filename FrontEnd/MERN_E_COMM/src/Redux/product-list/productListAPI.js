@@ -34,3 +34,23 @@ export async function fetchAllProductsFilter(queryData) {
   
   return {products:res.data, totalItems:totalItems};
 }
+
+// Fetching Category Data
+export async function fetchCategory(){
+  let res = await axios({
+    url: "http://localhost:3000/category",
+    method: "get"
+  })
+  console.log(`Api Response`);
+  
+  return res
+}
+
+// Fetching Brands Data
+export async function fetchBrands(){
+  let res = await axios({
+    url: "http://localhost:3000/brands",
+    method: "get"
+  })
+  return res
+}
