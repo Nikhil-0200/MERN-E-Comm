@@ -18,8 +18,9 @@ import {
   MinusIcon,
   PlusIcon,
   Squares2X2Icon,
-  StarIcon
+  StarIcon,
 } from "@heroicons/react/20/solid";
+import { Pagination } from "../../components/Pagination";
 
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -29,45 +30,80 @@ const ProductList = () => {
 
   const dispatch = useDispatch();
   const products = useSelector((state)=> state.product.products)
+  const totalItems = useSelector((state)=> state.product.totalItems)
   const [filterData, setFilterData] = useState({});
   const [sort, setSort] = useState({});
   const [page, setPage] = useState(1);
-  const limit = 10
-  
+  const limit = 8
 
-  const handleFilter = (e, section, option) =>{  
+
+  const totalPages = Math.ceil(totalItems/limit)
+  const indexOfLastItem = limit * page
+  const indexOfFirstItem = indexOfLastItem - limit
+
+
+  const centralFn = () =>{
+    const queryData = {...filterData, ...sort, _page:page, _limit:limit};
+
+    dispatch(fetchAllProductsFilterAsync(queryData))
+  }
+
+  // Filter Function
+  const handleFilter = (e, section, option) =>{
+
+    // Checkbox Status
     const checkedStatus = e.target.checked
 
+    // Shallow Copy Of filterData Object
     const newFilterData = {...filterData}
 
+
     if(checkedStatus){
+
+      // Now in this object we have to store data like this -> {category: ["beauty", "groceries"]}
+
+      // If there is nothing like {category:[]} then create one
       if(!newFilterData[section.id]){
         newFilterData[section.id] = []
       }
+      
+      // And then after creating an array push values in it.
       newFilterData[section.id].push(option.value)
-    }else{
+    }
+    // Else if it is unchecked then remove the values from array and if array length is zero delete the array.
+    else
+    {
+      // agr array present h toh
       if(newFilterData[section.id]){
-        newFilterData[section.id] = newFilterData[section.id].filter((ele)=> ele !== option.value)
+        // array ko filter krdo.
+        newFilterData[section.id] = newFilterData[section.id].filter((ele)=> ele != option.value)
 
+        // agr array empty h toh usko delete krdo.
         if(newFilterData[section.id].length === 0){
           delete newFilterData[section.id]
         }
       }
     }
 
-    setFilterData(newFilterData);
-    dispatch(fetchAllProductsFilterAsync(newFilterData))
+    // Now update original filterData Object
+    setFilterData(newFilterData)
   }
 
   const handleSort = (e, option) =>{
-    const newFilterData = {...filterData, _sort:option.sort, _order:option.order}
-    setFilterData(newFilterData)
-    dispatch(fetchAllProductsFilterAsync(newFilterData))
+    setSort({_sort:option.sort, _order:option.order})
+  }
+
+  const handlePagination = (newPage) =>{
+    setPage(newPage);
   }
 
   useEffect(()=>{
-    dispatch(fetchAllProductsAsync())
-  }, [dispatch])
+    centralFn()
+  }, [filterData, sort, page])
+
+  useEffect(()=>{
+    setPage(1)
+  },[totalItems, sort])
 
   const sortOptions = [
     { name: "Best Rating", sort: "rating", order:"desc" , current: false },
@@ -389,6 +425,7 @@ const ProductList = () => {
             </section>
           </main>
         </div>
+        <Pagination currentPage = {page} handlePage={handlePagination} totalItems={totalItems} totalPages={totalPages} indexOfLastItem={indexOfLastItem} indexOfFirstItem={indexOfFirstItem} limit={limit} />
       </div>
     </div>
   );

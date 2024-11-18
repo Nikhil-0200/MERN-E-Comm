@@ -9,25 +9,28 @@ export async function fetchAllProducts() {
   return res;
 }
 
-export async function fetchAllProductsFilter(filter) {
-  // Filter Para - Obj - {category:beauty}
-  //Sort Para = Obj = {_sort="price"&_order="desc"}
+export async function fetchAllProductsFilter(queryData) {
+
   let queryString = "";
-  for (let key in filter) {
-    if (Array.isArray(filter[key])) {
-      // Agr Filter[key] ek - array h toh
-      filter[key].forEach((ele) => {
-        queryString += `${key}=${ele}&`;
-      });
-    } else {
-      queryString += `${key}=${filter[key]}&`;
+
+  for(let key in queryData){
+
+    if(Array.isArray(queryData[key])){
+      queryData[key].map((ele)=>{
+        queryString += `${key}=${ele}&`
+      })
     }
+    else{
+      queryString += `${key}=${queryData[key]}&`
+    }
+
   }
 
   let res = await axios({
     url: `http://localhost:3000/products?${queryString}`,
     method: "get",
   });
-
-  return res;
+ const totalItems = res.headers["x-total-count"];
+  
+  return {products:res.data, totalItems:totalItems};
 }
