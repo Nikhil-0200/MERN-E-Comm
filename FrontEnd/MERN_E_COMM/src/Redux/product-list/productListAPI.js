@@ -54,3 +54,13 @@ export async function fetchBrands(){
   })
   return res
 }
+
+// SelectedProduct
+
+export async function fetchSelectedProduct(id){
+  let res = await axios({
+    url: `http://localhost:3000/products/${id}`,
+    method: "get"
+  })
+  return res
+}
