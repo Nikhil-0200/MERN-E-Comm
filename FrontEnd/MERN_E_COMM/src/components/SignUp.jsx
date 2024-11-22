@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { useSelector, useDispatch } from "react-redux";
+import {createUserAsync} from "../Redux/auth/authSlice"
 
 const SignUp = () => {
   const {
@@ -10,6 +12,12 @@ const SignUp = () => {
   } = useForm();
 
   console.log(errors);
+
+  const user = useSelector((state)=> state.auth.loggedIn)
+  const dispatch = useDispatch() 
+
+  console.log(user);
+  
 
   return (
     <div>
@@ -29,8 +37,10 @@ const SignUp = () => {
           <form
             noValidate
             className="space-y-6"
-            onSubmit={handleSubmit((data) => {
+            onSubmit={handleSubmit(async (data) => {
+              await dispatch(createUserAsync({email: data.email, password: data.password}))
               console.log(data);
+              
             })}
           >
             <div>
