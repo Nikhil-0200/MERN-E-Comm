@@ -3,10 +3,19 @@ import { useSelector, useDispatch } from 'react-redux'
 import { decrement, increment } from './Redux/counter/counterSlice'
 import NavBar from './components/NavBar'
 import AllRoutes from './components/AllRoutes'
+import { useEffect } from 'react'
+import { fetchItemByUserIdAsync } from './Redux/cart/cartSlice'
 
 function App() {
 
+  const user = useSelector((state)=> state.auth.loggedIn)
   const dispatch = useDispatch()
+
+  useEffect(()=>{
+    if(user){
+      dispatch(fetchItemByUserIdAsync(user.id))
+    }
+  }, [dispatch, user])
   
   return (
     <div>

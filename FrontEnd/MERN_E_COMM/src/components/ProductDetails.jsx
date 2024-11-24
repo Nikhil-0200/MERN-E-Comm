@@ -2,8 +2,10 @@ import { useEffect, useState } from "react";
 import { StarIcon } from "@heroicons/react/20/solid";
 import { Radio, RadioGroup } from "@headlessui/react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { fetchSelectedProductAsync } from "../Redux/product-list/productListSlice";
+import { addToCartAsync } from "../Redux/cart/cartSlice";
+import { checkUserAsync } from "../Redux/auth/authSlice";
 
  const colors = [
     { name: "White", class: "bg-white", selectedClass: "ring-gray-400" },
@@ -28,11 +30,18 @@ function classNames(...classes) {
 }
 
 const ProductDetails = () => {
+  const navigate = useNavigate()
   const [selectedColor, setSelectedColor] = useState(colors[0]);
   const [selectedSize, setSelectedSize] = useState(sizes[2]);
   const dispatch = useDispatch();
-  const product = useSelector((state)=> state.product.selectedProduct)
+  const user = useSelector((state)=> state.auth.loggedIn);
+  const product = useSelector((state)=> state.product.selectedProduct);
   const params = useParams()
+
+  function handleCart(e){
+    e.preventDefault()
+    dispatch(addToCartAsync({...product, quantity: 1, userId: user.id}))
+  }
 
   useEffect(()=>{    
     dispatch(fetchSelectedProductAsync(params.id))
@@ -258,6 +267,7 @@ const ProductDetails = () => {
                   </div>
 
                   <button
+                  onClick={handleCart}
                     type="submit"
                     className="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                   >

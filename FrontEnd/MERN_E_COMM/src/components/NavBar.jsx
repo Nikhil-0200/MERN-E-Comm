@@ -12,6 +12,7 @@ import {
   ShoppingCartIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
+import { useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
@@ -24,8 +25,12 @@ function classNames(...classes) {
 }
 
 const NavBar = () => {
-  const location =  useLocation()
+const location =  useLocation()
 const navigate = useNavigate();
+const items = useSelector((state) => state.cart.items)
+
+console.log(items.length);
+
 
 const navigation = [
   { name: "Dashboard", to: "/",  current: location.pathname === "/" },
@@ -93,7 +98,7 @@ const navigation = [
               </button>
 
               <span className="inline-flex items-center rounded-md bg-gray-50 px-1 py-0 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10 mb-7 -ml-3 z-10">
-                3
+                {items.length}
               </span>
 
               {/* Profile dropdown */}
