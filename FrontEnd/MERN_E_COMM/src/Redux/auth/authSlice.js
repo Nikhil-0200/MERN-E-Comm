@@ -1,9 +1,10 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
-import { createUser } from "./authAPI"
+import { checkUser, createUser } from "./authAPI"
 
 export const initialState = {
     loggedIn: null,
-    status: "idle"
+    status: "idle",
+    error: null
 }
 
 export const createUserAsync = createAsyncThunk(
@@ -14,6 +15,14 @@ export const createUserAsync = createAsyncThunk(
     }
 );
 
+export const checkUserAsync = createAsyncThunk(
+    "user/checkUser",
+    async (loginInfo)=>{
+        const response = await checkUser(loginInfo);
+        return response
+    } 
+)
+
 const authSlice = createSlice({
     name:"user",
     initialState,
@@ -21,12 +30,25 @@ const authSlice = createSlice({
     extraReducers: (builder) =>{
         builder.addCase(createUserAsync.pending, (state)=>{
             state.status= "loading";
-            state.error = null;
         })
 
         builder.addCase(createUserAsync.fulfilled, (state, action)=>{
             state.status= "idle";
             state.loggedIn = action.payload;
+        })
+
+        builder.addCase(checkUserAsync.pending, (state)=>{
+            state.status= "loading";
+        })
+
+        builder.addCase(checkUserAsync.fulfilled, (state, action)=>{
+            state.status= "idle";
+            state.loggedIn = action.payload;
+        })
+
+        builder.addCase(checkUserAsync.rejected, (state,action)=>{
+            state.status= "idle";
+            state.error = action.error;
         });
     }
 })
