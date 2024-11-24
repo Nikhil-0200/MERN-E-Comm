@@ -97,9 +97,11 @@ const navigation = [
                 <ShoppingCartIcon aria-hidden="true" className="h-6 w-6" />
               </button>
 
-              <span className="inline-flex items-center rounded-md bg-gray-50 px-1 py-0 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10 mb-7 -ml-3 z-10">
+              {items.length > 0 && <span className="inline-flex items-center rounded-md bg-gray-50 px-1 py-0 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10 mb-7 -ml-3 z-10">
                 {items.length}
-              </span>
+              </span> }
+
+              
 
               {/* Profile dropdown */}
               <Menu as="div" className="relative ml-3">
