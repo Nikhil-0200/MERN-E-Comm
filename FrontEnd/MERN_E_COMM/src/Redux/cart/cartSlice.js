@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
-import { addToCart, fetchItemByUserId } from "./cartAPI"
+import { addToCart, deleteItems, fetchItemByUserId, updateItems } from "./cartAPI"
 
 export const initialState = {
     status: "idle",
@@ -18,6 +18,22 @@ export const fetchItemByUserIdAsync = createAsyncThunk(
     "cart/fetchItemByUserId",
     async (userId) =>{
         const response = await fetchItemByUserId(userId)
+        return response
+    }
+)
+
+export const updateItemsAsync = createAsyncThunk(
+    "cart/updateItems",
+    async(update)=>{
+        let response = await updateItems(update);   
+        return response
+    }
+) 
+
+export const deleteItemsAsync = createAsyncThunk(
+    "cart/deleteItems",
+    async(itemId)=>{
+        const response = await deleteItems(itemId);
         return response
     }
 )
@@ -43,6 +59,29 @@ const cartSlice = createSlice({
         builder.addCase(fetchItemByUserIdAsync.fulfilled, (state, action)=>{
             state.status = "idle";
             state.items = action.payload;
+        })
+
+        builder.addCase(updateItemsAsync.pending, (state)=>{
+            state.status = "loading";
+        })
+
+        builder.addCase(updateItemsAsync.fulfilled, (state, action)=>{
+            state.status = "idle";
+            const updatedItem = action.payload;
+            const index = state.items.findIndex((index)=> index.id == updatedItem.id)
+            if(index != -1){
+                state.items[index] = updatedItem
+            }
+        });
+
+        builder.addCase(deleteItemsAsync.pending, (state)=>{
+            state.status = "loading";
+        })
+
+        builder.addCase(deleteItemsAsync.fulfilled, (state, action)=>{
+            state.status = "idle";
+            const deletedItemId = action.payload;
+            state.items = state.items.filter((item)=> item.id != deletedItemId)
         });
     }
 })

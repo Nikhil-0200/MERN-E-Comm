@@ -1,16 +1,24 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { deleteItemsAsync, updateItemsAsync } from "../Redux/cart/cartSlice";
 
 const Cart = () => {
 
+  const dispatch = useDispatch()
   const items = useSelector((state)=> state.cart.items)
   const totalAmount = items.reduce((acc, curr)=> curr.price * curr.quantity + acc, 0);
   const totalItems = items.reduce((acc, curr)=> curr.quantity + acc, 0);
-
-
-  console.log(items, totalAmount, totalItems);
   
+  function handleCart(e, product){
+    const {value} = e.target
+    dispatch(updateItemsAsync({...product, quantity: +value}))
+  }
 
+  function handleDelete(e, id){
+    dispatch(deleteItemsAsync(id))
+  }
+
+  
   return (
     <div>
       <div className="mx-auto max-w-5xl px-2 sm:px-6 lg:px-8 my-10">
@@ -49,11 +57,20 @@ const Cart = () => {
                         </div>
                         <div className="flex flex-1 items-end justify-between text-sm">
                           <p className="text-gray-500">
-                            Qty {product.quantity}
+                          Qty
+                            <select onChange={(e)=>handleCart(e, product)} className="mx-2">
+                              <option value="1">1</option>
+                              <option value="2">2</option>
+                              <option value="3">3</option>
+                              <option value="4">4</option>
+                              <option value="5">5</option>
+                            </select>
+                             
                           </p>
 
                           <div className="flex">
                             <button
+                            onClick={(e)=>handleDelete(e, product.id)}
                               type="button"
                               className="font-medium text-indigo-600 hover:text-indigo-500"
                             >
