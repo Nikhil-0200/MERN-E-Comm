@@ -1,3 +1,4 @@
+import { data } from "autoprefixer";
 import axios from "axios";
 import { Navigate } from "react-router-dom";
 
@@ -39,5 +40,18 @@ export async function checkUser(loginInfo){
 
     } catch (error) {
         throw new Error(error.message || `Invalid Login Credentials`)
+    }
+}
+
+export async function updateUser(update){
+    try {
+        let res = await axios({
+            url: `http://localhost:3000/users/${update.id}`,
+            method: "patch",
+            data: update
+        })
+        return res.data
+    } catch (error) {
+        throw new Error(`Failed to update address`)
     }
 }

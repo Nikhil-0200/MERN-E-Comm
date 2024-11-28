@@ -1895,11 +1895,41 @@
     {
       "email": "nikhiltiwari0707@gmail.com",
       "password": "Nikhil@0200@",
+      "addresses": [
+        {
+          "name": "Nikhil Tiwari",
+          "email": "nikhiltiwari0707@gmail.com",
+          "phone": "09811121377",
+          "street": "Hno.-479/5, meethapur , lakhpat colony-2,",
+          "city": "new delhi",
+          "region": "Delhi",
+          "pinCode": "110044"
+        },
+        {
+          "name": "Birender Kumar Tiwari",
+          "email": "birendertiwari0200@gmail.com",
+          "phone": "09811121377",
+          "street": "479 05 MITHAPUR LAKHPAT COLONY-02 BADARP",
+          "city": "New delhi",
+          "region": "Delhi",
+          "pinCode": "110044"
+        },
+        {
+          "name": "Karan Tiwari",
+          "email": "karantiwari956013@gmail.com",
+          "phone": "08595787643",
+          "street": "479/5, Lakhpat Colony-II, Mithapur, Badarpur",
+          "city": "New Delhi",
+          "region": "Delhi",
+          "pinCode": "110044"
+        }
+      ],
       "id": 1
     },
     {
       "email": "karantiwari956013@gmail.com",
       "password": "Karan@0200@",
+      "addresses": [],
       "id": 2
     }
   ],

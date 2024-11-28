@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { useSelector, useDispatch } from "react-redux";
 import {createUserAsync} from "../Redux/auth/authSlice"
 
-const SignUp = () => {
+const SignUp = () => {  
   const {
     register,
     handleSubmit,
@@ -38,7 +38,7 @@ const SignUp = () => {
             noValidate
             className="space-y-6"
             onSubmit={handleSubmit(async (data) => {
-              await dispatch(createUserAsync({email: data.email, password: data.password}))
+              await dispatch(createUserAsync({email: data.email, password: data.password, addresses: []}))
               console.log(data);
               
             })}
@@ -63,9 +63,9 @@ const SignUp = () => {
                   type="email"
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6"
                 />
-                {errors.email && (
-                  <p className="text-red-500">{errors.email.message}</p>
-                )}
+                  {errors.email && (
+                    <p className="text-red-500">{errors.email.message}</p>
+                  )}
                 
               </div>
             </div>
