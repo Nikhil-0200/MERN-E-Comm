@@ -41,7 +41,6 @@ export async function fetchCategory(){
     url: "http://localhost:3000/category",
     method: "get"
   })
-  console.log(`Api Response`);
   
   return res
 }

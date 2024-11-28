@@ -6,7 +6,7 @@ const Cart = () => {
 
   const dispatch = useDispatch()
   const items = useSelector((state)=> state.cart.items)
-  const totalAmount = items.reduce((acc, curr)=> curr.price * curr.quantity + acc, 0);
+  const totalAmount = (items.reduce((acc, curr)=> curr.price * curr.quantity + acc, 0)).toFixed(2);
   const totalItems = items.reduce((acc, curr)=> curr.quantity + acc, 0);
   
   function handleCart(e, product){
@@ -58,7 +58,7 @@ const Cart = () => {
                         <div className="flex flex-1 items-end justify-between text-sm">
                           <p className="text-gray-500">
                           Qty
-                            <select onChange={(e)=>handleCart(e, product)} className="mx-2">
+                            <select onChange={(e)=>handleCart(e, product)} className="mx-2" value={product.quantity}>
                               <option value="1">1</option>
                               <option value="2">2</option>
                               <option value="3">3</option>

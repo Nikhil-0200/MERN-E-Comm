@@ -1,4 +1,3 @@
-import { data } from "autoprefixer";
 import axios from "axios";
 import { Navigate } from "react-router-dom";
 
@@ -24,7 +23,6 @@ export async function checkUser(loginInfo){
             method: "get"
         })
 
-        console.log(`Auth API console date -> ${res.data}`);
         
 
         if(res.data.length){

@@ -16,27 +16,20 @@ import { useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
-
-
-
-
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
 const NavBar = () => {
-const location =  useLocation()
-const navigate = useNavigate();
-const items = useSelector((state) => state.cart.items)
+  const location = useLocation();
+  const navigate = useNavigate();
+  const items = useSelector((state) => state.cart.items);
 
-console.log(items.length);
-
-
-const navigation = [
-  { name: "Dashboard", to: "/",  current: location.pathname === "/" },
-  { name: "LogIn", to:"/login" , current: location.pathname === "/login" },
-  { name: "SignUp", to:"/signUp" , current: location.pathname === "/signUp" },
-];
+  const navigation = [
+    { name: "Dashboard", to: "/", current: location.pathname === "/" },
+    { name: "LogIn", to: "/login", current: location.pathname === "/login" },
+    { name: "SignUp", to: "/signUp", current: location.pathname === "/signUp" },
+  ];
 
   return (
     <div>
@@ -89,7 +82,7 @@ const navigation = [
             <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
               <button
                 type="button"
-                onClick={()=> navigate("/cart")}
+                onClick={() => navigate("/cart")}
                 className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
               >
                 <span className="absolute -inset-1.5" />
@@ -97,11 +90,11 @@ const navigation = [
                 <ShoppingCartIcon aria-hidden="true" className="h-6 w-6" />
               </button>
 
-              {items.length > 0 && <span className="inline-flex items-center rounded-md bg-gray-50 px-1 py-0 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10 mb-7 -ml-3 z-10">
-                {items.length}
-              </span> }
-
-              
+              {items.length > 0 && (
+                <span className="inline-flex items-center rounded-md bg-gray-50 px-1 py-0 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10 mb-7 -ml-3 z-10">
+                  {items.length}
+                </span>
+              )}
 
               {/* Profile dropdown */}
               <Menu as="div" className="relative ml-3">

@@ -14,7 +14,6 @@ const Login = () => {
     formState: { errors },
   } = useForm();
 
-  console.log(errors);
 
   return (
     <div>

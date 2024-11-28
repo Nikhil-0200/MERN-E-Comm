@@ -40,8 +40,14 @@ const ProductDetails = () => {
 
   function handleCart(e){
     e.preventDefault()
-    dispatch(addToCartAsync({...product, quantity: 1, userId: user.id}))
+    const newItem = {...product, quantity:1, userId: user.id};
+    delete newItem["id"];
+    dispatch(addToCartAsync(newItem))
   }
+
+  // Earlier what we were doing here is we were creating a shallow copy of product and additionally adding quantity & userId who is adding the item in cart. and storing this data in cart array. But at that time we were also sending items real id and when someone else logs in and try to add the same item which is already added by someone else then we were facing error (500 duplicate id). 
+
+  // So did we solve this is by, creating an object name = newItem and from that object deleting the id key with its values and passing that into dispatch.
 
   useEffect(()=>{    
     dispatch(fetchSelectedProductAsync(params.id))
