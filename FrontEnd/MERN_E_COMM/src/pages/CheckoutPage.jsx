@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { deleteItemsAsync } from "../Redux/cart/cartSlice";
 import { useForm } from "react-hook-form";
 import { updateUserAsync } from "../Redux/auth/authSlice";
+import { addOrderDataAsync } from "../Redux/order/orderSlice";
 
 const CheckoutPage = () => {
   const {
@@ -16,11 +17,6 @@ const CheckoutPage = () => {
 
   const [selectAddress, setSelectAddress] = useState(null);
   const [selectPayment, setSelectPayment] = useState("");
-
-  
-
-  
-
   const user = useSelector((state) => state.auth.loggedIn);
 
   function handleAddress(e){
@@ -43,6 +39,14 @@ const CheckoutPage = () => {
 
   async function handleDelete(e, itemId) {
     dispatch(deleteItemsAsync(itemId));
+  }
+
+  function handleOrder(){
+    const order = {items, totalAmount, totalItem, user, selectPayment, selectAddress}
+    dispatch(addOrderDataAsync(order))
+    // REDIRECT TO ORDER-SUCCESS PAGE
+    // CLEAR CART
+    // REDUCE ITEM FROM STOCK
   }
 
   return (
@@ -403,12 +407,12 @@ const CheckoutPage = () => {
                   Shipping and taxes calculated at checkout.
                 </p>
                 <div className="mt-6">
-                  <Link
-                    to={"/checkout"}
-                    className="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
+                  <div
+                  onClick={handleOrder}
+                    className="flex cursor-pointer items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
                   >
-                    Pay and Order
-                  </Link>
+                    Order Now
+                  </div>
                 </div>
                 <div className="mt-6 flex justify-center text-center text-sm text-gray-500">
                   <p>

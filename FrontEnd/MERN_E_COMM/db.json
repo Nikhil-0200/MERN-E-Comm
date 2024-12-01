@@ -2172,9 +2172,306 @@
         "https://cdn.dummyjson.com/products/images/groceries/Honey%20Jar/1.png"
       ],
       "thumbnail": "https://cdn.dummyjson.com/products/images/groceries/Honey%20Jar/thumbnail.png",
-      "quantity": 3,
+      "quantity": 1,
       "userId": 1,
       "id": 28
+    },
+    {
+      "title": "Eyeshadow Palette with Mirror",
+      "description": "The Eyeshadow Palette with Mirror offers a versatile range of eyeshadow shades for creating stunning eye looks. With a built-in mirror, it's convenient for on-the-go makeup application.",
+      "category": "beauty",
+      "price": 19.99,
+      "discountPercentage": 5.5,
+      "rating": 3.28,
+      "stock": 44,
+      "tags": [
+        "beauty",
+        "eyeshadow"
+      ],
+      "brand": "Glamour Beauty",
+      "sku": "MVCFH27F",
+      "weight": 3,
+      "dimensions": {
+        "width": 12.42,
+        "height": 8.63,
+        "depth": 29.13
+      },
+      "warrantyInformation": "1 year warranty",
+      "shippingInformation": "Ships in 2 weeks",
+      "availabilityStatus": "In Stock",
+      "reviews": [
+        {
+          "rating": 4,
+          "comment": "Very satisfied!",
+          "date": "2024-05-23T08:56:21.618Z",
+          "reviewerName": "Liam Garcia",
+          "reviewerEmail": "liam.garcia@x.dummyjson.com"
+        },
+        {
+          "rating": 1,
+          "comment": "Very disappointed!",
+          "date": "2024-05-23T08:56:21.618Z",
+          "reviewerName": "Nora Russell",
+          "reviewerEmail": "nora.russell@x.dummyjson.com"
+        },
+        {
+          "rating": 5,
+          "comment": "Highly impressed!",
+          "date": "2024-05-23T08:56:21.618Z",
+          "reviewerName": "Elena Baker",
+          "reviewerEmail": "elena.baker@x.dummyjson.com"
+        }
+      ],
+      "returnPolicy": "30 days return policy",
+      "minimumOrderQuantity": 32,
+      "meta": {
+        "createdAt": "2024-05-23T08:56:21.618Z",
+        "updatedAt": "2024-05-23T08:56:21.618Z",
+        "barcode": "2817839095220",
+        "qrCode": "https://assets.dummyjson.com/public/qr-code.png"
+      },
+      "images": [
+        "https://cdn.dummyjson.com/products/images/beauty/Eyeshadow%20Palette%20with%20Mirror/1.png"
+      ],
+      "thumbnail": "https://cdn.dummyjson.com/products/images/beauty/Eyeshadow%20Palette%20with%20Mirror/thumbnail.png",
+      "quantity": 1,
+      "userId": 1,
+      "id": 29
+    }
+  ],
+  "orders": [
+    {
+      "items": [
+        {
+          "id": 26,
+          "title": "Green Chili Pepper",
+          "description": "Spicy green chili pepper, ideal for adding heat to your favorite recipes.",
+          "category": "groceries",
+          "price": 0.99,
+          "discountPercentage": 18.51,
+          "rating": 4.43,
+          "stock": 8,
+          "tags": [
+            "vegetables"
+          ],
+          "sku": "Y4RM3JCB",
+          "weight": 2,
+          "dimensions": {
+            "width": 18.67,
+            "height": 21.17,
+            "depth": 25.26
+          },
+          "warrantyInformation": "No warranty",
+          "shippingInformation": "Ships in 1-2 business days",
+          "availabilityStatus": "In Stock",
+          "reviews": [
+            {
+              "rating": 2,
+              "comment": "Disappointing product!",
+              "date": "2024-05-23T08:56:21.620Z",
+              "reviewerName": "Mateo Bennett",
+              "reviewerEmail": "mateo.bennett@x.dummyjson.com"
+            },
+            {
+              "rating": 5,
+              "comment": "Very pleased!",
+              "date": "2024-05-23T08:56:21.620Z",
+              "reviewerName": "Natalie Price",
+              "reviewerEmail": "natalie.price@x.dummyjson.com"
+            },
+            {
+              "rating": 4,
+              "comment": "Very satisfied!",
+              "date": "2024-05-23T08:56:21.620Z",
+              "reviewerName": "Avery Barnes",
+              "reviewerEmail": "avery.barnes@x.dummyjson.com"
+            }
+          ],
+          "returnPolicy": "30 days return policy",
+          "minimumOrderQuantity": 43,
+          "meta": {
+            "createdAt": "2024-05-23T08:56:21.620Z",
+            "updatedAt": "2024-05-23T08:56:21.620Z",
+            "barcode": "8400326844874",
+            "qrCode": "https://assets.dummyjson.com/public/qr-code.png"
+          },
+          "images": [
+            "https://cdn.dummyjson.com/products/images/groceries/Green%20Chili%20Pepper/1.png"
+          ],
+          "thumbnail": "https://cdn.dummyjson.com/products/images/groceries/Green%20Chili%20Pepper/thumbnail.png",
+          "quantity": 1,
+          "userId": 1
+        },
+        {
+          "title": "Honey Jar",
+          "description": "Pure and natural honey in a convenient jar, perfect for sweetening beverages or drizzling over food.",
+          "category": "groceries",
+          "price": 6.99,
+          "discountPercentage": 1.91,
+          "rating": 3.5,
+          "stock": 25,
+          "tags": [
+            "condiments"
+          ],
+          "sku": "BTBNIIOU",
+          "weight": 9,
+          "dimensions": {
+            "width": 26.53,
+            "height": 27.11,
+            "depth": 6.63
+          },
+          "warrantyInformation": "2 year warranty",
+          "shippingInformation": "Ships overnight",
+          "availabilityStatus": "In Stock",
+          "reviews": [
+            {
+              "rating": 4,
+              "comment": "Fast shipping!",
+              "date": "2024-05-23T08:56:21.620Z",
+              "reviewerName": "Nicholas Bailey",
+              "reviewerEmail": "nicholas.bailey@x.dummyjson.com"
+            },
+            {
+              "rating": 5,
+              "comment": "Awesome product!",
+              "date": "2024-05-23T08:56:21.620Z",
+              "reviewerName": "Gabriel Hayes",
+              "reviewerEmail": "gabriel.hayes@x.dummyjson.com"
+            },
+            {
+              "rating": 5,
+              "comment": "Highly impressed!",
+              "date": "2024-05-23T08:56:21.620Z",
+              "reviewerName": "James Garcia",
+              "reviewerEmail": "james.garcia@x.dummyjson.com"
+            }
+          ],
+          "returnPolicy": "90 days return policy",
+          "minimumOrderQuantity": 1,
+          "meta": {
+            "createdAt": "2024-05-23T08:56:21.620Z",
+            "updatedAt": "2024-05-23T08:56:21.620Z",
+            "barcode": "0668665656044",
+            "qrCode": "https://assets.dummyjson.com/public/qr-code.png"
+          },
+          "images": [
+            "https://cdn.dummyjson.com/products/images/groceries/Honey%20Jar/1.png"
+          ],
+          "thumbnail": "https://cdn.dummyjson.com/products/images/groceries/Honey%20Jar/thumbnail.png",
+          "quantity": 1,
+          "userId": 1,
+          "id": 28
+        },
+        {
+          "title": "Eyeshadow Palette with Mirror",
+          "description": "The Eyeshadow Palette with Mirror offers a versatile range of eyeshadow shades for creating stunning eye looks. With a built-in mirror, it's convenient for on-the-go makeup application.",
+          "category": "beauty",
+          "price": 19.99,
+          "discountPercentage": 5.5,
+          "rating": 3.28,
+          "stock": 44,
+          "tags": [
+            "beauty",
+            "eyeshadow"
+          ],
+          "brand": "Glamour Beauty",
+          "sku": "MVCFH27F",
+          "weight": 3,
+          "dimensions": {
+            "width": 12.42,
+            "height": 8.63,
+            "depth": 29.13
+          },
+          "warrantyInformation": "1 year warranty",
+          "shippingInformation": "Ships in 2 weeks",
+          "availabilityStatus": "In Stock",
+          "reviews": [
+            {
+              "rating": 4,
+              "comment": "Very satisfied!",
+              "date": "2024-05-23T08:56:21.618Z",
+              "reviewerName": "Liam Garcia",
+              "reviewerEmail": "liam.garcia@x.dummyjson.com"
+            },
+            {
+              "rating": 1,
+              "comment": "Very disappointed!",
+              "date": "2024-05-23T08:56:21.618Z",
+              "reviewerName": "Nora Russell",
+              "reviewerEmail": "nora.russell@x.dummyjson.com"
+            },
+            {
+              "rating": 5,
+              "comment": "Highly impressed!",
+              "date": "2024-05-23T08:56:21.618Z",
+              "reviewerName": "Elena Baker",
+              "reviewerEmail": "elena.baker@x.dummyjson.com"
+            }
+          ],
+          "returnPolicy": "30 days return policy",
+          "minimumOrderQuantity": 32,
+          "meta": {
+            "createdAt": "2024-05-23T08:56:21.618Z",
+            "updatedAt": "2024-05-23T08:56:21.618Z",
+            "barcode": "2817839095220",
+            "qrCode": "https://assets.dummyjson.com/public/qr-code.png"
+          },
+          "images": [
+            "https://cdn.dummyjson.com/products/images/beauty/Eyeshadow%20Palette%20with%20Mirror/1.png"
+          ],
+          "thumbnail": "https://cdn.dummyjson.com/products/images/beauty/Eyeshadow%20Palette%20with%20Mirror/thumbnail.png",
+          "quantity": 1,
+          "userId": 1,
+          "id": 29
+        }
+      ],
+      "totalAmount": "27.97",
+      "totalItem": 3,
+      "user": {
+        "email": "nikhiltiwari0707@gmail.com",
+        "password": "Nikhil@0200@",
+        "addresses": [
+          {
+            "name": "Nikhil Tiwari",
+            "email": "nikhiltiwari0707@gmail.com",
+            "phone": "09811121377",
+            "street": "Hno.-479/5, meethapur , lakhpat colony-2,",
+            "city": "new delhi",
+            "region": "Delhi",
+            "pinCode": "110044"
+          },
+          {
+            "name": "Birender Kumar Tiwari",
+            "email": "birendertiwari0200@gmail.com",
+            "phone": "09811121377",
+            "street": "479 05 MITHAPUR LAKHPAT COLONY-02 BADARP",
+            "city": "New delhi",
+            "region": "Delhi",
+            "pinCode": "110044"
+          },
+          {
+            "name": "Karan Tiwari",
+            "email": "karantiwari956013@gmail.com",
+            "phone": "08595787643",
+            "street": "479/5, Lakhpat Colony-II, Mithapur, Badarpur",
+            "city": "New Delhi",
+            "region": "Delhi",
+            "pinCode": "110044"
+          }
+        ],
+        "id": 1
+      },
+      "selectPayment": "cash",
+      "selectAddress": {
+        "name": "Nikhil Tiwari",
+        "email": "nikhiltiwari0707@gmail.com",
+        "phone": "09811121377",
+        "street": "Hno.-479/5, meethapur , lakhpat colony-2,",
+        "city": "new delhi",
+        "region": "Delhi",
+        "pinCode": "110044"
+      },
+      "id": 1
     }
   ]
 }
