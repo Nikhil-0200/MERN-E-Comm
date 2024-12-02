@@ -7,7 +7,7 @@ export async function addOrderData(data){
             method: "post",
             data: data
         })
-        return res.data
+        return res
     } catch (error) {
         throw new Error(`Failed to add item to order: ${error}`)
     }

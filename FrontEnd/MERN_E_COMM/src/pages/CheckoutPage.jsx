@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { deleteItemsAsync } from "../Redux/cart/cartSlice";
 import { useForm } from "react-hook-form";
 import { updateUserAsync } from "../Redux/auth/authSlice";
@@ -15,9 +15,14 @@ const CheckoutPage = () => {
     formState: { errors },
   } = useForm();
 
+  const navigate = useNavigate();
   const [selectAddress, setSelectAddress] = useState(null);
   const [selectPayment, setSelectPayment] = useState("");
   const user = useSelector((state) => state.auth.loggedIn);
+  const currentOrder = useSelector((state) => state.order.currentOrder)
+  // const currentOrderStatus = useSelector((state)=> state.order.currentOrderStatus)
+
+  
 
   function handleAddress(e){
     const addressIndex = e.target.value
@@ -41,15 +46,28 @@ const CheckoutPage = () => {
     dispatch(deleteItemsAsync(itemId));
   }
 
-  function handleOrder(){
-    const order = {items, totalAmount, totalItem, user, selectPayment, selectAddress}
-    dispatch(addOrderDataAsync(order))
-    // REDIRECT TO ORDER-SUCCESS PAGE
+  async function handleOrder(e){
+    if(selectAddress && selectPayment){
+      // In this we are also passing the status which will be initially pending and in future it can be successful, dispatch, delivered & etc
+    const order = {items, totalAmount, totalItem, user, selectPayment, selectAddress, status: "pending"}
+    await dispatch(addOrderDataAsync(order))
+
     // CLEAR CART
     // REDUCE ITEM FROM STOCK
+    }
+    else{
+      alert(`Enter Address and Payment Method`)   
+    }
+    
   }
 
+
   return (
+    <>
+
+    {!items.length && <Navigate to="/" /> }
+    {currentOrder && <Navigate to={`/orderSuccess/${currentOrder.id}`} replace={true}></Navigate>}
+    {/* if currentOrder got order details in orderSlice, so Navigate it to Order Success Page */}
     
     <div className="mx-auto max-w-5xl px-2 sm:px-6 lg:px-8 my-10">
       <div className="grid grid-cols-1 gap-x-8=6 gap-y-10 lg:grid-cols-2">
@@ -260,9 +278,9 @@ const CheckoutPage = () => {
                   {user.addresses.map((ele, index) => (
                     <li
                       key={index}
-                      class="flex justify-between gap-x-6 py-5 border-solid border-2 border-gray-200 p-2"
+                      className="flex justify-between gap-x-6 py-5 border-solid border-2 border-gray-200 p-2"
                     >
-                      <div class="flex min-w-0 gap-x-4">
+                      <div className="flex min-w-0 gap-x-4">
                         <input
                         onChange={(e)=>handleAddress(e)}
                           name="address"
@@ -270,18 +288,18 @@ const CheckoutPage = () => {
                           value={index}
                           className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
                         />
-                        <div class="min-w-0 flex-auto">
-                          <p class="text-sm/6 font-semibold text-gray-900">
+                        <div className="min-w-0 flex-auto">
+                          <p className="text-sm/6 font-semibold text-gray-900">
                             {ele.name}
                           </p>
-                          <p class="mt-1 truncate text-xs/5 text-gray-500">
+                          <p className="mt-1 truncate text-xs/5 text-gray-500">
                             {ele.street}
                           </p>
                         </div>
                       </div>
-                      <div class="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
-                        <p class="text-sm/6 text-gray-900">{ele.Phone}</p>
-                        <p class="mt-1 text-xs/5 text-gray-500">
+                      <div className="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
+                        <p className="text-sm/6 text-gray-900">{ele.Phone}</p>
+                        <p className="mt-1 text-xs/5 text-gray-500">
                           {ele.PinCode}
                         </p>
                       </div>
@@ -435,6 +453,8 @@ const CheckoutPage = () => {
         </div>
       </div>
     </div>
+    </>
+    
   );
 };
 

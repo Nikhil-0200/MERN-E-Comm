@@ -6,10 +6,12 @@ import CartPage from "../pages/CartPage";
 import CheckoutPage from "../pages/CheckoutPage";
 import ProductDetails from "./ProductDetails";
 import Private from "./Private"
+import PageNotFound from "../pages/404";
+import OrderSuccessPage from "../pages/OrderSuccessPage";
 
 
 const AllRoutes = () =>{
-    return(
+    return(     
         <Routes>
             <Route path="/" element={<Private><Home/></Private>} />
             <Route path="/cart" element={<Private><CartPage/></Private>} />
@@ -17,6 +19,8 @@ const AllRoutes = () =>{
             <Route path="/signUp" element={<SignUpPage/>} />
             <Route path="/checkout" element={<Private><CheckoutPage/></Private>} />
             <Route path="/productDetails/:id" element={<Private><ProductDetails/></Private>} />
+            <Route path="/orderSuccess/:id" element={<OrderSuccessPage />} />
+            <Route path="*" element={<PageNotFound />} />
         </Routes>
     )
 }
