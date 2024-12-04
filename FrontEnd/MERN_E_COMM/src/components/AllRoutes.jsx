@@ -8,6 +8,7 @@ import ProductDetails from "./ProductDetails";
 import Private from "./Private"
 import PageNotFound from "../pages/404";
 import OrderSuccessPage from "../pages/OrderSuccessPage";
+import UserOrder from "./UserOrder"
 
 
 const AllRoutes = () =>{
@@ -20,6 +21,7 @@ const AllRoutes = () =>{
             <Route path="/checkout" element={<Private><CheckoutPage/></Private>} />
             <Route path="/productDetails/:id" element={<Private><ProductDetails/></Private>} />
             <Route path="/orderSuccess/:id" element={<OrderSuccessPage />} />
+            <Route path="/orders" element={<UserOrder />} />
             <Route path="*" element={<PageNotFound />} />
         </Routes>
     )

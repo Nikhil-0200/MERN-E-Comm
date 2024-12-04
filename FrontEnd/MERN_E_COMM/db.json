@@ -1933,7 +1933,70 @@
       "id": 2
     }
   ],
-  "cart": [],
+  "cart": [
+    {
+      "title": "Essence Mascara Lash Princess",
+      "description": "The Essence Mascara Lash Princess is a popular mascara known for its volumizing and lengthening effects. Achieve dramatic lashes with this long-lasting and cruelty-free formula.",
+      "category": "beauty",
+      "price": 9.99,
+      "discountPercentage": 7.17,
+      "rating": 4.94,
+      "stock": 5,
+      "tags": [
+        "beauty",
+        "mascara"
+      ],
+      "brand": "Essence",
+      "sku": "RCH45Q1A",
+      "weight": 2,
+      "dimensions": {
+        "width": 23.17,
+        "height": 14.43,
+        "depth": 28.01
+      },
+      "warrantyInformation": "1 month warranty",
+      "shippingInformation": "Ships in 1 month",
+      "availabilityStatus": "Low Stock",
+      "reviews": [
+        {
+          "rating": 2,
+          "comment": "Very unhappy with my purchase!",
+          "date": "2024-05-23T08:56:21.618Z",
+          "reviewerName": "John Doe",
+          "reviewerEmail": "john.doe@x.dummyjson.com"
+        },
+        {
+          "rating": 2,
+          "comment": "Not as described!",
+          "date": "2024-05-23T08:56:21.618Z",
+          "reviewerName": "Nolan Gonzalez",
+          "reviewerEmail": "nolan.gonzalez@x.dummyjson.com"
+        },
+        {
+          "rating": 5,
+          "comment": "Very satisfied!",
+          "date": "2024-05-23T08:56:21.618Z",
+          "reviewerName": "Scarlett Wright",
+          "reviewerEmail": "scarlett.wright@x.dummyjson.com"
+        }
+      ],
+      "returnPolicy": "30 days return policy",
+      "minimumOrderQuantity": 24,
+      "meta": {
+        "createdAt": "2024-05-23T08:56:21.618Z",
+        "updatedAt": "2024-05-23T08:56:21.618Z",
+        "barcode": "9164035109868",
+        "qrCode": "https://assets.dummyjson.com/public/qr-code.png"
+      },
+      "images": [
+        "https://cdn.dummyjson.com/products/images/beauty/Essence%20Mascara%20Lash%20Princess/1.png"
+      ],
+      "thumbnail": "https://cdn.dummyjson.com/products/images/beauty/Essence%20Mascara%20Lash%20Princess/thumbnail.png",
+      "quantity": 1,
+      "userId": 1,
+      "id": 1
+    }
+  ],
   "orders": [
     {
       "items": [
@@ -1995,10 +2058,62 @@
             "https://cdn.dummyjson.com/products/images/beauty/Essence%20Mascara%20Lash%20Princess/1.png"
           ],
           "thumbnail": "https://cdn.dummyjson.com/products/images/beauty/Essence%20Mascara%20Lash%20Princess/thumbnail.png",
-          "quantity": 1,
+          "quantity": 3,
           "userId": 1,
           "id": 1
-        },
+        }
+      ],
+      "totalAmount": "29.97",
+      "totalItem": 3,
+      "user": {
+        "email": "nikhiltiwari0707@gmail.com",
+        "password": "Nikhil@0200@",
+        "addresses": [
+          {
+            "name": "Nikhil Tiwari",
+            "email": "nikhiltiwari0707@gmail.com",
+            "phone": "09811121377",
+            "street": "Hno.-479/5, meethapur , lakhpat colony-2,",
+            "city": "new delhi",
+            "region": "Delhi",
+            "pinCode": "110044"
+          },
+          {
+            "name": "Birender Kumar Tiwari",
+            "email": "birendertiwari0200@gmail.com",
+            "phone": "09811121377",
+            "street": "479 05 MITHAPUR LAKHPAT COLONY-02 BADARP",
+            "city": "New delhi",
+            "region": "Delhi",
+            "pinCode": "110044"
+          },
+          {
+            "name": "Karan Tiwari",
+            "email": "karantiwari956013@gmail.com",
+            "phone": "08595787643",
+            "street": "479/5, Lakhpat Colony-II, Mithapur, Badarpur",
+            "city": "New Delhi",
+            "region": "Delhi",
+            "pinCode": "110044"
+          }
+        ],
+        "id": 1
+      },
+      "selectPayment": "cash",
+      "selectAddress": {
+        "name": "Nikhil Tiwari",
+        "email": "nikhiltiwari0707@gmail.com",
+        "phone": "09811121377",
+        "street": "Hno.-479/5, meethapur , lakhpat colony-2,",
+        "city": "new delhi",
+        "region": "Delhi",
+        "pinCode": "110044"
+      },
+      "status": "pending",
+      "id": 1
+    },
+    {
+      "items": [
         {
           "title": "Red Nail Polish",
           "description": "The Red Nail Polish offers a rich and glossy red hue for vibrant and polished nails. With a quick-drying formula, it provides a salon-quality finish at home.",
@@ -2059,10 +2174,70 @@
           "thumbnail": "https://cdn.dummyjson.com/products/images/beauty/Red%20Nail%20Polish/thumbnail.png",
           "quantity": 1,
           "userId": 1,
+          "id": 1
+        },
+        {
+          "title": "Kiwi",
+          "description": "Nutrient-rich kiwi, perfect for snacking or adding a tropical twist to your dishes.",
+          "category": "groceries",
+          "price": 2.49,
+          "discountPercentage": 10.32,
+          "rating": 4.37,
+          "stock": 1,
+          "tags": [
+            "fruits"
+          ],
+          "sku": "0X3NORB9",
+          "weight": 8,
+          "dimensions": {
+            "width": 27.3,
+            "height": 7.48,
+            "depth": 15.08
+          },
+          "warrantyInformation": "6 months warranty",
+          "shippingInformation": "Ships in 3-5 business days",
+          "availabilityStatus": "Low Stock",
+          "reviews": [
+            {
+              "rating": 5,
+              "comment": "Very pleased!",
+              "date": "2024-05-23T08:56:21.620Z",
+              "reviewerName": "Nora Russell",
+              "reviewerEmail": "nora.russell@x.dummyjson.com"
+            },
+            {
+              "rating": 5,
+              "comment": "Very pleased!",
+              "date": "2024-05-23T08:56:21.620Z",
+              "reviewerName": "Dylan Wells",
+              "reviewerEmail": "dylan.wells@x.dummyjson.com"
+            },
+            {
+              "rating": 5,
+              "comment": "Great product!",
+              "date": "2024-05-23T08:56:21.620Z",
+              "reviewerName": "Noah Hernandez",
+              "reviewerEmail": "noah.hernandez@x.dummyjson.com"
+            }
+          ],
+          "returnPolicy": "7 days return policy",
+          "minimumOrderQuantity": 8,
+          "meta": {
+            "createdAt": "2024-05-23T08:56:21.620Z",
+            "updatedAt": "2024-05-23T08:56:21.620Z",
+            "barcode": "3325493172934",
+            "qrCode": "https://assets.dummyjson.com/public/qr-code.png"
+          },
+          "images": [
+            "https://cdn.dummyjson.com/products/images/groceries/Kiwi/1.png"
+          ],
+          "thumbnail": "https://cdn.dummyjson.com/products/images/groceries/Kiwi/thumbnail.png",
+          "quantity": 1,
+          "userId": 1,
           "id": 2
         }
       ],
-      "totalAmount": "18.98",
+      "totalAmount": "11.48",
       "totalItem": 2,
       "user": {
         "email": "nikhiltiwari0707@gmail.com",
@@ -2098,18 +2273,250 @@
         ],
         "id": 1
       },
-      "selectPayment": "cash",
+      "selectPayment": "card",
       "selectAddress": {
-        "name": "Nikhil Tiwari",
-        "email": "nikhiltiwari0707@gmail.com",
+        "name": "Birender Kumar Tiwari",
+        "email": "birendertiwari0200@gmail.com",
         "phone": "09811121377",
-        "street": "Hno.-479/5, meethapur , lakhpat colony-2,",
-        "city": "new delhi",
+        "street": "479 05 MITHAPUR LAKHPAT COLONY-02 BADARP",
+        "city": "New delhi",
         "region": "Delhi",
         "pinCode": "110044"
       },
       "status": "pending",
-      "id": 1
+      "id": 2
+    },
+    {
+      "items": [
+        {
+          "title": "Green Bell Pepper",
+          "description": "Fresh and vibrant green bell pepper, perfect for adding color and flavor to your dishes.",
+          "category": "groceries",
+          "price": 1.29,
+          "discountPercentage": 15.5,
+          "rating": 4.28,
+          "stock": 89,
+          "tags": [
+            "vegetables"
+          ],
+          "sku": "HU7S7VQ0",
+          "weight": 7,
+          "dimensions": {
+            "width": 7.32,
+            "height": 14.31,
+            "depth": 21.38
+          },
+          "warrantyInformation": "5 year warranty",
+          "shippingInformation": "Ships overnight",
+          "availabilityStatus": "In Stock",
+          "reviews": [
+            {
+              "rating": 4,
+              "comment": "Excellent quality!",
+              "date": "2024-05-23T08:56:21.620Z",
+              "reviewerName": "Maya Reed",
+              "reviewerEmail": "maya.reed@x.dummyjson.com"
+            },
+            {
+              "rating": 4,
+              "comment": "Would buy again!",
+              "date": "2024-05-23T08:56:21.620Z",
+              "reviewerName": "Madison Collins",
+              "reviewerEmail": "madison.collins@x.dummyjson.com"
+            },
+            {
+              "rating": 5,
+              "comment": "Would buy again!",
+              "date": "2024-05-23T08:56:21.620Z",
+              "reviewerName": "Ethan Thompson",
+              "reviewerEmail": "ethan.thompson@x.dummyjson.com"
+            }
+          ],
+          "returnPolicy": "30 days return policy",
+          "minimumOrderQuantity": 1,
+          "meta": {
+            "createdAt": "2024-05-23T08:56:21.620Z",
+            "updatedAt": "2024-05-23T08:56:21.620Z",
+            "barcode": "7583442707568",
+            "qrCode": "https://assets.dummyjson.com/public/qr-code.png"
+          },
+          "images": [
+            "https://cdn.dummyjson.com/products/images/groceries/Green%20Bell%20Pepper/1.png"
+          ],
+          "thumbnail": "https://cdn.dummyjson.com/products/images/groceries/Green%20Bell%20Pepper/thumbnail.png",
+          "quantity": 1,
+          "userId": 1,
+          "id": 2
+        },
+        {
+          "title": "Juice",
+          "description": "Refreshing fruit juice, packed with vitamins and great for staying hydrated.",
+          "category": "groceries",
+          "price": 3.99,
+          "discountPercentage": 5.45,
+          "rating": 3.41,
+          "stock": 99,
+          "tags": [
+            "beverages"
+          ],
+          "sku": "M2K19S06",
+          "weight": 2,
+          "dimensions": {
+            "width": 8.97,
+            "height": 12.26,
+            "depth": 15.05
+          },
+          "warrantyInformation": "1 week warranty",
+          "shippingInformation": "Ships in 1-2 business days",
+          "availabilityStatus": "In Stock",
+          "reviews": [
+            {
+              "rating": 4,
+              "comment": "Very satisfied!",
+              "date": "2024-05-23T08:56:21.620Z",
+              "reviewerName": "Leo Rivera",
+              "reviewerEmail": "leo.rivera@x.dummyjson.com"
+            },
+            {
+              "rating": 2,
+              "comment": "Not worth the price!",
+              "date": "2024-05-23T08:56:21.620Z",
+              "reviewerName": "Ethan Martinez",
+              "reviewerEmail": "ethan.martinez@x.dummyjson.com"
+            },
+            {
+              "rating": 4,
+              "comment": "Excellent quality!",
+              "date": "2024-05-23T08:56:21.620Z",
+              "reviewerName": "Max Parker",
+              "reviewerEmail": "max.parker@x.dummyjson.com"
+            }
+          ],
+          "returnPolicy": "90 days return policy",
+          "minimumOrderQuantity": 26,
+          "meta": {
+            "createdAt": "2024-05-23T08:56:21.620Z",
+            "updatedAt": "2024-05-23T08:56:21.620Z",
+            "barcode": "8546824122355",
+            "qrCode": "https://assets.dummyjson.com/public/qr-code.png"
+          },
+          "images": [
+            "https://cdn.dummyjson.com/products/images/groceries/Juice/1.png"
+          ],
+          "thumbnail": "https://cdn.dummyjson.com/products/images/groceries/Juice/thumbnail.png",
+          "quantity": 1,
+          "userId": 1,
+          "id": 3
+        },
+        {
+          "title": "Honey Jar",
+          "description": "Pure and natural honey in a convenient jar, perfect for sweetening beverages or drizzling over food.",
+          "category": "groceries",
+          "price": 6.99,
+          "discountPercentage": 1.91,
+          "rating": 3.5,
+          "stock": 25,
+          "tags": [
+            "condiments"
+          ],
+          "sku": "BTBNIIOU",
+          "weight": 9,
+          "dimensions": {
+            "width": 26.53,
+            "height": 27.11,
+            "depth": 6.63
+          },
+          "warrantyInformation": "2 year warranty",
+          "shippingInformation": "Ships overnight",
+          "availabilityStatus": "In Stock",
+          "reviews": [
+            {
+              "rating": 4,
+              "comment": "Fast shipping!",
+              "date": "2024-05-23T08:56:21.620Z",
+              "reviewerName": "Nicholas Bailey",
+              "reviewerEmail": "nicholas.bailey@x.dummyjson.com"
+            },
+            {
+              "rating": 5,
+              "comment": "Awesome product!",
+              "date": "2024-05-23T08:56:21.620Z",
+              "reviewerName": "Gabriel Hayes",
+              "reviewerEmail": "gabriel.hayes@x.dummyjson.com"
+            },
+            {
+              "rating": 5,
+              "comment": "Highly impressed!",
+              "date": "2024-05-23T08:56:21.620Z",
+              "reviewerName": "James Garcia",
+              "reviewerEmail": "james.garcia@x.dummyjson.com"
+            }
+          ],
+          "returnPolicy": "90 days return policy",
+          "minimumOrderQuantity": 1,
+          "meta": {
+            "createdAt": "2024-05-23T08:56:21.620Z",
+            "updatedAt": "2024-05-23T08:56:21.620Z",
+            "barcode": "0668665656044",
+            "qrCode": "https://assets.dummyjson.com/public/qr-code.png"
+          },
+          "images": [
+            "https://cdn.dummyjson.com/products/images/groceries/Honey%20Jar/1.png"
+          ],
+          "thumbnail": "https://cdn.dummyjson.com/products/images/groceries/Honey%20Jar/thumbnail.png",
+          "quantity": 1,
+          "userId": 1,
+          "id": 4
+        }
+      ],
+      "totalAmount": "12.27",
+      "totalItem": 3,
+      "user": {
+        "email": "nikhiltiwari0707@gmail.com",
+        "password": "Nikhil@0200@",
+        "addresses": [
+          {
+            "name": "Nikhil Tiwari",
+            "email": "nikhiltiwari0707@gmail.com",
+            "phone": "09811121377",
+            "street": "Hno.-479/5, meethapur , lakhpat colony-2,",
+            "city": "new delhi",
+            "region": "Delhi",
+            "pinCode": "110044"
+          },
+          {
+            "name": "Birender Kumar Tiwari",
+            "email": "birendertiwari0200@gmail.com",
+            "phone": "09811121377",
+            "street": "479 05 MITHAPUR LAKHPAT COLONY-02 BADARP",
+            "city": "New delhi",
+            "region": "Delhi",
+            "pinCode": "110044"
+          },
+          {
+            "name": "Karan Tiwari",
+            "email": "karantiwari956013@gmail.com",
+            "phone": "08595787643",
+            "street": "479/5, Lakhpat Colony-II, Mithapur, Badarpur",
+            "city": "New Delhi",
+            "region": "Delhi",
+            "pinCode": "110044"
+          }
+        ],
+        "id": 1
+      },
+      "selectPayment": "card",
+      "selectAddress": {
+        "name": "Karan Tiwari",
+        "email": "karantiwari956013@gmail.com",
+        "phone": "08595787643",
+        "street": "479/5, Lakhpat Colony-II, Mithapur, Badarpur",
+        "city": "New Delhi",
+        "region": "Delhi",
+        "pinCode": "110044"
+      },
+      "status": "pending",
+      "id": 3
     }
   ]
 }
