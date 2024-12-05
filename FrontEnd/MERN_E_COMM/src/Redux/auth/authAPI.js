@@ -43,15 +43,17 @@ export async function checkUser(loginInfo){
     }
 }
 
-export async function updateUser(update){
-    try {
-        let res = await axios({
-            url: `http://localhost:3000/users/${update.id}`,
-            method: "patch",
-            data: update
-        })
-        return res.data
-    } catch (error) {
-        throw new Error(`Failed to update address`)
-    }
-}
+// export async function updateUser(update){
+//     try {
+//         let res = await axios({
+//             url: `http://localhost:3000/users/${update.id}`,
+//             method: "patch",
+//             data: update
+//         })
+//         return res.data
+//     } catch (error) {
+//         throw new Error(`Failed to update address`)
+//     }
+// }
+
+// We were using updateUser first in Auth but now have moved to userAPI. 

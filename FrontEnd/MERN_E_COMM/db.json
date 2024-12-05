@@ -1929,7 +1929,44 @@
     {
       "email": "karantiwari956013@gmail.com",
       "password": "Karan@0200@",
-      "addresses": [],
+      "addresses": [
+        {
+          "name": "Karan Tiwari",
+          "email": "karantiwari956013@gmail.com",
+          "phone": "08595787643",
+          "street": "479/5, Lakhpat Colony-II, Mithapur, Badarpur",
+          "city": "New Delhi",
+          "region": "Delhi",
+          "pinCode": "110044"
+        },
+        {
+          "name": "Nikhil Tiwari",
+          "email": "nikhiltiwari0707@gmail.com",
+          "phone": "09811121377",
+          "street": "Hno.-479/5, meethapur , lakhpat colony-2,",
+          "city": "new delhi",
+          "region": "Delhi",
+          "pinCode": "110044"
+        },
+        {
+          "name": "Aman Sharma",
+          "email": "aman0100@gmail.com",
+          "phone": "123445433",
+          "street": "Kendriya Vidyalaya 1st BN ITBP,",
+          "city": "JOSHIMATH",
+          "region": "UTTARAKHAND",
+          "pinCode": "246443"
+        },
+        {
+          "name": "Ashok Kumar Pathak",
+          "email": "ashok777@gmail.com",
+          "phone": "09431291152",
+          "street": "Kendriya Vidyalaya 1st BN ITBP,",
+          "city": "JOSHIMATH",
+          "region": "UTTARAKHAND",
+          "pinCode": "246443"
+        }
+      ],
       "id": 2
     }
   ],
@@ -2517,6 +2554,191 @@
       },
       "status": "pending",
       "id": 3
+    },
+    {
+      "items": [
+        {
+          "title": "Essence Mascara Lash Princess",
+          "description": "The Essence Mascara Lash Princess is a popular mascara known for its volumizing and lengthening effects. Achieve dramatic lashes with this long-lasting and cruelty-free formula.",
+          "category": "beauty",
+          "price": 9.99,
+          "discountPercentage": 7.17,
+          "rating": 4.94,
+          "stock": 5,
+          "tags": [
+            "beauty",
+            "mascara"
+          ],
+          "brand": "Essence",
+          "sku": "RCH45Q1A",
+          "weight": 2,
+          "dimensions": {
+            "width": 23.17,
+            "height": 14.43,
+            "depth": 28.01
+          },
+          "warrantyInformation": "1 month warranty",
+          "shippingInformation": "Ships in 1 month",
+          "availabilityStatus": "Low Stock",
+          "reviews": [
+            {
+              "rating": 2,
+              "comment": "Very unhappy with my purchase!",
+              "date": "2024-05-23T08:56:21.618Z",
+              "reviewerName": "John Doe",
+              "reviewerEmail": "john.doe@x.dummyjson.com"
+            },
+            {
+              "rating": 2,
+              "comment": "Not as described!",
+              "date": "2024-05-23T08:56:21.618Z",
+              "reviewerName": "Nolan Gonzalez",
+              "reviewerEmail": "nolan.gonzalez@x.dummyjson.com"
+            },
+            {
+              "rating": 5,
+              "comment": "Very satisfied!",
+              "date": "2024-05-23T08:56:21.618Z",
+              "reviewerName": "Scarlett Wright",
+              "reviewerEmail": "scarlett.wright@x.dummyjson.com"
+            }
+          ],
+          "returnPolicy": "30 days return policy",
+          "minimumOrderQuantity": 24,
+          "meta": {
+            "createdAt": "2024-05-23T08:56:21.618Z",
+            "updatedAt": "2024-05-23T08:56:21.618Z",
+            "barcode": "9164035109868",
+            "qrCode": "https://assets.dummyjson.com/public/qr-code.png"
+          },
+          "images": [
+            "https://cdn.dummyjson.com/products/images/beauty/Essence%20Mascara%20Lash%20Princess/1.png"
+          ],
+          "thumbnail": "https://cdn.dummyjson.com/products/images/beauty/Essence%20Mascara%20Lash%20Princess/thumbnail.png",
+          "quantity": 1,
+          "userId": 2,
+          "id": 2
+        },
+        {
+          "title": "Red Nail Polish",
+          "description": "The Red Nail Polish offers a rich and glossy red hue for vibrant and polished nails. With a quick-drying formula, it provides a salon-quality finish at home.",
+          "category": "beauty",
+          "price": 8.99,
+          "discountPercentage": 2.46,
+          "rating": 3.91,
+          "stock": 71,
+          "tags": [
+            "beauty",
+            "nail polish"
+          ],
+          "brand": "Nail Couture",
+          "sku": "YUIIIP4W",
+          "weight": 9,
+          "dimensions": {
+            "width": 8.11,
+            "height": 10.89,
+            "depth": 29.06
+          },
+          "warrantyInformation": "1 year warranty",
+          "shippingInformation": "Ships in 1 week",
+          "availabilityStatus": "In Stock",
+          "reviews": [
+            {
+              "rating": 5,
+              "comment": "Very pleased!",
+              "date": "2024-05-23T08:56:21.619Z",
+              "reviewerName": "Leo Rivera",
+              "reviewerEmail": "leo.rivera@x.dummyjson.com"
+            },
+            {
+              "rating": 5,
+              "comment": "Great product!",
+              "date": "2024-05-23T08:56:21.619Z",
+              "reviewerName": "Evan Reed",
+              "reviewerEmail": "evan.reed@x.dummyjson.com"
+            },
+            {
+              "rating": 4,
+              "comment": "Highly recommended!",
+              "date": "2024-05-23T08:56:21.619Z",
+              "reviewerName": "Evelyn Sanchez",
+              "reviewerEmail": "evelyn.sanchez@x.dummyjson.com"
+            }
+          ],
+          "returnPolicy": "No return policy",
+          "minimumOrderQuantity": 46,
+          "meta": {
+            "createdAt": "2024-05-23T08:56:21.619Z",
+            "updatedAt": "2024-05-23T08:56:21.619Z",
+            "barcode": "3212847902461",
+            "qrCode": "https://assets.dummyjson.com/public/qr-code.png"
+          },
+          "images": [
+            "https://cdn.dummyjson.com/products/images/beauty/Red%20Nail%20Polish/1.png"
+          ],
+          "thumbnail": "https://cdn.dummyjson.com/products/images/beauty/Red%20Nail%20Polish/thumbnail.png",
+          "quantity": 1,
+          "userId": 2,
+          "id": 3
+        }
+      ],
+      "totalAmount": "18.98",
+      "totalItem": 2,
+      "user": {
+        "email": "karantiwari956013@gmail.com",
+        "password": "Karan@0200@",
+        "addresses": [
+          {
+            "name": "Karan Tiwari",
+            "email": "karantiwari956013@gmail.com",
+            "phone": "08595787643",
+            "street": "479/5, Lakhpat Colony-II, Mithapur, Badarpur",
+            "city": "New Delhi",
+            "region": "Delhi",
+            "pinCode": "110044"
+          },
+          {
+            "name": "Nikhil Tiwari",
+            "email": "nikhiltiwari0707@gmail.com",
+            "phone": "09811121377",
+            "street": "Hno.-479/5, meethapur , lakhpat colony-2,",
+            "city": "new delhi",
+            "region": "Delhi",
+            "pinCode": "110044"
+          },
+          {
+            "name": "Aman Sharma",
+            "email": "aman0100@gmail.com",
+            "phone": "123445433",
+            "street": "Kendriya Vidyalaya 1st BN ITBP,",
+            "city": "JOSHIMATH",
+            "region": "UTTARAKHAND",
+            "pinCode": "246443"
+          },
+          {
+            "name": "Ashok Kumar Pathak",
+            "email": "ashok777@gmail.com",
+            "phone": "09431291152",
+            "street": "Kendriya Vidyalaya 1st BN ITBP,",
+            "city": "JOSHIMATH",
+            "region": "UTTARAKHAND",
+            "pinCode": "246443"
+          }
+        ],
+        "id": 2
+      },
+      "selectPayment": "card",
+      "selectAddress": {
+        "name": "Karan Tiwari",
+        "email": "karantiwari956013@gmail.com",
+        "phone": "08595787643",
+        "street": "479/5, Lakhpat Colony-II, Mithapur, Badarpur",
+        "city": "New Delhi",
+        "region": "Delhi",
+        "pinCode": "110044"
+      },
+      "status": "pending",
+      "id": 4
     }
   ]
 }

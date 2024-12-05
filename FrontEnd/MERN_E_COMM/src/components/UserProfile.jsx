@@ -1,7 +1,15 @@
 import { useDispatch, useSelector } from "react-redux";
 
 const UserProfile = () => {
-  const user = useSelector((state) => state.auth.loggedIn);
+  const user = useSelector((state) => state.user.userInfo);
+
+  function handleEdit(e, index){
+
+  }
+
+  function handleDelete(e, index){
+
+  }
 
   return (
     <div>
@@ -27,7 +35,7 @@ const UserProfile = () => {
             <p className="flex justify-between text-base font-medium text-black-500 pb-4">
               Your Addresses:
             </p>
-            {user.addresses.map((addresses) => (
+            {user.addresses.map((addresses, index) => (
               <div className="flex justify-between gap-x-6 py-5 border-solid border-2 border-gray-200 p-2">
                 <div className="flex min-w-0 gap-x-4">
                   <div className="min-w-0 flex-auto">
@@ -45,6 +53,21 @@ const UserProfile = () => {
                   <p className="mt-1 text-xs/5 text-gray-500">
                     {addresses.pinCode}
                   </p>
+
+                  <button
+                    onClick={(e) => handleEdit(e, index)}
+                    type="button"
+                    className="text-sm text-indigo-600 hover:text-indigo-500 pt-3"
+                  >
+                    Edit
+                  </button>
+                  <button
+                    onClick={(e) => handleDelete(e, index)}
+                    type="button"
+                    className="text-sm text-indigo-600 hover:text-indigo-500"
+                  >
+                    Remove
+                  </button>
                 </div>
               </div>
             ))}

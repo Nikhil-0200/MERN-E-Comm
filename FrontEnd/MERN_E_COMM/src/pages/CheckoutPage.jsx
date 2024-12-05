@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import { deleteItemsAsync } from "../Redux/cart/cartSlice";
 import { useForm } from "react-hook-form";
-import { updateUserAsync } from "../Redux/auth/authSlice";
+import { updateUserAsync } from "../Redux/user/userSlice";
 import { addOrderDataAsync } from "../Redux/order/orderSlice";
 
 const CheckoutPage = () => {
@@ -18,7 +18,7 @@ const CheckoutPage = () => {
   const navigate = useNavigate();
   const [selectAddress, setSelectAddress] = useState(null);
   const [selectPayment, setSelectPayment] = useState("");
-  const user = useSelector((state) => state.auth.loggedIn);
+  const user = useSelector((state) => state.user.userInfo);
   const currentOrder = useSelector((state) => state.order.currentOrder)
   // const currentOrderStatus = useSelector((state)=> state.order.currentOrderStatus)
 
