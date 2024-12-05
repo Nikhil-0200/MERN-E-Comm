@@ -97,11 +97,11 @@ const UserOrder = () => {
                   </div>
 
                   <div className="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
-                    <p className="text-sm/6 text-gray-900">
-                      {orders.selectAddress.Phone}
+                    <p className="text-sm/6 text-gray-900 font-semibold">
+                      {orders.selectAddress.phone}
                     </p>
                     <p className="mt-1 text-xs/5 text-gray-500">
-                      {orders.selectAddress.PinCode}
+                      {orders.selectAddress.pinCode}
                     </p>
                   </div>
                 </div>
