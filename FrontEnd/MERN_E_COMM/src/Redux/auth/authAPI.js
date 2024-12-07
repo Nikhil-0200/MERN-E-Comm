@@ -43,6 +43,14 @@ export async function checkUser(loginInfo){
     }
 }
 
+export async function logout(userId){
+    try {
+        return `User Logout Successfully`
+    } catch (error) {
+        throw new Error(`Failed to Logout`)
+    }
+}
+
 // export async function updateUser(update){
 //     try {
 //         let res = await axios({

@@ -10,6 +10,7 @@ import PageNotFound from "../pages/404";
 import OrderSuccessPage from "../pages/OrderSuccessPage";
 import UserOrder from "./UserOrder"
 import UserProfile from "./UserProfile";
+import Logout from "./Logout"
 
 
 const AllRoutes = () =>{
@@ -24,6 +25,7 @@ const AllRoutes = () =>{
             <Route path="/orderSuccess/:id" element={<OrderSuccessPage />} />
             <Route path="/orders" element={<Private><UserOrder /></Private>} />
             <Route path="/profile" element={<Private><UserProfile /></Private>} />
+            <Route path="/logout" element={<Logout/>} />
             <Route path="*" element={<PageNotFound />} />
         </Routes>
     )

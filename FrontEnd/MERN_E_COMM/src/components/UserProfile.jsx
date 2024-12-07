@@ -115,7 +115,7 @@ const UserProfile = () => {
               handleAdd(data)
               reset()
             })}
-            className="border-2 border-black my-6"
+            className="my-6"
           >
             <div className="space-y-12">
               <div className="border-b border-gray-900/10 pb-12">
@@ -334,7 +334,7 @@ const UserProfile = () => {
                       handleEdit(data, index);
                       reset();
                     })}
-                    className="border-2 border-black my-6"
+                    className="my-6"
                   >
                     <div className="space-y-12">
                       <div className="border-b border-gray-900/10 pb-12">
