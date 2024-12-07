@@ -1,14 +1,31 @@
 import { useDispatch, useSelector } from "react-redux";
+import { updateUserAsync } from "../Redux/user/userSlice";
 
 const UserProfile = () => {
+  const dispatch = useDispatch();
   const user = useSelector((state) => state.user.userInfo);
 
-  function handleEdit(e, index){
+  function handleEdit(e, index) {}
 
-  }
+  function handleDelete(e, index) {
+    // const newUser = {...user, addresses: [...user.addresses]} // Shallow Copy
+    const newUser = JSON.parse(JSON.stringify(user)); // Deep Copy
 
-  function handleDelete(e, index){
+    // Here we are making copy of user
 
+    const filterUser = newUser.addresses.filter(
+      (ele, addIndex) => addIndex != index
+    );
+
+    // Here we are filtering user addresses on index basis
+
+    newUser.addresses = filterUser;
+
+    // Here we are assigning filter addresses to user original addresses 
+
+    dispatch(updateUserAsync(newUser));
+
+    // Here we are dispatching filter user to updateUserAsync
   }
 
   return (
@@ -36,7 +53,10 @@ const UserProfile = () => {
               Your Addresses:
             </p>
             {user.addresses.map((addresses, index) => (
-              <div className="flex justify-between gap-x-6 py-5 border-solid border-2 border-gray-200 p-2">
+              <div
+                key={index}
+                className="flex justify-between gap-x-6 py-5 border-solid border-2 border-gray-200 p-2"
+              >
                 <div className="flex min-w-0 gap-x-4">
                   <div className="min-w-0 flex-auto">
                     <p className="text-sm/6 font-semibold text-gray-900">

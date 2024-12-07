@@ -13,12 +13,12 @@ const UserOrder = () => {
 
   return (
     <div>
-      {orders &&
-        orders.map((orders) => (
-          <div>
-            <h1 className="text-4xl font-bold tracking-tight text-gray-900 px-20 pt-20">
+      <h1 className="text-4xl font-bold tracking-tight text-gray-900 px-20 pt-20">
               My Orders
-            </h1>
+      </h1>
+      {orders &&
+        orders.map((orders, index) => (
+          <div key={index}>
             {orders.length < 1 && <Navigate to="/" />}
             <div className="mx-auto max-w-5xl px-2 sm:px-6 lg:px-8 my-10">
               <div className="flex h-full flex-col bg-white shadow-xl">

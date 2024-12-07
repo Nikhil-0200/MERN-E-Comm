@@ -38,8 +38,8 @@ const SignUp = () => {
             noValidate
             className="space-y-6"
             onSubmit={handleSubmit(async (data) => {
-              await dispatch(createUserAsync({email: data.email, password: data.password, addresses: []}))
-              console.log(data);
+              // await dispatch(createUserAsync({email: data.email, password: data.password, addresses: []}))
+              // console.log(data);
               
             })}
           >
