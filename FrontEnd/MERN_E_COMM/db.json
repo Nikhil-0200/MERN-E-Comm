@@ -1915,6 +1915,7 @@
           "pinCode": "923129"
         }
       ],
+      "role": "user",
       "id": 1
     },
     {
@@ -1931,7 +1932,15 @@
           "pinCode": "110044"
         }
       ],
+      "role": "user",
       "id": 2
+    },
+    {
+      "email": "info@shailsecurity.in",
+      "password": "Nikhil@0200@",
+      "addresses": [],
+      "role": "admin",
+      "id": 3
     }
   ],
   "cart": [

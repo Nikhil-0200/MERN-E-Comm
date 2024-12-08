@@ -12,12 +12,15 @@ import UserOrder from "./UserOrder"
 import UserProfile from "./UserProfile";
 import Logout from "./Logout"
 import ForgotPass from "./ForgotPass";
+import AdminHome from "../pages/AdminHome";
+import PrivateAdmin from "./PrivateAdmin"
 
 
 const AllRoutes = () =>{
     return(     
         <Routes>
             <Route path="/" element={<Private><Home/></Private>} />
+            <Route path="/admin" element={<PrivateAdmin><AdminHome/></PrivateAdmin>} />
             <Route path="/cart" element={<Private><CartPage/></Private>} />
             <Route path="/login" element={<LoginPage/>} />
             <Route path="/signUp" element={<SignUpPage/>} />

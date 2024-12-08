@@ -20,16 +20,23 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
+
+
+
 const NavBar = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const items = useSelector((state) => state.cart.items);
+  const user = useSelector((state)=> state.auth.loggedIn)
 
   const navigation = [
-    { name: "Dashboard", to: "/", current: location.pathname === "/" },
-    { name: "LogIn", to: "/login", current: location.pathname === "/login" },
-    { name: "SignUp", to: "/signUp", current: location.pathname === "/signUp" },
+    { name: "Dashboard", to: "/", current: location.pathname === "/", role: "user" },
+    { name: "LogIn", to: "/login", current: location.pathname === "/login", role: "guest"},
+    { name: "SignUp", to: "/signUp", current: location.pathname === "/signUp", role: "guest" },
+    { name: "Admin", to: "/admin", current: location.pathname === "/admin", role: "admin" },
   ];
+
+  // Have given role in navigation to show specific buttons according to the role
 
   return (
     <div>
@@ -61,21 +68,31 @@ const NavBar = () => {
               </div>
               <div className="hidden sm:ml-6 sm:block">
                 <div className="flex space-x-4">
-                  {navigation.map((item) => (
-                    <Link
-                      key={item.name}
-                      to={item.to}
-                      aria-current={item.current ? "page" : undefined}
-                      className={classNames(
-                        item.current
-                          ? "bg-gray-900 text-white"
-                          : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                        "rounded-md px-3 py-2 text-sm font-medium"
-                      )}
-                    >
-                      {item.name}
-                    </Link>
-                  ))}
+                {navigation
+                    .filter((item) => {
+                      if (user?.role === "admin" && item.role === "admin") return true;
+                      if (user?.role === "user" && item.role === "user") return true;
+                      if (!user && item.role === "guest") return true;
+                      return false;
+                    })
+
+                    // Here we are first filtering navigation that if user role which we are fetching from auth > loggedIn and if navigation role is same. Then after filter in navigation item we have data and links for that specific role only.
+
+                    .map((item) => (
+                      <Link
+                        key={item.name}
+                        to={item.to}
+                        aria-current={item.current ? "page" : undefined}
+                        className={classNames(
+                          item.current
+                            ? "bg-gray-900 text-white"
+                            : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                          "rounded-md px-3 py-2 text-sm font-medium"
+                        )}
+                      >
+                        {item.name}
+                      </Link>
+                    ))}
                 </div>
               </div>
             </div>

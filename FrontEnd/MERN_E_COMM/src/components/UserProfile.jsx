@@ -70,13 +70,13 @@ const UserProfile = () => {
     // Here we are dispatching filter user to updateUserAsync
   }
 
-  function handleAdd(data){
+  function handleAdd(data) {
     console.log(data);
     const newUser = JSON.parse(JSON.stringify(user));
-    newUser.addresses.push(data)    
-    dispatch(updateUserAsync(newUser))
-    setShowEditForm(-1)
-    setShowAddForm(false)
+    newUser.addresses.push(data);
+    dispatch(updateUserAsync(newUser));
+    setShowEditForm(-1);
+    setShowAddForm(false);
   }
 
   return (
@@ -95,232 +95,242 @@ const UserProfile = () => {
                 <p className="flex justify-between text-base font-medium text-black-900 pb-4">
                   Email Address: {user.email}
                 </p>
+
+                {user.role == "admin" ? (
+                  <p className="flex justify-between text-base font-medium text-black-900 pb-4">
+                  Role: {user.role}
+                </p>
+                ) : ("")}
+                
               </div>
             </div>
           </div>
 
           <div className="px-4 py-6 sm:px-6">
             <button
-              onClick={() => {setShowAddForm(true); setShowEditForm(-1)}}
+              onClick={() => {
+                setShowAddForm(true);
+                setShowEditForm(-1);
+              }}
               type="submit"
               className="rounded-md bg-gray-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 mb-10"
             >
               Add New Address
             </button>
 
-           {showAddForm ? (
-            <form
-            noValidate
-            onSubmit={handleSubmit((data) => {
-              handleAdd(data)
-              reset()
-            })}
-            className="my-6"
-          >
-            <div className="space-y-12">
-              <div className="border-b border-gray-900/10 pb-12">
-                <h2 className="text-xl leading-10 py-3 font-semibold text-gray-900">
-                  Add Information
-                </h2>
-                <p className="mt-1 text-sm/6 text-gray-600">
-                  Use a permanent address where you can receive mail.
-                </p>
+            {showAddForm ? (
+              <form
+                noValidate
+                onSubmit={handleSubmit((data) => {
+                  handleAdd(data);
+                  reset();
+                })}
+                className="my-6"
+              >
+                <div className="space-y-12">
+                  <div className="border-b border-gray-900/10 pb-12">
+                    <h2 className="text-xl leading-10 py-3 font-semibold text-gray-900">
+                      Add Information
+                    </h2>
+                    <p className="mt-1 text-sm/6 text-gray-600">
+                      Use a permanent address where you can receive mail.
+                    </p>
 
-                <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-                  <div className="sm:col-span-3">
-                    <label
-                      htmlFor="name"
-                      className="block text-sm/6 font-medium text-gray-900"
-                    >
-                      Full name
-                    </label>
-                    <div className="mt-2">
-                      <input
-                        id="name"
-                        {...register("name", {
-                          required: "Name is required",
-                        })}
-                        type="text"
-                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6"
-                      />
-                      {errors.name && (
-                        <p className="text-red-500">
-                          {errors.name.message}
-                        </p>
-                      )}
+                    <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+                      <div className="sm:col-span-3">
+                        <label
+                          htmlFor="name"
+                          className="block text-sm/6 font-medium text-gray-900"
+                        >
+                          Full name
+                        </label>
+                        <div className="mt-2">
+                          <input
+                            id="name"
+                            {...register("name", {
+                              required: "Name is required",
+                            })}
+                            type="text"
+                            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6"
+                          />
+                          {errors.name && (
+                            <p className="text-red-500">
+                              {errors.name.message}
+                            </p>
+                          )}
+                        </div>
+                      </div>
+
+                      <div className="sm:col-span-4">
+                        <label
+                          htmlFor="email"
+                          className="block text-sm/6 font-medium text-gray-900"
+                        >
+                          Email address
+                        </label>
+                        <div className="mt-2">
+                          <input
+                            id="email"
+                            {...register("email", {
+                              required: "Email is required",
+                              pattern: {
+                                value: /\b[\w\.-]+@[\w\.-]+\.\w{2,4}\b/gi,
+                                message: "Email not valid",
+                              },
+                            })}
+                            type="email"
+                            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6"
+                          />
+                          {errors.email && (
+                            <p className="text-red-500">
+                              {errors.email.message}
+                            </p>
+                          )}
+                        </div>
+                      </div>
+
+                      <div className="sm:col-span-3">
+                        <label
+                          htmlFor="phone"
+                          className="block text-sm/6 font-medium text-gray-900"
+                        >
+                          Phone
+                        </label>
+                        <div className="mt-2">
+                          <input
+                            id="phone"
+                            {...register("phone", {
+                              required: "phone is required",
+                            })}
+                            type="tel"
+                            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6"
+                          />
+                          {errors.phone && (
+                            <p className="text-red-500">
+                              {errors.phone.message}
+                            </p>
+                          )}
+                        </div>
+                      </div>
+
+                      <div className="col-span-full">
+                        <label
+                          htmlFor="street-address"
+                          className="block text-sm/6 font-medium text-gray-900"
+                        >
+                          Street address
+                        </label>
+                        <div className="mt-2">
+                          <input
+                            id="street"
+                            {...register("street", {
+                              required: "Street is required",
+                            })}
+                            type="text"
+                            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6"
+                          />
+                          {errors.street && (
+                            <p className="text-red-500">
+                              {errors.street.message}
+                            </p>
+                          )}
+                        </div>
+                      </div>
+
+                      <div className="sm:col-span-2 sm:col-start-1">
+                        <label
+                          htmlFor="city"
+                          className="block text-sm/6 font-medium text-gray-900"
+                        >
+                          City
+                        </label>
+                        <div className="mt-2">
+                          <input
+                            id="city"
+                            {...register("city", {
+                              required: "City is required",
+                            })}
+                            type="text"
+                            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6"
+                          />
+                          {errors.city && (
+                            <p className="text-red-500">
+                              {errors.city.message}
+                            </p>
+                          )}
+                        </div>
+                      </div>
+
+                      <div className="sm:col-span-2">
+                        <label
+                          htmlFor="region"
+                          className="block text-sm/6 font-medium text-gray-900"
+                        >
+                          State / Province
+                        </label>
+                        <div className="mt-2">
+                          <input
+                            id="region"
+                            {...register("region", {
+                              required: "Region is required",
+                            })}
+                            type="text"
+                            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6"
+                          />
+                          {errors.region && (
+                            <p className="text-red-500">
+                              {errors.region.message}
+                            </p>
+                          )}
+                        </div>
+                      </div>
+
+                      <div className="sm:col-span-2">
+                        <label
+                          htmlFor="pinCode"
+                          className="block text-sm/6 font-medium text-gray-900"
+                        >
+                          ZIP / Postal code
+                        </label>
+                        <div className="mt-2">
+                          <input
+                            id="pinCode"
+                            {...register("pinCode", {
+                              required: "pinCode is required",
+                            })}
+                            type="number"
+                            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6"
+                          />
+                          {errors.pinCode && (
+                            <p className="text-red-500">
+                              {errors.pinCode.message}
+                            </p>
+                          )}
+                        </div>
+                      </div>
                     </div>
                   </div>
 
-                  <div className="sm:col-span-4">
-                    <label
-                      htmlFor="email"
-                      className="block text-sm/6 font-medium text-gray-900"
+                  <div className="mt-6 flex items-center justify-end gap-x-6">
+                    <button
+                      onClick={() => setShowAddForm(false)}
+                      type="button"
+                      className="text-sm/6 font-semibold text-gray-900"
                     >
-                      Email address
-                    </label>
-                    <div className="mt-2">
-                      <input
-                        id="email"
-                        {...register("email", {
-                          required: "Email is required",
-                          pattern: {
-                            value: /\b[\w\.-]+@[\w\.-]+\.\w{2,4}\b/gi,
-                            message: "Email not valid",
-                          },
-                        })}
-                        type="email"
-                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6"
-                      />
-                      {errors.email && (
-                        <p className="text-red-500">
-                          {errors.email.message}
-                        </p>
-                      )}
-                    </div>
-                  </div>
-
-                  <div className="sm:col-span-3">
-                    <label
-                      htmlFor="phone"
-                      className="block text-sm/6 font-medium text-gray-900"
+                      Cancel
+                    </button>
+                    <button
+                      type="submit"
+                      className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                     >
-                      Phone
-                    </label>
-                    <div className="mt-2">
-                      <input
-                        id="phone"
-                        {...register("phone", {
-                          required: "phone is required",
-                        })}
-                        type="tel"
-                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6"
-                      />
-                      {errors.phone && (
-                        <p className="text-red-500">
-                          {errors.phone.message}
-                        </p>
-                      )}
-                    </div>
-                  </div>
-
-                  <div className="col-span-full">
-                    <label
-                      htmlFor="street-address"
-                      className="block text-sm/6 font-medium text-gray-900"
-                    >
-                      Street address
-                    </label>
-                    <div className="mt-2">
-                      <input
-                        id="street"
-                        {...register("street", {
-                          required: "Street is required",
-                        })}
-                        type="text"
-                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6"
-                      />
-                      {errors.street && (
-                        <p className="text-red-500">
-                          {errors.street.message}
-                        </p>
-                      )}
-                    </div>
-                  </div>
-
-                  <div className="sm:col-span-2 sm:col-start-1">
-                    <label
-                      htmlFor="city"
-                      className="block text-sm/6 font-medium text-gray-900"
-                    >
-                      City
-                    </label>
-                    <div className="mt-2">
-                      <input
-                        id="city"
-                        {...register("city", {
-                          required: "City is required",
-                        })}
-                        type="text"
-                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6"
-                      />
-                      {errors.city && (
-                        <p className="text-red-500">
-                          {errors.city.message}
-                        </p>
-                      )}
-                    </div>
-                  </div>
-
-                  <div className="sm:col-span-2">
-                    <label
-                      htmlFor="region"
-                      className="block text-sm/6 font-medium text-gray-900"
-                    >
-                      State / Province
-                    </label>
-                    <div className="mt-2">
-                      <input
-                        id="region"
-                        {...register("region", {
-                          required: "Region is required",
-                        })}
-                        type="text"
-                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6"
-                      />
-                      {errors.region && (
-                        <p className="text-red-500">
-                          {errors.region.message}
-                        </p>
-                      )}
-                    </div>
-                  </div>
-
-                  <div className="sm:col-span-2">
-                    <label
-                      htmlFor="pinCode"
-                      className="block text-sm/6 font-medium text-gray-900"
-                    >
-                      ZIP / Postal code
-                    </label>
-                    <div className="mt-2">
-                      <input
-                        id="pinCode"
-                        {...register("pinCode", {
-                          required: "pinCode is required",
-                        })}
-                        type="number"
-                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6"
-                      />
-                      {errors.pinCode && (
-                        <p className="text-red-500">
-                          {errors.pinCode.message}
-                        </p>
-                      )}
-                    </div>
+                      Add Address
+                    </button>
                   </div>
                 </div>
-              </div>
-
-              <div className="mt-6 flex items-center justify-end gap-x-6">
-                <button
-                  onClick={() => setShowAddForm(false)}
-                  type="button"
-                  className="text-sm/6 font-semibold text-gray-900"
-                >
-                  Cancel
-                </button>
-                <button
-                  type="submit"
-                  className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                >
-                  Add Address
-                </button>
-              </div>
-            </div>
-          </form>
-           ): ("")}
-              
-            
+              </form>
+            ) : (
+              ""
+            )}
 
             <p className="flex justify-between text-base font-medium text-black-500 pb-4">
               Your Addresses:

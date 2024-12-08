@@ -1,9 +1,9 @@
 import { Link, Navigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useSelector, useDispatch } from "react-redux";
-import {createUserAsync} from "../Redux/auth/authSlice"
+import { createUserAsync } from "../Redux/auth/authSlice";
 
-const SignUp = () => {  
+const SignUp = () => {
   const {
     register,
     handleSubmit,
@@ -13,10 +13,8 @@ const SignUp = () => {
 
   console.log(errors);
 
-  const user = useSelector((state)=> state.auth.loggedIn)
-  const dispatch = useDispatch() 
-
-  
+  const user = useSelector((state) => state.auth.loggedIn);
+  const dispatch = useDispatch();
 
   return (
     <div>
@@ -38,9 +36,15 @@ const SignUp = () => {
             noValidate
             className="space-y-6"
             onSubmit={handleSubmit(async (data) => {
-              // await dispatch(createUserAsync({email: data.email, password: data.password, addresses: []}))
-              // console.log(data);
-              
+              await dispatch(
+                createUserAsync({
+                  email: data.email,
+                  password: data.password,
+                  addresses: [],
+                  role: "user"
+                })
+              );
+              console.log(data);
             })}
           >
             <div>
@@ -63,10 +67,9 @@ const SignUp = () => {
                   type="email"
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6"
                 />
-                  {errors.email && (
-                    <p className="text-red-500">{errors.email.message}</p>
-                  )}
-                
+                {errors.email && (
+                  <p className="text-red-500">{errors.email.message}</p>
+                )}
               </div>
             </div>
 
@@ -85,11 +88,12 @@ const SignUp = () => {
                   {...register("password", {
                     required: "Password is required",
                     pattern: {
-                      value: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/gm,
+                      value:
+                        /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/gm,
                       message: `- at least 8 characters\n
 - must contain at least 1 uppercase letter, 1 lowercase letter, and 1 number\n
-- Can contain special characters`
-                    }
+- Can contain special characters`,
+                    },
                   })}
                   type="password"
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6"
@@ -120,10 +124,10 @@ const SignUp = () => {
               <div className="mt-2">
                 <input
                   id="confirmPassword"
-                  {...register(
-                    "confirmPassword",
-                    { required: "Confirm Password is required",
-                      validate: (value, formValues) => value === formValues.password || "Password not matching"
+                  {...register("confirmPassword", {
+                    required: "Confirm Password is required",
+                    validate: (value, formValues) =>
+                      value === formValues.password || "Password not matching",
                   })}
                   type="password"
                   required

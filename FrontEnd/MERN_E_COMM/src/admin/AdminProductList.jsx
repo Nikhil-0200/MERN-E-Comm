@@ -20,7 +20,7 @@ import {
   Squares2X2Icon,
   StarIcon,
 } from "@heroicons/react/20/solid";
-import { Pagination } from "../../components/Pagination";
+import { Pagination } from "../components/Pagination";
 
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -30,10 +30,10 @@ import {
   fetchAllProductsFilterAsync,
   fetchCategoryAsync,
   fetchBrandsAsync,
-} from "./productListSlice";
-import { fetchCategory } from "./productListAPI";
+} from "../Redux/product-list/productListSlice";
+import { fetchCategory } from "../Redux/product-list/productListAPI";
 
-const ProductList = () => {
+const AdminProductList = () => {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.product.products);
   const category = useSelector((state) => state.product.category);
@@ -241,7 +241,7 @@ const ProductList = () => {
           <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="flex items-baseline justify-between border-b border-gray-200 pb-6 pt-24">
               <h1 className="text-4xl font-bold tracking-tight text-gray-900">
-                All Products
+                All Products - This is Admin Home Page
               </h1>
 
               <div className="flex items-center">
@@ -437,4 +437,4 @@ const ProductList = () => {
   );
 };
 
-export default ProductList;
+export default AdminProductList;
