@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, Navigate } from "react-router-dom";
 import { checkUserAsync } from "../Redux/auth/authSlice";
 
-const Login = () => {
+const ForgotPass = () => {
   const dispatch = useDispatch();
   const error = useSelector((state)=> state.auth.error)
   const user = useSelector((state)=> state.auth.loggedIn)
@@ -26,7 +26,7 @@ const Login = () => {
             className="mx-auto h-10 w-auto"
           />
           <h2 className="mt-10 text-center text-2xl/9 font-bold tracking-tight text-gray-900">
-            Log In to your account
+            Enter email to reset password
           </h2>
         </div>
 
@@ -39,7 +39,8 @@ const Login = () => {
             noValidate
             className="space-y-6"
             onSubmit={handleSubmit(async (data) => {
-              await dispatch(checkUserAsync({email: data.email, password: data.password}))
+                console.log(data);
+                
             })}
           >
             <div>
@@ -68,62 +69,24 @@ const Login = () => {
               </div>
             </div>
 
-            <div>
-              <div className="flex items-center justify-between">
-                <label
-                  htmlFor="password"
-                  className="block text-sm/6 font-medium text-gray-900"
-                >
-                  Password
-                </label>
-                <div className="text-sm">
-                  <Link
-                    to="/forgotPassword"
-                    className="font-semibold text-indigo-600 hover:text-indigo-500"
-                  >
-                    Forgot password?
-                  </Link>
-                </div>
-              </div>
-              <div className="mt-2">
-                <input
-                  id="password"
-                  {...register("password", {
-                    required: "Password is required",
-                    pattern: {
-                      value:
-                        /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/gm,
-                      message: `- at least 8 characters\n
-                      - must contain at least 1 uppercase letter, 1 lowercase letter, and 1 number\n
-                      - Can contain special characters`,
-                    },
-                  })}
-                  type="password"
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6"
-                />
-                {errors.password && (
-                  <p className="text-red-500">{errors.password.message}</p>
-                )}
-              </div>
-            </div>
 
             <div>
               <button
                 type="submit"
                 className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
-                Log In
+                Send Email
               </button>
             </div>
           </form>
 
           <p className="mt-10 text-center text-sm/6 text-gray-500">
-            Not a member?{" "}
+           Send me back to{" "}
             <Link
-              to={"/signUp"}
+              to={"/login"}
               className="font-semibold text-indigo-600 hover:text-indigo-500"
             >
-              Create an Account
+              Login
             </Link>
           </p>
         </div>
@@ -132,4 +95,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default ForgotPass;

@@ -11,6 +11,7 @@ import OrderSuccessPage from "../pages/OrderSuccessPage";
 import UserOrder from "./UserOrder"
 import UserProfile from "./UserProfile";
 import Logout from "./Logout"
+import ForgotPass from "./ForgotPass";
 
 
 const AllRoutes = () =>{
@@ -26,6 +27,7 @@ const AllRoutes = () =>{
             <Route path="/orders" element={<Private><UserOrder /></Private>} />
             <Route path="/profile" element={<Private><UserProfile /></Private>} />
             <Route path="/logout" element={<Logout/>} />
+            <Route path="/forgotPassword" element={<ForgotPass/>} />
             <Route path="*" element={<PageNotFound />} />
         </Routes>
     )
