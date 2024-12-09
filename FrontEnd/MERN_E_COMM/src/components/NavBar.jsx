@@ -162,7 +162,13 @@ const NavBar = () => {
 
         <DisclosurePanel className="sm:hidden">
           <div className="space-y-1 px-2 pb-3 pt-2">
-            {navigation.map((item) => (
+            {navigation.filter((item)=>{
+              if (user?.role === "admin" && item.role === "admin") return true;
+              if (user?.role === "user" && item.role === "user") return true;
+              if (!user && item.role === "guest") return true;
+              return false;
+            })
+            .map((item) => (
               <Disclosure.Button
                 key={item.name}
                 as={Link}

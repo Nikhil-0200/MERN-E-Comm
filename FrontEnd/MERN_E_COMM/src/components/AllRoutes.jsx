@@ -14,6 +14,10 @@ import Logout from "./Logout"
 import ForgotPass from "./ForgotPass";
 import AdminHome from "../pages/AdminHome";
 import PrivateAdmin from "./PrivateAdmin"
+import AdminProductDetails from "../admin/AdminProductDetails";
+import AdminProductForm from "./AdminProductForm";
+import AdminProductDetailsPage from "../pages/AdminProductDetailsPage";
+import AdminProductFormPage from "../pages/AdminProductFormPage";
 
 
 const AllRoutes = () =>{
@@ -26,6 +30,8 @@ const AllRoutes = () =>{
             <Route path="/signUp" element={<SignUpPage/>} />
             <Route path="/checkout" element={<Private><CheckoutPage/></Private>} />
             <Route path="/productDetails/:id" element={<Private><ProductDetails/></Private>} />
+            <Route path="/admin/productDetails/:id" element={<PrivateAdmin><AdminProductDetails/></PrivateAdmin>} />
+            <Route path="/admin/AdminProductForm" element={<PrivateAdmin><AdminProductFormPage/></PrivateAdmin>} />
             <Route path="/orderSuccess/:id" element={<OrderSuccessPage />} />
             <Route path="/orders" element={<Private><UserOrder /></Private>} />
             <Route path="/profile" element={<Private><UserProfile /></Private>} />

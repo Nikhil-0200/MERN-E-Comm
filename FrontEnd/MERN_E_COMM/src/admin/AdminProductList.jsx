@@ -238,7 +238,7 @@ const AdminProductList = () => {
             </div>
           </Dialog>
 
-          <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 border-2">
             <div className="flex items-baseline justify-between border-b border-gray-200 pb-6 pt-24">
               <h1 className="text-4xl font-bold tracking-tight text-gray-900">
                 All Products - This is Admin Home Page
@@ -367,53 +367,62 @@ const AdminProductList = () => {
                 <div className="lg:col-span-3">
                   <div className="bg-white ">
                     <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-0 lg:max-w-7xl lg:px-8">
-                      <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
+                      <Link to="/admin/AdminProductForm" className="mt-4 mb-10 items-center justify-center rounded-md border border-transparent bg-green-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                        Add New Product
+                      </Link>
+                      <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8">
                         {products.map((product) => (
-                          <Link
-                            to={`/productDetails/${product.id}`}
-                            key={product.id}
-                          >
-                            <div
+                          <div key={product.id}>
+                            <Link
+                              to={`/admin/productDetails/${product.id}`}
                               key={product.id}
-                              className="group relative border-2 border-black p-2"
                             >
-                              <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-64">
-                                <img
-                                  alt={product.images}
-                                  src={product.images}
-                                  className="h-full w-full object-cover object-center lg:h-full lg:w-full"
-                                />
-                              </div>
-                              <div className="mt-4 flex justify-between">
-                                <div>
-                                  <h3 className="text-sm text-gray-700">
-                                    <span
-                                      aria-hidden="true"
-                                      className="absolute inset-0"
-                                    />
-                                    {product.title}
-                                  </h3>
-                                  <p className="mt-1 text-sm text-gray-500 flex items-center gap-2">
-                                    <StarIcon className="w-3.5 h-3.5" />
+                              <div
+                                key={product.id}
+                                className="group relative border-2 border-black p-2"
+                              >
+                                <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-64">
+                                  <img
+                                    alt={product.images}
+                                    src={product.images}
+                                    className="h-full w-full object-cover object-center lg:h-full lg:w-full"
+                                  />
+                                </div>
+                                <div className="mt-4 flex justify-between">
+                                  <div>
+                                    <h3 className="text-sm text-gray-700">
+                                      <span
+                                        aria-hidden="true"
+                                        className="absolute inset-0"
+                                      />
+                                      {product.title}
+                                    </h3>
+                                    <p className="mt-1 text-sm text-gray-500 flex items-center gap-2">
+                                      <StarIcon className="w-3.5 h-3.5" />
 
-                                    {product.rating}
-                                  </p>
-                                </div>
-                                <div>
-                                  <p className="text-sm font-medium text-gray-900">
-                                    ${product.price}
-                                  </p>
-                                  <p className="text-sm font-medium text-gray-900 line-through">
-                                    $
-                                    {parseFloat(
-                                      product.price /
-                                        (1 - product.discountPercentage / 100)
-                                    ).toFixed(2)}
-                                  </p>
+                                      {product.rating}
+                                    </p>
+                                  </div>
+                                  <div>
+                                    <p className="text-sm font-medium text-gray-900">
+                                      ${product.price}
+                                    </p>
+                                    <p className="text-sm font-medium text-gray-900 line-through">
+                                      $
+                                      {parseFloat(
+                                        product.price /
+                                          (1 - product.discountPercentage / 100)
+                                      ).toFixed(2)}
+                                    </p>
+                                  </div>
                                 </div>
                               </div>
-                            </div>
-                          </Link>
+                            </Link>
+
+                            <button className="mt-4 flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                              Edit Product
+                            </button>
+                          </div>
                         ))}
                       </div>
                     </div>
