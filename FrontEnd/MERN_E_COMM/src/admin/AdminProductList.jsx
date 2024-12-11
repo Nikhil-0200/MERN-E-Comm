@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import {
+  Button,
   Dialog,
   DialogBackdrop,
   DialogPanel,
@@ -43,6 +44,8 @@ const AdminProductList = () => {
   const [sort, setSort] = useState({});
   const [page, setPage] = useState(1);
   const limit = 8;
+
+
 
   const totalPages = Math.ceil(totalItems / limit);
   const indexOfLastItem = limit * page;
@@ -129,12 +132,12 @@ const AdminProductList = () => {
     {
       id: "category",
       name: "Category",
-      options: category,
+      options: category || [],
     },
     {
       id: "brand",
       name: "Brands",
-      options: brands,
+      options: brands || [],
     },
   ];
 
@@ -143,6 +146,10 @@ const AdminProductList = () => {
   }
 
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
+
+  if (!products) {
+    return <p>Loading products...</p>;
+  }
 
   return (
     <div>
@@ -367,64 +374,74 @@ const AdminProductList = () => {
                 <div className="lg:col-span-3">
                   <div className="bg-white ">
                     <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-0 lg:max-w-7xl lg:px-8">
-                      <Link to="/admin/AdminProductForm" className="mt-4 mb-10 items-center justify-center rounded-md border border-transparent bg-green-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                      <Link
+                        to="/admin/AdminProductForm"
+                        className="mt-4 mb-10 items-center justify-center rounded-md border border-transparent bg-green-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                      >
                         Add New Product
                       </Link>
-                      <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8">
-                        {products.map((product) => (
-                          <div key={product.id}>
-                            <Link
-                              to={`/admin/productDetails/${product.id}`}
-                              key={product.id}
-                            >
-                              <div
+                      {products ? (
+                        <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8">
+                          {products.map((product) => (
+                            <div key={product.id}>
+                              <Link
+                                to={`/productDetails/${product.id}`}
                                 key={product.id}
-                                className="group relative border-2 border-black p-2"
                               >
-                                <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-64">
-                                  <img
-                                    alt={product.images}
-                                    src={product.images}
-                                    className="h-full w-full object-cover object-center lg:h-full lg:w-full"
-                                  />
-                                </div>
-                                <div className="mt-4 flex justify-between">
-                                  <div>
-                                    <h3 className="text-sm text-gray-700">
-                                      <span
-                                        aria-hidden="true"
-                                        className="absolute inset-0"
-                                      />
-                                      {product.title}
-                                    </h3>
-                                    <p className="mt-1 text-sm text-gray-500 flex items-center gap-2">
-                                      <StarIcon className="w-3.5 h-3.5" />
-
-                                      {product.rating}
-                                    </p>
+                                <div className="group relative border-2 border-black p-2">
+                                  <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-64">
+                                    <img
+                                      alt={product.images}
+                                      src={product.images}
+                                      className="h-full w-full object-cover object-center lg:h-full lg:w-full"
+                                    />
                                   </div>
-                                  <div>
-                                    <p className="text-sm font-medium text-gray-900">
-                                      ${product.price}
-                                    </p>
-                                    <p className="text-sm font-medium text-gray-900 line-through">
-                                      $
-                                      {parseFloat(
-                                        product.price /
-                                          (1 - product.discountPercentage / 100)
-                                      ).toFixed(2)}
-                                    </p>
-                                  </div>
-                                </div>
-                              </div>
-                            </Link>
+                                  <div className="mt-4 flex justify-between">
+                                    <div>
+                                      <h3 className="text-sm text-gray-700">
+                                        <span
+                                          aria-hidden="true"
+                                          className="absolute inset-0"
+                                        />
+                                        {product.title}
+                                      </h3>
+                                      <p className="mt-1 text-sm text-gray-500 flex items-center gap-2">
+                                        <StarIcon className="w-3.5 h-3.5" />
 
-                            <button className="mt-4 flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
-                              Edit Product
-                            </button>
-                          </div>
-                        ))}
-                      </div>
+                                        {product.rating}
+                                      </p>
+                                    </div>
+                                    <div>
+                                      <p className="text-sm font-medium text-gray-900">
+                                        ${product.price}
+                                      </p>
+                                      <p className="text-sm font-medium text-gray-900 line-through">
+                                        $
+                                        {parseFloat(
+                                          product.price /
+                                            (1 -
+                                              product.discountPercentage / 100)
+                                        ).toFixed(2)}
+                                      </p>
+                                    </div>
+                                  </div>
+                                  {product.deleted &&
+                                  <p className="text-red-700 font-semibold">Product Is Deleted</p>
+                                  }
+                                </div>
+                              </Link>
+
+                              <Link
+                              to={`/admin/AdminProductForm/Edit/${product.id}`}
+                              className="mt-4 flex w-[45%] items-center justify-center rounded-md border border-transparent bg-indigo-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                                Edit Product
+                              </Link>
+                            </div>
+                          ))}
+                        </div>
+                      ) : (
+                        ""
+                      )}
                     </div>
                   </div>
                 </div>

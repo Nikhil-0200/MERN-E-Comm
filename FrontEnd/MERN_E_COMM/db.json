@@ -5,8 +5,8 @@
       "title": "Essence Mascara Lash Princess",
       "description": "The Essence Mascara Lash Princess is a popular mascara known for its volumizing and lengthening effects. Achieve dramatic lashes with this long-lasting and cruelty-free formula.",
       "category": "beauty",
-      "price": 9.99,
-      "discountPercentage": 7.17,
+      "price": "191.99",
+      "discountPercentage": "7.17",
       "rating": 4.94,
       "stock": 5,
       "tags": [
@@ -56,9 +56,12 @@
         "qrCode": "https://assets.dummyjson.com/public/qr-code.png"
       },
       "images": [
-        "https://cdn.dummyjson.com/products/images/beauty/Essence%20Mascara%20Lash%20Princess/1.png"
+        "https://cdn.dummyjson.com/products/images/beauty/Essence%20Mascara%20Lash%20Princess/thumbnail.png",
+        "https://cdn.dummyjson.com/products/images/beauty/Essence%20Mascara%20Lash%20Princess/thumbnail.png",
+        "https://cdn.dummyjson.com/products/images/beauty/Essence%20Mascara%20Lash%20Princess/thumbnail.png"
       ],
-      "thumbnail": "https://cdn.dummyjson.com/products/images/beauty/Essence%20Mascara%20Lash%20Princess/thumbnail.png"
+      "thumbnail": "https://cdn.dummyjson.com/products/images/beauty/Essence%20Mascara%20Lash%20Princess/thumbnail.png",
+      "deleted": true
     },
     {
       "id": 2,
@@ -1210,7 +1213,8 @@
       "images": [
         "https://cdn.dummyjson.com/products/images/groceries/Cooking%20Oil/1.png"
       ],
-      "thumbnail": "https://cdn.dummyjson.com/products/images/groceries/Cooking%20Oil/thumbnail.png"
+      "thumbnail": "https://cdn.dummyjson.com/products/images/groceries/Cooking%20Oil/thumbnail.png",
+      "deleted": true
     },
     {
       "id": 21,
@@ -1795,6 +1799,70 @@
         "https://cdn.dummyjson.com/products/images/groceries/Kiwi/1.png"
       ],
       "thumbnail": "https://cdn.dummyjson.com/products/images/groceries/Kiwi/thumbnail.png"
+    },
+    {
+      "title": "Body Lotion",
+      "description": "Body Lotion that keeps body moist and healthy in winters.",
+      "brand": "Essence",
+      "category": "beauty",
+      "price": "23",
+      "discountPercentage": "2",
+      "stock": "125",
+      "thumbnail": "https://m.media-amazon.com/images/I/31zzeops4qL._SX300_SY300_QL70_FMwebp_.jpg",
+      "images": [
+        "https://m.media-amazon.com/images/I/31zzeops4qL._SX300_SY300_QL70_FMwebp_.jpg",
+        "https://m.media-amazon.com/images/I/31zzeops4qL._SX300_SY300_QL70_FMwebp_.jpg",
+        "https://m.media-amazon.com/images/I/31zzeops4qL._SX300_SY300_QL70_FMwebp_.jpg"
+      ],
+      "id": 31
+    },
+    {
+      "title": "Dior Men's Sauvage",
+      "description": "Dior Men's Sauvage Eau De Toilette Spray (3.4 Oz/100 Ml), Fresh",
+      "brand": "Dior",
+      "category": "fragrances",
+      "price": "16950",
+      "discountPercentage": "15",
+      "stock": "10",
+      "thumbnail": "https://m.media-amazon.com/images/I/51BSg68D4IL._SY879_.jpg",
+      "images": [
+        "https://m.media-amazon.com/images/I/51BSg68D4IL._SY879_.jpg",
+        "https://m.media-amazon.com/images/I/51BSg68D4IL._SY879_.jpg",
+        "https://m.media-amazon.com/images/I/51BSg68D4IL._SY879_.jpg"
+      ],
+      "id": 32
+    },
+    {
+      "title": "Wild Stone CODE Acqua Perfume for Men",
+      "description": "Wild Stone CODE Acqua Perfume for Men, 100ml l Long-Lasting Eau De Parfum having Fresh & Oceanic Vibes with Marine, Musk, Amber, and Patchouli Notes|LuxuryMen EDP Perfume",
+      "brand": "Essence",
+      "category": "fragrances",
+      "price": "519",
+      "discountPercentage": "60",
+      "stock": "100",
+      "thumbnail": "https://m.media-amazon.com/images/I/61IdjxxiRKL._SX679_.jpg",
+      "images": [
+        "https://m.media-amazon.com/images/I/61IdjxxiRKL._SX679_.jpg",
+        "https://m.media-amazon.com/images/I/61IdjxxiRKL._SX679_.jpg",
+        "https://m.media-amazon.com/images/I/61IdjxxiRKL._SX679_.jpg"
+      ],
+      "id": 33
+    },
+    {
+      "title": "Dior Men's Sauvage",
+      "description": "Dior Men's Sauvage Eau De Toilette Spray (3.4 Oz/100 Ml), Fresh",
+      "brand": "Dior",
+      "category": "fragrances",
+      "price": "26950",
+      "discountPercentage": "15",
+      "stock": "10",
+      "thumbnail": "https://m.media-amazon.com/images/I/51BSg68D4IL._SY879_.jpg",
+      "images": [
+        "https://m.media-amazon.com/images/I/51BSg68D4IL._SY879_.jpg",
+        "https://m.media-amazon.com/images/I/51BSg68D4IL._SY879_.jpg",
+        "https://m.media-amazon.com/images/I/51BSg68D4IL._SY879_.jpg"
+      ],
+      "id": 34
     }
   ],
   "category": [
@@ -2139,6 +2207,42 @@
       "quantity": 1,
       "userId": 3,
       "id": 3
+    },
+    {
+      "title": "Body Lotion",
+      "description": "Body Lotion that keeps body moist and healthy in winters.",
+      "brand": "Essence",
+      "category": "beauty",
+      "price": "23",
+      "discountPercentage": "2",
+      "stock": "125",
+      "thumbnail": "https://m.media-amazon.com/images/I/31zzeops4qL._SX300_SY300_QL70_FMwebp_.jpg",
+      "images": [
+        "https://m.media-amazon.com/images/I/31zzeops4qL._SX300_SY300_QL70_FMwebp_.jpg",
+        "https://m.media-amazon.com/images/I/31zzeops4qL._SX300_SY300_QL70_FMwebp_.jpg",
+        "https://m.media-amazon.com/images/I/31zzeops4qL._SX300_SY300_QL70_FMwebp_.jpg"
+      ],
+      "quantity": 1,
+      "userId": 1,
+      "id": 4
+    },
+    {
+      "title": "Dior Men's Sauvage",
+      "description": "Dior Men's Sauvage Eau De Toilette Spray (3.4 Oz/100 Ml), Fresh",
+      "brand": "Dior",
+      "category": "fragrances",
+      "price": "16950",
+      "discountPercentage": "15",
+      "stock": "10",
+      "thumbnail": "https://m.media-amazon.com/images/I/51BSg68D4IL._SY879_.jpg",
+      "images": [
+        "https://m.media-amazon.com/images/I/51BSg68D4IL._SY879_.jpg",
+        "https://m.media-amazon.com/images/I/51BSg68D4IL._SY879_.jpg",
+        "https://m.media-amazon.com/images/I/51BSg68D4IL._SY879_.jpg"
+      ],
+      "quantity": 1,
+      "userId": 3,
+      "id": 5
     }
   ],
   "orders": [

@@ -63,3 +63,29 @@ export async function fetchSelectedProduct(id){
   })
   return res
 }
+
+export async function createProduct(product){
+  try {
+    let res = await axios({
+      url: "http://localhost:3000/products",
+      method: "post",
+      data: product
+    })
+    return res.data
+  } catch (error) {
+    throw new Error(`Failed to create product ${error}`)
+  }
+}
+
+export async function updateProduct(update) {
+  try {
+    let res = await axios({
+      url: `http://localhost:3000/products/${update.id}`,
+      method: "patch",
+      data: update,
+    });
+    return res.data;
+  } catch (error) {
+    throw new Error(`Error getting update item: ${error}`);
+  }
+}
