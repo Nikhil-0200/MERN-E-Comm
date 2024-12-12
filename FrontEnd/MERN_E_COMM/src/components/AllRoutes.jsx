@@ -18,6 +18,7 @@ import AdminProductDetails from "../admin/AdminProductDetails";
 import AdminProductForm from "./AdminProductForm";
 import AdminProductDetailsPage from "../pages/AdminProductDetailsPage";
 import AdminProductFormPage from "../pages/AdminProductFormPage";
+import AdminOrdersPage from "../pages/AdminOrdersPage";
 
 
 const AllRoutes = () =>{
@@ -33,6 +34,7 @@ const AllRoutes = () =>{
             <Route path="/admin/productDetails/:id" element={<PrivateAdmin><AdminProductDetails/></PrivateAdmin>} />
             <Route path="/admin/AdminProductForm" element={<PrivateAdmin><AdminProductFormPage/></PrivateAdmin>} />
             <Route path="/admin/AdminProductForm/Edit/:id" element={<PrivateAdmin><AdminProductFormPage/></PrivateAdmin>} />
+            <Route path="/admin/orders" element={<PrivateAdmin><AdminOrdersPage/></PrivateAdmin>} />
             <Route path="/orderSuccess/:id" element={<OrderSuccessPage />} />
             <Route path="/orders" element={<Private><UserOrder /></Private>} />
             <Route path="/profile" element={<Private><UserProfile /></Private>} />

@@ -12,3 +12,43 @@ export async function addOrderData(data){
         throw new Error(`Failed to add item to order: ${error}`)
     }
 }
+
+export async function fetchAllOrders(queryData){
+    let queryString = "";
+
+    for(let key in queryData){
+
+        if(Array.isArray(queryData[key])){
+          queryData[key].map((ele)=>{
+            queryString += `${key}=${ele}&`
+          })
+        }
+        else{
+          queryString += `${key}=${queryData[key]}&`
+        }
+    
+      }
+
+    try {
+        let res = await axios({
+            url: `http://localhost:3000/orders?${queryString}`,
+            method: "get"
+        })
+        return res
+    } catch (error) {
+     throw new Error(`Failed to fetch order details, ${error}`)   
+    }
+}
+
+export async function updateOrders(OrderData){
+  try {
+      let res = await axios({
+          url: `http://localhost:3000/orders/${OrderData.id}`,
+          method: "patch",
+          data: OrderData
+      })
+      return res
+  } catch (error) {
+      throw new Error(`Failed to add item to order: ${error}`)
+  }
+}

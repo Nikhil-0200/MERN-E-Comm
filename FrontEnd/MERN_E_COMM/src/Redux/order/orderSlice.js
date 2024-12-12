@@ -1,10 +1,11 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { addOrderData } from "./orderAPI";
+import { addOrderData, fetchAllOrders, updateOrders } from "./orderAPI";
 
 export const initialState = {
   status: "idle",
   orders: [],
   currentOrder: null,
+  totalItems: 0
 };
 
 export const addOrderDataAsync = createAsyncThunk(
@@ -14,6 +15,23 @@ export const addOrderDataAsync = createAsyncThunk(
     return response.data;
   }
 );
+
+export const fetchAllOrdersAsync = createAsyncThunk(
+  "order/fetchAllOrders",
+  async (queryData)=>{
+    const response = await fetchAllOrders(queryData);
+    return response.data;
+  }
+)
+
+export const updateOrdersAsync = createAsyncThunk(
+  "order/updateOrders",
+  async (OrderData)=>{
+    const response = await updateOrders(OrderData);
+    return response.data;
+  }
+)
+
 
 const orderSlice = createSlice({
   name: "order",
@@ -34,6 +52,29 @@ const orderSlice = createSlice({
       state.status = "idle";
       state.orders.push(action.payload);
       state.currentOrder = action.payload;
+    })
+
+    builder.addCase(fetchAllOrdersAsync.pending, (state) => {
+      state.status = "loading";
+    });
+
+    builder.addCase(fetchAllOrdersAsync.fulfilled, (state, action) => {
+      state.status = "idle";
+      state.orders = action.payload
+      state.totalItems = action.payload.totalItems
+    })
+
+    builder.addCase(updateOrdersAsync.pending, (state) => {
+      state.status = "loading";
+    });
+
+    builder.addCase(updateOrdersAsync.fulfilled, (state, action) => {
+      state.status = "idle";
+      const updateOrder = action.payload
+      const index = state.orders.findIndex((index)=> index.id == updateOrder.id)
+      if (index != -1){
+        state.orders[index] = updateOrder
+      }
     });
   },
 });

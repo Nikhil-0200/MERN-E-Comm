@@ -50,7 +50,6 @@ const ProductList = () => {
 
   const centralFn = () => {
     const queryData = { ...filterData, ...sort, _page: page, _limit: limit };
-
     dispatch(fetchAllProductsFilterAsync(queryData));
   };
 
