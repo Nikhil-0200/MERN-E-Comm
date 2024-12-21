@@ -1,29 +1,39 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchAllOrdersAsync, updateOrdersAsync } from "../Redux/order/orderSlice";
+import {
+  fetchAllOrdersAsync,
+  updateOrdersAsync,
+} from "../Redux/order/orderSlice";
 import {
   EyeIcon,
   PencilIcon,
   ShoppingCartIcon,
 } from "@heroicons/react/24/outline";
+
+import {ArrowDownCircleIcon, ArrowUpCircleIcon} from "@heroicons/react/24/solid"
 import { Pagination } from "../components/Pagination";
 
 const AdminOrders = () => {
   const [statusEdit, setStatusEdit] = useState(-1);
   const dispatch = useDispatch();
   const orderDetails = useSelector((state) => state.order.orders);
-  const totalItems = useSelector((state) => state.order.totalItems);
+  const totalOrders = useSelector((state) => state.order.totalOrders);
   const [page, setPage] = useState(1);
   const limit = 4;
+  const [sort, setSort] = useState({});
 
-  const totalPages = Math.ceil(orderDetails.length / limit);
+  console.log(sort);
+  
+
+  const totalPages = Math.ceil(totalOrders / limit);
   const indexOfLastItem = limit * page;
   const indexOfFirstItem = indexOfLastItem - limit;
 
-  console.log(totalPages);
+  // console.log(totalOrders);
+  // console.log(orderDetails);
 
   const centralFn = () => {
-    const queryData = { _page: page, _limit: limit };
+    const queryData = { ...sort, _page: page, _limit: limit };
     dispatch(fetchAllOrdersAsync(queryData));
   };
 
@@ -31,37 +41,39 @@ const AdminOrders = () => {
     setPage(newPage);
   };
 
+  const handleSort = (sortOption) => {
+    const sort = { _sort: sortOption.sort, _order: sortOption.order };
+    setSort({ ...sort });
+  };
+
   useEffect(() => {
     centralFn();
-  }, [page]);
-
-  console.log(orderDetails);
+  }, [page, sort]);
 
   const handleEdit = (id) => {
-    console.log(`handleEdit, ${id}`);
     setStatusEdit(id);
   };
 
-  const handleUpdate = (e, order) =>{
-    const updatedOrder = {...order, status:e.target.value}
-    dispatch(updateOrdersAsync(updatedOrder))
-    setStatusEdit(-1)
-  }
+  const handleUpdate = (e, order) => {
+    const updatedOrder = { ...order, status: e.target.value };
+    dispatch(updateOrdersAsync(updatedOrder));
+    setStatusEdit(-1);
+  };
 
-  const chooseColor = (status) =>{
-    switch(status){
+  const chooseColor = (status) => {
+    switch (status) {
       case "pending":
-        return `bg-purple-200 text-purple-600`;
+        return "bg-purple-200 text-purple-600";
       case "dispatch":
-        return `bg-orange-200 text-yellow-600`;
+        return "bg-yellow-200 text-yellow-600";
       case "delivered":
-        return `bg-green-200 text-green-600`;
+        return "bg-green-200 text-green-600";
       case "cancelled":
-        return `bg-red-200 text-red-600`;
+        return "bg-red-200 text-red-600";
       default:
-        return `bg-purple-200 text-purple-600`;
+        return "";
     }
-  }
+  };
 
   return (
     <div>
@@ -72,7 +84,21 @@ const AdminOrders = () => {
               <table className="min-w-max w-full table-auto">
                 <thead>
                   <tr className="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
-                    <th className="py-3 px-6 text-left">Order#</th>
+                    <th
+                      className="py-3 px-6 text-left cursor-pointer flex items-center gap-2"
+                      onClick={(e) =>
+                        handleSort({
+                          sort: "id",
+                          order: sort?._order == "desc" ? "asc" : "desc",
+                        })
+                      }
+                    >
+                      Order#
+                    
+                      {sort._order === "desc" ?  <ArrowUpCircleIcon className="w-4 h-4"/> : <ArrowDownCircleIcon className="w-4 h-4"/> }
+
+ 
+                    </th>
                     <th className="py-3 px-6 text-left">Items</th>
                     <th className="py-3 px-6 text-center">total amount</th>
                     <th className="py-3 px-6 text-center">Shipping address</th>
@@ -156,17 +182,21 @@ const AdminOrders = () => {
                               >
                                 {statusEdit == order.id ? (
                                   <select
-                                  value={order.status}
-                                  onChange={(e)=>handleUpdate(e, order)}
-                                  className={`py-2 px-5 rounded-full text-xs`}
-                                   >
+                                    value={order.status}
+                                    onChange={(e) => handleUpdate(e, order)}
+                                    className={`py-2 px-5 rounded-full text-xs`}
+                                  >
                                     <option value="pending">Pending</option>
                                     <option value="dispatch">Dispatch</option>
                                     <option value="delivered">Delivered</option>
                                     <option value="cancelled">Cancelled</option>
                                   </select>
                                 ) : (
-                                  <span className={`${chooseColor(order.status)} bg-purple-200 text-purple-600 py-1 px-3 rounded-full text-xs`}>
+                                  <span
+                                    className={`${chooseColor(
+                                      order.status
+                                    )} py-1 px-3 rounded-full text-xs`}
+                                  >
                                     {order.status}
                                   </span>
                                 )}
@@ -209,7 +239,7 @@ const AdminOrders = () => {
       <Pagination
         currentPage={page}
         handlePage={handlePagination}
-        totalItems={totalItems}
+        totalItems={totalOrders}
         totalPages={totalPages}
         indexOfLastItem={indexOfLastItem}
         indexOfFirstItem={indexOfFirstItem}

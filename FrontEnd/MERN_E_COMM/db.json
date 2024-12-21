@@ -2639,7 +2639,7 @@
         "region": "Delhi",
         "pinCode": "110044"
       },
-      "status": "delivered",
+      "status": "pending",
       "id": 3
     },
     {
@@ -3009,7 +3009,7 @@
         "region": "Delhi",
         "pinCode": "110044"
       },
-      "status": "pending",
+      "status": "delivered",
       "id": 5
     },
     {
@@ -3114,7 +3114,7 @@
         "region": "Delhi",
         "pinCode": "110044"
       },
-      "status": "pending",
+      "status": "dispatch",
       "id": 6
     },
     {
@@ -3290,7 +3290,7 @@
         "region": "Delhi",
         "pinCode": "110044"
       },
-      "status": "pending",
+      "status": "cancelled",
       "id": 7
     }
   ]

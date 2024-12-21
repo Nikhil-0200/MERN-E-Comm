@@ -34,7 +34,10 @@ export async function fetchAllOrders(queryData){
             url: `http://localhost:3000/orders?${queryString}`,
             method: "get"
         })
-        return res
+        const orders = res.data;
+        const totalOrders = parseInt(res.headers['x-total-count'], 10) || 0;
+
+        return {orders, totalOrders};
     } catch (error) {
      throw new Error(`Failed to fetch order details, ${error}`)   
     }

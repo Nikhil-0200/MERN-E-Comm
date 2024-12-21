@@ -48,13 +48,16 @@ const ProductList = () => {
   const indexOfLastItem = limit * page;
   const indexOfFirstItem = indexOfLastItem - limit;
 
+  console.log(totalItems);
+  
+
   const centralFn = () => {
     const queryData = { ...filterData, ...sort, _page: page, _limit: limit };
     dispatch(fetchAllProductsFilterAsync(queryData));
   };
 
-  // Filter Function
-  const handleFilter = (e, section, option) => {
+    // Filter Function
+    const handleFilter = (e, section, option) => {
     // Checkbox Status
     const checkedStatus = e.target.checked;
 
@@ -433,6 +436,7 @@ const ProductList = () => {
         />
       </div>
     </div>
+    
   );
 };
 

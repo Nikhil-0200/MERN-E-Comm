@@ -5,7 +5,7 @@ export const initialState = {
   status: "idle",
   orders: [],
   currentOrder: null,
-  totalItems: 0
+  totalOrders: 0
 };
 
 export const addOrderDataAsync = createAsyncThunk(
@@ -20,7 +20,7 @@ export const fetchAllOrdersAsync = createAsyncThunk(
   "order/fetchAllOrders",
   async (queryData)=>{
     const response = await fetchAllOrders(queryData);
-    return response.data;
+    return response;
   }
 )
 
@@ -60,8 +60,8 @@ const orderSlice = createSlice({
 
     builder.addCase(fetchAllOrdersAsync.fulfilled, (state, action) => {
       state.status = "idle";
-      state.orders = action.payload
-      state.totalItems = action.payload.totalItems
+      state.orders = action.payload.orders
+      state.totalOrders = action.payload.totalOrders
     })
 
     builder.addCase(updateOrdersAsync.pending, (state) => {
