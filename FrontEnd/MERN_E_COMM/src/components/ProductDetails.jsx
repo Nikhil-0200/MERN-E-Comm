@@ -35,15 +35,26 @@ const ProductDetails = () => {
   const [selectedSize, setSelectedSize] = useState(sizes[2]);
   const dispatch = useDispatch();
   const user = useSelector((state)=> state.auth.loggedIn);
+  const items = useSelector((state)=> state.cart.items)
   const product = useSelector((state)=> state.product.selectedProduct);
   const params = useParams()
 
   function handleCart(e){
     e.preventDefault()
-    const newItem = {...product, quantity:1, userId: user.id};
-    delete newItem["id"];
-    dispatch(addToCartAsync(newItem))
+    if(items.findIndex((item)=> product.id === product.id) < 0){
+      const newItem = {...product, quantity:1, userId: user.id};
+      delete newItem["id"];
+      dispatch(addToCartAsync(newItem))
+    }
+    else{
+      console.log(`Already Added`);
+      
+    }
   }
+
+  console.log(items);
+  console.log(product);
+  
 
   // Earlier what we were doing here is we were creating a shallow copy of product and additionally adding quantity & userId who is adding the item in cart. and storing this data in cart array. But at that time we were also sending items real id and when someone else logs in and try to add the same item which is already added by someone else then we were facing error (500 duplicate id). 
 

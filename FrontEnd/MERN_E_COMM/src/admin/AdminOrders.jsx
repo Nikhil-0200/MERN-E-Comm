@@ -95,7 +95,7 @@ const AdminOrders = () => {
                     >
                       Order#
                     
-                      {sort._order === "desc" ?  <ArrowUpCircleIcon className="w-4 h-4"/> : <ArrowDownCircleIcon className="w-4 h-4"/> }
+                      {sort._sort === "id"  && (sort._order === "desc" ?  <ArrowUpCircleIcon className="w-4 h-4"/> : <ArrowDownCircleIcon className="w-4 h-4"/>) }
 
  
                     </th>
