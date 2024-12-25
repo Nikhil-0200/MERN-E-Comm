@@ -3,6 +3,6 @@ const { addCategory, fetchCategory } = require("../controller/category.controlle
 
 const categoryRouter = express.Router();
 
-categoryRouter.post("/addCategory", addCategory).get("/fetchCategory", fetchCategory);
+categoryRouter.post("/", addCategory).get("/", fetchCategory);
 
 module.exports = categoryRouter;

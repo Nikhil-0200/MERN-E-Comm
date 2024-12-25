@@ -5,7 +5,7 @@ exports.addCategory = async (req, res) => {
 
   try {
     await category.save();
-    res.status(201).json({ msg: `Category Added Successfully`, category });
+    res.status(201).json(category);
   } catch (error) {
     res.status(404).json({ msg: `Error occurred in adding category ${error}` });
   }
@@ -14,7 +14,7 @@ exports.addCategory = async (req, res) => {
 exports.fetchCategory = async (req, res) => {
   try {
     const category = await categoryModel.find({}).exec();
-    res.status(200).json({ msg: `Category Fetched Successfully`, category });
+    res.status(200).json(category);
   } catch (error) {
     res
       .status(400)

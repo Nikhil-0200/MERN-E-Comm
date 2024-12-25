@@ -3,6 +3,6 @@ const { addBrand, fetchBrand } = require("../controller/brand.controller");
 
 const brandRouter = express.Router();
 
-brandRouter.post("/addBrand", addBrand).get("/fetchBrand", fetchBrand);
+brandRouter.post("/", addBrand).get("/", fetchBrand);
 
 module.exports = brandRouter;

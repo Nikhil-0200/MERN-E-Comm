@@ -5,7 +5,7 @@ exports.addBrand = async (req, res) => {
 
   try {
     await brand.save();
-    res.status(201).json({ msg: `brand Added Successfully`, brand });
+    res.status(201).json(brand);
   } catch (error) {
     res.status(404).json({ msg: `Error occurred in adding brand ${error}` });
   }
@@ -14,7 +14,7 @@ exports.addBrand = async (req, res) => {
 exports.fetchBrand = async (req, res) => {
   try {
     const brand = await brandModel.find({}).exec();
-    res.status(200).json({ msg: `brand Fetched Successfully`, brand });
+    res.status(200).json(brand);
   } catch (error) {
     res
       .status(400)

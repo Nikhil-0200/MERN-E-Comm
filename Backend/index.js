@@ -1,16 +1,19 @@
 const express = require("express");
 const server = express();
-const PORT = process.env.PORT || 3009;
+const PORT = process.env.PORT || 3000;
 const connection = require("./config/db.js");
 const productRouter = require("./routes/product.route.js");
 const categoryRouter = require("./routes/category.route.js");
 const brandRouter = require("./routes/brand.route.js");
+const cors = require("cors")
 
-
+server.use(cors({
+    exposedHeaders: ["x-total-count"]
+}))
 server.use(express.json());
-server.use("/product", productRouter)
+server.use("/products", productRouter)
 server.use("/category", categoryRouter)
-server.use("/brand", brandRouter)
+server.use("/brands", brandRouter)
 
 server.get("/", (req, res)=>{
     res.send(`Server is running`);

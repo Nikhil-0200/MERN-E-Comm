@@ -8,7 +8,7 @@ exports.addProduct = async (req, res) => {
 
   try {
     await product.save();
-    res.status(201).json({ msg: `Product Added Successfully`, product });
+    res.status(201).json(product);
   } catch (error) {
     res.status(404).json({ msg: `Error occurred in adding product ${error}` });
   }
@@ -51,9 +51,32 @@ exports.fetchAllProducts = async (req,res)=>{
   try {
     const docs = await query.exec();
     res.set('x-total-count', totalDocs);
-    res.status(200).json({msg: `Product Fetched Successfully`, docs})
+    res.status(200).json(docs)
   } catch (error) {
     res.status(400).json({msg: `Error occurred in finding product ${error}` })
   }
 
+}
+
+exports.fetchProductById = async(req, res)=>{
+  
+  const {id} = req.params;
+
+  try {
+    const product = await productModel.findById(id);
+    res.status(200).json(product)
+  } catch (error) {
+    res.status(400).json({msg: `Error occurred while fetching product by id ${error}`})
+  }
+}
+
+exports.updateProduct = async(req, res)=>{
+  const {id} = req.params;
+
+  try {
+    const updatedProduct = await productModel.findByIdAndUpdate(id, req.body, {new: true});
+    res.status(200).json(updatedProduct);
+  } catch (error) {
+    res.status(400).json({msg: `Error occurred while updating product ${error}`}); 
+  }
 }
