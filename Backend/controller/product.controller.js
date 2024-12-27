@@ -1,7 +1,9 @@
 const productModel = require("../model/product.model");
 
+// ADD PRODUCT (POST)
 exports.addProduct = async (req, res) => {
   const product = new productModel(req.body);
+  
   product.discountPrice = Math.round(
     product.price * (1 - product.discountPercentage / 100)
   );
@@ -14,6 +16,7 @@ exports.addProduct = async (req, res) => {
   }
 };
 
+// FETCH PRODUCT (GET)
 exports.fetchAllProducts = async (req,res)=>{
   // Here we need all query strings
   
@@ -58,6 +61,7 @@ exports.fetchAllProducts = async (req,res)=>{
 
 }
 
+// FETCH PRODUCT BY ID (SINGLE PRODUCT - [GET])
 exports.fetchProductById = async(req, res)=>{
   
   const {id} = req.params;
@@ -70,6 +74,7 @@ exports.fetchProductById = async(req, res)=>{
   }
 }
 
+// UPDATE PRODUCT (SINGLE PRODUCT - [PATCH])
 exports.updateProduct = async(req, res)=>{
   const {id} = req.params;
 
