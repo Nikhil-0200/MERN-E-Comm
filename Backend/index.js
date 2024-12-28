@@ -9,6 +9,7 @@ const authRouter = require("./routes/auth.router.js");
 
 const cors = require("cors");
 const userRouter = require("./routes/user.router.js");
+const cartRouter = require("./routes/cart.router.js");
 
 server.use(cors({
     exposedHeaders: ["x-total-count"]
@@ -19,6 +20,7 @@ server.use("/category", categoryRouter)
 server.use("/brands", brandRouter)
 server.use("/auth", authRouter)
 server.use("/users", userRouter)
+server.use("/cart", cartRouter)
 
 server.get("/", (req, res)=>{
     res.send(`Server is running`);
