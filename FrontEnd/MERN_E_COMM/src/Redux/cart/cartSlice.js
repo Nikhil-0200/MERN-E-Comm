@@ -6,6 +6,8 @@ export const initialState = {
     items:[],
 }
 
+
+
 export const addToCartAsync = createAsyncThunk(
     "cart/addToCart",
     async (item) =>{
@@ -25,7 +27,7 @@ export const fetchItemByUserIdAsync = createAsyncThunk(
 export const updateItemsAsync = createAsyncThunk(
     "cart/updateItems",
     async(update)=>{
-        let response = await updateItems(update);   
+        let response = await updateItems(update);  
         return response
     }
 ) 
@@ -34,7 +36,7 @@ export const deleteItemsAsync = createAsyncThunk(
     "cart/deleteItems",
     async(itemId)=>{
         const response = await deleteItems(itemId);
-        return response
+        return itemId
     }
 )
 

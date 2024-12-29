@@ -8,6 +8,9 @@ export async function addToCart(item) {
       method: "post",
       data: item,
     });
+
+    
+
     return res.data;
   } catch (error) {
     throw new Error(`Failed to add item to cart: ${error}`);
@@ -17,13 +20,13 @@ export async function addToCart(item) {
 export async function fetchItemByUserId(userId) {
   try {
     let res = await axios({
-      url: `http://localhost:3000/cart?userId=${userId}`,
+      url: `http://localhost:3000/cart/${userId}`,
       method: "get",
     });
     return res.data;
   } catch (error) {
     throw new Error(`Failed to fetch item from cart: ${error}`);
-  }
+  }   
 }
 
 export async function updateItems(update) {
@@ -31,7 +34,7 @@ export async function updateItems(update) {
     let res = await axios({
       url: `http://localhost:3000/cart/${update.id}`,
       method: "patch",
-      data: update,
+      data: {quantity: update.quantity},
     });
     return res.data;
   } catch (error) {

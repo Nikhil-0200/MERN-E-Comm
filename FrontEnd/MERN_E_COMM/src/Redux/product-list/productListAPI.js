@@ -10,70 +10,83 @@ export async function fetchAllProducts() {
 }
 
 export async function fetchAllProductsFilter(queryData) {
-
   let queryString = "";
 
-  for(let key in queryData){
-
-    if(Array.isArray(queryData[key])){
-      queryData[key].map((ele)=>{
-        queryString += `${key}=${ele}&`
-      })
+  for (let key in queryData) {
+    if (Array.isArray(queryData[key])) {
+      queryData[key].map((ele) => {
+        queryString += `${key}=${ele}&`;
+      });
+    } else {
+      queryString += `${key}=${queryData[key]}&`;
     }
-    else{
-      queryString += `${key}=${queryData[key]}&`
-    }
-
   }
 
-  let res = await axios({
-    url: `http://localhost:3000/products?${queryString}`,
-    method: "get",
-  });
- const totalItems = res.headers["x-total-count"];
-  
-  return {products:res.data, totalItems:totalItems};
+  try {
+    let res = await axios({
+      url: `http://localhost:3000/products?${queryString}`,
+      method: "get",
+    });
+    const totalItems = res.headers["x-total-count"];
+
+    return { products: res.data, totalItems: totalItems };
+  } catch (error) {
+    throw new Error(`Error fetching filtered products: ${error}`);
+  }
 }
 
 // Fetching Category Data
-export async function fetchCategory(){
-  let res = await axios({
-    url: "http://localhost:3000/category",
-    method: "get"
-  })
-  
-  return res
+export async function fetchCategory() {
+  try {
+    let res = await axios({
+      url: "http://localhost:3000/category",
+      method: "get",
+    });
+    return res;
+  } catch (error) {
+    throw new Error(`Error fetching category: ${error}`);
+  }
 }
 
 // Fetching Brands Data
-export async function fetchBrands(){
-  let res = await axios({
-    url: "http://localhost:3000/brands",
-    method: "get"
-  })
-  return res
+export async function fetchBrands() {
+  
+  try {
+    let res = await axios({
+      url: "http://localhost:3000/brands",
+      method: "get",
+    });
+    return res;  
+  } catch (error) {
+    throw new Error(`Error fetching brands: ${error}`);
+  }  
 }
 
 // SelectedProduct
 
-export async function fetchSelectedProduct(id){
-  let res = await axios({
-    url: `http://localhost:3000/products/${id}`,
-    method: "get"
-  })
-  return res
+export async function fetchSelectedProduct(id) {
+
+  try {
+    let res = await axios({
+      url: `http://localhost:3000/products/${id}`,
+      method: "get",
+    });
+    return res;  
+  } catch (error) {
+    throw new Error(`Error fetching productByID: ${error}`);
+  }
 }
 
-export async function createProduct(product){
+export async function createProduct(product) {
   try {
     let res = await axios({
       url: "http://localhost:3000/products",
       method: "post",
-      data: product
-    })
-    return res.data
+      data: product,
+    });
+    return res.data;
   } catch (error) {
-    throw new Error(`Failed to create product ${error}`)
+    throw new Error(`Failed to create product ${error}`);
   }
 }
 

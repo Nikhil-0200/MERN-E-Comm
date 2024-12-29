@@ -41,9 +41,8 @@ const ProductDetails = () => {
 
   function handleCart(e){
     e.preventDefault()
-    if(items.findIndex((item)=> product.id === product.id) < 0){
-      const newItem = {...product, quantity:1, userId: user.id};
-      delete newItem["id"];
+    if(items.findIndex((item)=> item.product.id === product.id) < 0){
+      const newItem = {product: product.id, quantity:1, user: user.id};
       dispatch(addToCartAsync(newItem))
     }
     else{
@@ -52,8 +51,7 @@ const ProductDetails = () => {
     }
   }
 
-  console.log(items);
-  console.log(product);
+
   
 
   // Earlier what we were doing here is we were creating a shallow copy of product and additionally adding quantity & userId who is adding the item in cart. and storing this data in cart array. But at that time we were also sending items real id and when someone else logs in and try to add the same item which is already added by someone else then we were facing error (500 duplicate id). 

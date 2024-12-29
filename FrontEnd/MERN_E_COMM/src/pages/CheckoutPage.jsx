@@ -22,22 +22,19 @@ const CheckoutPage = () => {
   const currentOrder = useSelector((state) => state.order.currentOrder)
   // const currentOrderStatus = useSelector((state)=> state.order.currentOrderStatus)
 
-  
 
   function handleAddress(e){
     const addressIndex = e.target.value
     setSelectAddress(user.addresses[addressIndex])
-    console.log(e.target.value);
   }
 
   function handlePayment(e){
     setSelectPayment(e.target.value)
-    console.log(e.target.value);
   }
 
   const items = useSelector((state) => state.cart.items);
   const totalAmount = items
-    .reduce((acc, curr) => curr.quantity * curr.price + acc, 0)
+    .reduce((acc, curr) => curr.quantity * curr.product.price + acc, 0)
     .toFixed(2);
   const totalItem = items.reduce((acc, curr) => acc + curr.quantity, 0);
   const dispatch = useDispatch();
@@ -49,8 +46,9 @@ const CheckoutPage = () => {
   async function handleOrder(e){
     if(selectAddress && selectPayment){
       // In this we are also passing the status which will be initially pending and in future it can be successful, dispatch, delivered & etc
-    const order = {items, totalAmount, totalItem, user, selectPayment, selectAddress, status: "pending"}
+    const order = {items, totalAmount, totalItem, user:user.id, selectPayment, selectAddress, status: "pending"}
     await dispatch(addOrderDataAsync(order))
+    
 
     // CLEAR CART
     // REDUCE ITEM FROM STOCK
@@ -81,6 +79,7 @@ const CheckoutPage = () => {
                   addresses: [...user.addresses, data],
                 })
               );
+              
               reset()
             })}
           >
@@ -371,8 +370,8 @@ const CheckoutPage = () => {
                         <li key={product.id} className="flex py-6">
                           <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
                             <img
-                              alt={product.title}
-                              src={product.images[0]}
+                              alt={product.product.title}
+                              src={product.product.images[0]}
                               className="h-full w-full object-cover object-center"
                             />
                           </div>
@@ -381,9 +380,9 @@ const CheckoutPage = () => {
                             <div>
                               <div className="flex justify-between text-base font-medium text-gray-900">
                                 <h3>
-                                  <a href={product.href}>{product.title}</a>
+                                  <a href={product.product.href}>{product.product.title}</a>
                                 </h3>
-                                <p className="ml-4">{product.price}</p>
+                                <p className="ml-4">{product.product.price}</p>
                               </div>
                               <p className="mt-1 text-sm text-gray-500">
                                 {product.color}
