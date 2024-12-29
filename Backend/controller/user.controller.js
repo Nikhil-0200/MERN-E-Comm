@@ -25,3 +25,16 @@ exports.fetchUser = async(req, res)=>{
     }
 
 }
+
+exports.updateUser = async(req, res)=>{
+
+    const {id} = req.params;
+
+    try {
+        const user = await userModel.findByIdAndUpdate(id, req.body, {new: true});
+        res.status(200).json({id: user.id, email: user.email, addresses: user.addresses})
+    } catch (error) {
+        res.status(400).json({msg: `Error occurred while fetching user ${error}`})
+    }
+
+}

@@ -22,7 +22,7 @@ exports.loginUser = async(req, res)=>{
             res.status(401).json({msg: `No such user email found`})
         }else if(user.password == req.body.password){
             // TO DO: WE WILL MAKE ADDRESSES INDEPENDENT OF LOGIN.
-            res.status(200).json({id: user.id, email: user.email, name: user.name, addresses:user.addresses});
+            res.status(200).json({id: user.id, email: user.email, name: user.name});
         }
         else{
             res.status(401).json({msg: `Invalid Credentials`});
