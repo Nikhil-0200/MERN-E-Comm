@@ -15,10 +15,13 @@ const UserProfile = () => {
   const [showEditForm, setShowEditForm] = useState(-1);
   const [showAddForm, setShowAddForm] = useState(false);
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.user.userInfo);
+  const user = useSelector((state) => state.auth.loggedIn);
+  const userDetails = useSelector((state) => state.user.userInfo);
+  
+  
 
   function handleEdit(addressUpdate, index) {
-    const newUser = JSON.parse(JSON.stringify(user));
+    const newUser = JSON.parse(JSON.stringify(userDetails));
     newUser.addresses.splice(index, 1, addressUpdate); // removing older data in array with new updated data from edit form
 
     // newUser.addresses = newUser.addresses.map((address, idx)=> (
@@ -35,7 +38,7 @@ const UserProfile = () => {
 
   function handleEditForm(e, index) {
     setShowEditForm(index);
-    const address = user.addresses[index];
+    const address = userDetails.addresses[index];
     setValue("name", address.name);
     setValue("email", address.email);
     setValue("phone", address.phone);
@@ -50,8 +53,8 @@ const UserProfile = () => {
   // And setValue is state from react-hook-form.
 
   function handleDelete(e, index) {
-    // const newUser = {...user, addresses: [...user.addresses]} // Shallow Copy
-    const newUser = JSON.parse(JSON.stringify(user)); // Deep Copy
+    // const newUser = {...userDetails, addresses: [...userDetails.addresses]} // Shallow Copy
+    const newUser = JSON.parse(JSON.stringify(userDetails)); // Deep Copy
 
     // Here we are making copy of user
 
@@ -59,20 +62,20 @@ const UserProfile = () => {
       (ele, addIndex) => addIndex != index
     );
 
-    // Here we are filtering user addresses on index basis
+    // Here we are filtering userDetails addresses on index basis
 
     newUser.addresses = filterUser;
 
-    // Here we are assigning filter addresses to user original addresses
+    // Here we are assigning filter addresses to userDetails original addresses
 
     dispatch(updateUserAsync(newUser));
 
-    // Here we are dispatching filter user to updateUserAsync
+    // Here we are dispatching filter userDetails to updateUserAsync
   }
 
   function handleAdd(data) {
     console.log(data);
-    const newUser = JSON.parse(JSON.stringify(user));
+    const newUser = JSON.parse(JSON.stringify(userDetails));
     newUser.addresses.push(data);
     dispatch(updateUserAsync(newUser));
     setShowEditForm(-1);
@@ -335,7 +338,7 @@ const UserProfile = () => {
             <p className="flex justify-between text-base font-medium text-black-500 pb-4">
               Your Addresses:
             </p>
-            {user.addresses.map((addresses, index) => (
+            {userDetails.addresses.map((addresses, index) => (
               <div>
                 {showEditForm === index ? (
                   <form

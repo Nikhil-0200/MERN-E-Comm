@@ -52,7 +52,7 @@ const AdminProductList = () => {
   const indexOfFirstItem = indexOfLastItem - limit;
 
   const centralFn = () => {
-    const queryData = { ...filterData, ...sort, _page: page, _limit: limit };
+    const queryData = { ...filterData, ...sort, _page: page, _limit: limit, admin: true };
 
     dispatch(fetchAllProductsFilterAsync(queryData));
   };
