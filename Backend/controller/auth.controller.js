@@ -1,35 +1,45 @@
-const userModel = require("../model/user.model")
+const userModel = require("../model/user.model");
+const crypto = require("crypto");
+const { sanitizeUser } = require("../services/common");
+const jwt = require('jsonwebtoken');
+const SECRET_KEY = "SECRET_KEY";
 
-exports.createUser = async(req, res)=>{
-    
-    const user = new userModel(req.body);
-
-    try {
+exports.createUser = async (req, res) => {
+  try {
+    const salt = crypto.randomBytes(16);
+    crypto.pbkdf2(
+      req.body.password,
+      salt,
+      310000,
+      32,
+      "sha256",
+      async function (err, hashedPassword) {
+        const user = new userModel({
+          ...req.body,
+          password: hashedPassword,
+          salt,
+        });
         await user.save();
-        res.status(201).json(user);        
-    } catch (error) {
-        res.status(404).json({msg: `Error occurred while creating user ${error}`})
-    }
-}
 
-exports.loginUser = async(req, res)=>{
+        req.login(sanitizeUser(user), (error) => { // this also calls serializer and adds to session
+          if (error) {
+            res.status(400).json(error);
+          } else {
+            const token = jwt.sign(sanitizeUser(user), SECRET_KEY);
+            res.status(201).json(token);
+          }
+        });
+      }
+    );
+  } catch (error) {
+    res.status(400).json(error);
+  }
+};
 
-    try {
-        const user = await userModel.findOne({email: req.body.email}).exec();
-        // TO DO: this is temporary have to create a strong auth.
+exports.loginUser = async (req, res) => {
+  res.json(req.user);
+};
 
-        if(!user){
-            res.status(401).json({msg: `No such user email found`})
-        }else if(user.password == req.body.password){
-            // TO DO: WE WILL MAKE ADDRESSES INDEPENDENT OF LOGIN.
-            res.status(200).json({id: user.id, email: user.email, name: user.name, role: user.role});
-        }
-        else{
-            res.status(401).json({msg: `Invalid Credentials`});
-        }
-
-    } catch (error) {
-        res.status(400).json({msg: `Error occurred while login user ${error}`})
-    }
-
-}
+exports.checkUser = async (req, res) => {
+  res.json({status: "success", user:req.user});
+};
