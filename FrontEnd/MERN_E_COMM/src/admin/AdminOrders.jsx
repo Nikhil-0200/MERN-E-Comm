@@ -10,7 +10,10 @@ import {
   ShoppingCartIcon,
 } from "@heroicons/react/24/outline";
 
-import {ArrowDownCircleIcon, ArrowUpCircleIcon} from "@heroicons/react/24/solid"
+import {
+  ArrowDownCircleIcon,
+  ArrowUpCircleIcon,
+} from "@heroicons/react/24/solid";
 import { Pagination } from "../components/Pagination";
 
 const AdminOrders = () => {
@@ -22,8 +25,7 @@ const AdminOrders = () => {
   const limit = 4;
   const [sort, setSort] = useState({});
 
-  console.log(sort);
-  
+  console.log(orderDetails);
 
   const totalPages = Math.ceil(totalOrders / limit);
   const indexOfLastItem = limit * page;
@@ -94,10 +96,12 @@ const AdminOrders = () => {
                       }
                     >
                       Order#
-                    
-                      {sort._sort === "id"  && (sort._order === "desc" ?  <ArrowUpCircleIcon className="w-4 h-4"/> : <ArrowDownCircleIcon className="w-4 h-4"/>) }
-
- 
+                      {sort._sort === "id" &&
+                        (sort._order === "desc" ? (
+                          <ArrowUpCircleIcon className="w-4 h-4" />
+                        ) : (
+                          <ArrowDownCircleIcon className="w-4 h-4" />
+                        ))}
                     </th>
                     <th className="py-3 px-6 text-left">Items</th>
                     <th className="py-3 px-6 text-center">total amount</th>
@@ -109,7 +113,7 @@ const AdminOrders = () => {
                 <tbody className="text-gray-600 text-sm font-light">
                   {orderDetails &&
                     orderDetails.map((order) => (
-                      <React.Fragment key={order.id}>
+                      <React.Fragment key={order.items.id}>
                         {order.items.map((item, index) => (
                           <tr
                             key={item.id || index}
@@ -135,12 +139,17 @@ const AdminOrders = () => {
                                 <div className="mr-2">
                                   <img
                                     className="w-8 h-8 rounded-full border-2 border-black"
-                                    src={item.thumbnail}
-                                    alt={item.title}
+                                    src={item.product.thumbnail}
+                                    alt={item.product.title}
                                   />
                                 </div>
                                 <span className="font-medium">
-                                  {item.title}
+                                  {item.product.title.split(" ").length > 2
+                                    ? `${item.product.title
+                                        .split(" ")
+                                        .slice(0, 1)
+                                        .join(" ")}...`
+                                    : item.product.title}
                                 </span>
                               </div>
                             </td>

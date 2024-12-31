@@ -48,7 +48,7 @@ export async function updateOrders(OrderData){
       let res = await axios({
           url: `http://localhost:3000/orders/${OrderData.id}`,
           method: "patch",
-          data: OrderData
+          data: {status: OrderData.status}
       })
       return res
   } catch (error) {

@@ -123,7 +123,7 @@ const Login = () => {
               to={"/signUp"}
               className="font-semibold text-indigo-600 hover:text-indigo-500"
             >
-              Create an Account
+              Create an Accoun
             </Link>
           </p>
         </div>
