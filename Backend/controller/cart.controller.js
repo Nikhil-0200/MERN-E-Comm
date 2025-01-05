@@ -1,7 +1,6 @@
 const cartModel = require("../model/cart.model")
 
 exports.addToCart = async (req, res) => {
-    
     const cartData = new cartModel(req.body);
     
     try {

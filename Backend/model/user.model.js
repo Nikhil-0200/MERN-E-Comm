@@ -3,12 +3,11 @@ const { default: mongoose, Schema, version } = require("mongoose");
 const userSchema = mongoose.Schema(
     {
         email: {type: String, required: true, unique: true},
-        password: {type: Buffer, required: true},
+        password: {type: String, required: true},
         role: {type: String, required: true, default: "user"},
         addresses: {type: [Schema.Types.Mixed]},
         // We can make a separate schema for this.
         name:{type: String},
-        salt: Buffer
     },{
         versionKey: false,
         timestamps: true,

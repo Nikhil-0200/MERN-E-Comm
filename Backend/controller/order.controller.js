@@ -14,10 +14,10 @@ exports.addOrderData = async (req, res) => {
 };
 
 exports.fetchLoggedInUserOrder = async (req, res) => {
-  const { user } = req.params;
+  const { userId  } = req.params;
 
   try {
-    const orderDetails = await orderModel.find(user);
+    const orderDetails = await orderModel.find({user: userId });
     res.status(200).json(orderDetails);
   } catch (error) {
     res

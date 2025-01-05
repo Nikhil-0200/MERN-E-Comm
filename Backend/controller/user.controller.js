@@ -15,9 +15,12 @@ const userModel = require("../model/user.model")
 exports.fetchUser = async(req, res)=>{
 
     const {id} = req.params;
+    
 
     try {
         const user = await userModel.findById(id);
+        delete user.password;
+        delete user.salt;
         res.status(200).json({id: user.id, email: user.email, addresses: user.addresses})
 
     } catch (error) {
