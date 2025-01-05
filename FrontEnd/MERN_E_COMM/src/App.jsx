@@ -1,6 +1,5 @@
 import './App.css'
 import { useSelector, useDispatch } from 'react-redux'
-import { decrement, increment } from './Redux/counter/counterSlice'
 import NavBar from './components/NavBar'
 import AllRoutes from './components/AllRoutes'
 import { useEffect } from 'react'
@@ -14,7 +13,7 @@ function App() {
 
   useEffect(()=>{
     if(user){
-      dispatch(fetchItemByUserIdAsync(user.id))
+      dispatch(fetchItemByUserIdAsync(user.id)) 
       dispatch(fetchLoggedInUserAsync(user.id))
     }
   }, [dispatch, user])

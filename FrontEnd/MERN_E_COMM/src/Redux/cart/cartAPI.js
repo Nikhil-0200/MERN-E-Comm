@@ -4,7 +4,7 @@ import axios from "axios";
 export async function addToCart(item) {
   try {
     let res = await axios({
-      url: "http://localhost:3000/cart",
+      url: "http://localhost:8080/cart",
       method: "post",
       data: item,
     });
@@ -20,7 +20,7 @@ export async function addToCart(item) {
 export async function fetchItemByUserId(userId) {
   try {
     let res = await axios({
-      url: `http://localhost:3000/cart/${userId}`,
+      url: `http://localhost:8080/cart/${userId}`,
       method: "get",
     });
     return res.data;
@@ -32,7 +32,7 @@ export async function fetchItemByUserId(userId) {
 export async function updateItems(update) {
   try {
     let res = await axios({
-      url: `http://localhost:3000/cart/${update.id}`,
+      url: `http://localhost:8080/cart/${update.id}`,
       method: "patch",
       data: {quantity: update.quantity},
     });
@@ -45,7 +45,7 @@ export async function updateItems(update) {
 export async function deleteItems(itemId) {
   try {
     let res = await axios({
-      url: `http://localhost:3000/cart/${itemId}`,
+      url: `http://localhost:8080/cart/${itemId}`,
       method: "delete",
     });
     return itemId;

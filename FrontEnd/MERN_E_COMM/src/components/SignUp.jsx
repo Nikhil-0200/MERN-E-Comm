@@ -11,8 +11,6 @@ const SignUp = () => {
     formState: { errors },
   } = useForm();
 
-  console.log(errors);
-
   const user = useSelector((state) => state.auth.loggedIn);
   const dispatch = useDispatch();
 

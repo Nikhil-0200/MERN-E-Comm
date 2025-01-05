@@ -15,7 +15,6 @@ const UserProfile = () => {
   const [showEditForm, setShowEditForm] = useState(-1);
   const [showAddForm, setShowAddForm] = useState(false);
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.auth.loggedIn);
   const userDetails = useSelector((state) => state.user.userInfo);
   
   
@@ -89,19 +88,19 @@ const UserProfile = () => {
           <div className="flex-1 overflow-y-auto px-4 py-6 sm:px-6 border-b border-black">
             <div className="flex items-start justify-between my-10">
               <h1 className="text-4xl font-bold tracking-tight text-gray-900">
-                Name: {user.name ? user.name : "Guest Name"}
+                Name: {userDetails.name ? userDetails.name : "Guest Name"}
               </h1>
             </div>
 
             <div className="mt-8">
               <div className="flow-root">
                 <p className="flex justify-between text-base font-medium text-black-900 pb-4">
-                  Email Address: {user.email}
+                  Email Address: {userDetails.email}
                 </p>
 
-                {user.role == "admin" ? (
+                {userDetails.role == "admin" ? (
                   <p className="flex justify-between text-base font-medium text-black-900 pb-4">
-                  Role: {user.role}
+                  Role: {userDetails.role}
                 </p>
                 ) : ("")}
                 

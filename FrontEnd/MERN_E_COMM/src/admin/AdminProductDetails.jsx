@@ -34,13 +34,12 @@ const AdminProductDetails = () => {
   const [selectedColor, setSelectedColor] = useState(colors[0]);
   const [selectedSize, setSelectedSize] = useState(sizes[2]);
   const dispatch = useDispatch();
-  const user = useSelector((state)=> state.auth.loggedIn);
   const product = useSelector((state)=> state.product.selectedProduct);
   const params = useParams()
 
   function handleCart(e){
     e.preventDefault()
-    const newItem = {...product, quantity:1, userId: user.id};
+    const newItem = {...product, quantity:1};
     delete newItem["id"];
     dispatch(addToCartAsync(newItem))
   }

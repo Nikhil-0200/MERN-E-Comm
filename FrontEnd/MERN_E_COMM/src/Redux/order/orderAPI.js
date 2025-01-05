@@ -3,7 +3,7 @@ import axios from "axios";
 export async function addOrderData(data){
     try {
         let res = await axios({
-            url: "http://localhost:3000/orders",
+            url: "http://localhost:8080/orders",
             method: "post",
             data: data
         })
@@ -31,7 +31,7 @@ export async function fetchAllOrders(queryData){
 
     try {
         let res = await axios({
-            url: `http://localhost:3000/orders?${queryString}`,
+            url: `http://localhost:8080/orders?${queryString}`,
             method: "get"
         })
         const orders = res.data;
@@ -46,7 +46,7 @@ export async function fetchAllOrders(queryData){
 export async function updateOrders(OrderData){
   try {
       let res = await axios({
-          url: `http://localhost:3000/orders/${OrderData.id}`,
+          url: `http://localhost:8080/orders/${OrderData.id}`,
           method: "patch",
           data: {status: OrderData.status}
       })

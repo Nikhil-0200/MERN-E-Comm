@@ -2,7 +2,7 @@ import axios from "axios";
 
 export async function fetchAllProducts() {
   let res = await axios({
-    url: "http://localhost:3000/products",
+    url: "http://localhost:8080/products",
     method: "get",
   });
 
@@ -24,7 +24,7 @@ export async function fetchAllProductsFilter(queryData) {
 
   try {
     let res = await axios({
-      url: `http://localhost:3000/products?${queryString}`,
+      url: `http://localhost:8080/products?${queryString}`,
       method: "get",
     });
     const totalItems = res.headers["x-total-count"];
@@ -39,7 +39,7 @@ export async function fetchAllProductsFilter(queryData) {
 export async function fetchCategory() {
   try {
     let res = await axios({
-      url: "http://localhost:3000/category",
+      url: "http://localhost:8080/category",
       method: "get",
     });
     return res;
@@ -53,7 +53,7 @@ export async function fetchBrands() {
   
   try {
     let res = await axios({
-      url: "http://localhost:3000/brands",
+      url: "http://localhost:8080/brands",
       method: "get",
     });
     return res;  
@@ -68,7 +68,7 @@ export async function fetchSelectedProduct(id) {
 
   try {
     let res = await axios({
-      url: `http://localhost:3000/products/${id}`,
+      url: `http://localhost:8080/products/${id}`,
       method: "get",
     });
     return res;  
@@ -80,7 +80,7 @@ export async function fetchSelectedProduct(id) {
 export async function createProduct(product) {
   try {
     let res = await axios({
-      url: "http://localhost:3000/products",
+      url: "http://localhost:8080/products",
       method: "post",
       data: product,
     });
@@ -93,7 +93,7 @@ export async function createProduct(product) {
 export async function updateProduct(update) {
   try {
     let res = await axios({
-      url: `http://localhost:3000/products/${update.id}`,
+      url: `http://localhost:8080/products/${update.id}`,
       method: "patch",
       data: update,
     });

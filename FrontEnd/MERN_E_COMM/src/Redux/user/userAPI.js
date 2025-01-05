@@ -3,7 +3,7 @@ import axios from "axios"
 export async function fetchLoggedInUserOrder(userId){
     try {
         let res = await axios({
-            url: `http://localhost:3000/orders/user/${userId}`,
+            url: `http://localhost:8080/orders/user/${userId}`,
             method: "get"  
         })
         return res
@@ -15,7 +15,7 @@ export async function fetchLoggedInUserOrder(userId){
 export async function fetchLoggedInUser(userId){
     try {
         let res = await axios({
-            url: `http://localhost:3000/users/${userId}`,
+            url: `http://localhost:8080/users/${userId}`,
             method: "get"  
         })
         return res
@@ -28,7 +28,7 @@ export async function fetchLoggedInUser(userId){
 export async function updateUser(update){
     try {
         let res = await axios({
-            url: `http://localhost:3000/users/${update.id}`,
+            url: `http://localhost:8080/users/${update.id}`,
             method: "patch",
             data: update
         })

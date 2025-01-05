@@ -15,6 +15,8 @@ export const createUserAsync = createAsyncThunk(
     }
 );
 
+// loggedInUserToken
+
 export const checkUserAsync = createAsyncThunk(
     "user/checkUser",
     async (loginInfo)=>{
@@ -52,7 +54,7 @@ const authSlice = createSlice({
 
         builder.addCase(createUserAsync.fulfilled, (state, action)=>{
             state.status= "idle";
-            state.loggedIn = action.payload;
+            state.loggedIn= action.payload;
         })
 
         builder.addCase(checkUserAsync.pending, (state)=>{
@@ -61,7 +63,7 @@ const authSlice = createSlice({
 
         builder.addCase(checkUserAsync.fulfilled, (state, action)=>{
             state.status= "idle";
-            state.loggedIn = action.payload;
+            state.loggedIn= action.payload;
         })
 
         builder.addCase(checkUserAsync.rejected, (state,action)=>{
@@ -75,7 +77,7 @@ const authSlice = createSlice({
 
         builder.addCase(logoutAsync.fulfilled, (state, action)=>{
             state.status= "idle";
-            state.loggedIn = null;
+            state.loggedIn= null;
         })
 
         builder.addCase(logoutAsync.rejected, (state,action)=>{
@@ -89,7 +91,7 @@ const authSlice = createSlice({
 
         // builder.addCase(updateUserAsync.fulfilled, (state, action)=>{
         //     state.status= "idle";
-        //     state.loggedIn = action.payload;
+        //     state.loggedInUserToken= action.payload;
         // })
 
         // builder.addCase(updateUserAsync.rejected, (state,action)=>{

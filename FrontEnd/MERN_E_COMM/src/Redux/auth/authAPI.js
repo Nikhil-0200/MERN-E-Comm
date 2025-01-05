@@ -5,7 +5,7 @@ import { Navigate } from "react-router-dom";
 export async function createUser(data){
     try {
         let res = await axios({
-            url:"http://localhost:3000/auth/signup",
+            url:"http://localhost:8080/auth/signup",
             method: "post",
             data: data
         })
@@ -19,7 +19,7 @@ export async function checkUser(loginInfo){
     
     try {
         let res = await axios({
-            url: `http://localhost:3000/auth/login`,
+            url: `http://localhost:8080/auth/login`,
             method: "post",
             data: loginInfo
         })
@@ -28,7 +28,6 @@ export async function checkUser(loginInfo){
         return res.data
 
     } catch (error) {
-        console.log(error);
         throw new Error(error.response?.data?.msg || `Invalid Login Credentials`)
         
     }
@@ -45,7 +44,7 @@ export async function logout(userId){
 // export async function updateUser(update){
 //     try {
 //         let res = await axios({
-//             url: `http://localhost:3000/users/${update.id}`,
+//             url: `http://localhost:8080/users/${update.id}`,
 //             method: "patch",
 //             data: update
 //         })
