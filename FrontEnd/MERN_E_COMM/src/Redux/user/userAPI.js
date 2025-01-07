@@ -1,9 +1,9 @@
 import axios from "axios"
 
-export async function fetchLoggedInUserOrder(userId){
+export async function fetchLoggedInUserOrder(){
     try {
         let res = await axios({
-            url: `http://localhost:8080/orders/user/${userId}`,
+            url: `http://localhost:8080/orders/own`,
             method: "get"  
         })
         return res
@@ -12,10 +12,10 @@ export async function fetchLoggedInUserOrder(userId){
     }
 } 
 
-export async function fetchLoggedInUser(userId){
+export async function fetchLoggedInUser(){
     try {
         let res = await axios({
-            url: `http://localhost:8080/users/${userId}`,
+            url: `http://localhost:8080/users`,
             method: "get"  
         })
         return res

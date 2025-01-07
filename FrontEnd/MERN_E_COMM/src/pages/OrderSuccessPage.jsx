@@ -6,16 +6,17 @@ import { resetOrder } from "../Redux/order/orderSlice";
 
 const OrderSuccessPage = () =>{
   const user = useSelector((state)=> state.auth.loggedIn)
+  const userInfo = useSelector((state)=> state.user.userInfo)
   const dispatch = useDispatch()
   const {id} = useParams();
 
   useEffect(()=>{
     // Cart Reset
-    dispatch(resetCartAsync(user.id))
+    dispatch(resetCartAsync(userInfo.id))
 
     // Current Order Reset
     dispatch(resetOrder())
-  }, [dispatch, user])
+  }, [dispatch, userInfo])
 
     return (
         <>

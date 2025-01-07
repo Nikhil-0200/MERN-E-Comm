@@ -35,6 +35,7 @@ const ProductDetails = () => {
   const [selectedSize, setSelectedSize] = useState(sizes[2]);
   const dispatch = useDispatch();
   const user = useSelector((state)=> state.auth.loggedIn);
+  const userInfo = useSelector((state) => state.user.userInfo);
   const items = useSelector((state)=> state.cart.items)
   const product = useSelector((state)=> state.product.selectedProduct);
   const params = useParams()
@@ -42,7 +43,7 @@ const ProductDetails = () => {
   function handleCart(e){
     e.preventDefault()
     if(items.findIndex((item)=> item.product.id === product.id) < 0){
-      const newItem = {product: product.id, quantity:1, user: user.id};
+      const newItem = {product: product.id, quantity:1, user: userInfo.id};
       dispatch(addToCartAsync(newItem))
     }
     else{

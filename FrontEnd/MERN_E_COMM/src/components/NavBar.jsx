@@ -28,6 +28,7 @@ const NavBar = () => {
   const navigate = useNavigate();
   const items = useSelector((state) => state.cart.items);
   const user = useSelector((state)=> state.auth.loggedIn)
+  const userInfo = useSelector((state)=> state.user.userInfo);
 
   const navigation = [
     { name: "Dashboard", to: "/", current: location.pathname === "/", role: "user" },
@@ -72,8 +73,8 @@ const NavBar = () => {
                 <div className="flex space-x-4">
                 {navigation
                     .filter((item) => {
-                      if (user?.role === "admin" && item.role === "admin") return true;
-                      if (user?.role === "user" && item.role === "user") return true;
+                      if (userInfo?.role === "admin" && item.role === "admin") return true;
+                      if (userInfo?.role === "user" && item.role === "user") return true;
                       if (!user && item.role === "guest") return true;
                       return false;
                     })
@@ -165,8 +166,8 @@ const NavBar = () => {
         <DisclosurePanel className="sm:hidden">
           <div className="space-y-1 px-2 pb-3 pt-2">
             {navigation.filter((item)=>{
-              if (user?.role === "admin" && item.role === "admin") return true;
-              if (user?.role === "user" && item.role === "user") return true;
+              if (userInfo?.role === "admin" && item.role === "admin") return true;
+              if (userInfo?.role === "user" && item.role === "user") return true;
               if (!user && item.role === "guest") return true;
               return false;
             })

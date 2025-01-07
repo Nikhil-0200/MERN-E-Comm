@@ -17,10 +17,10 @@ export async function addToCart(item) {
   }
 }
 
-export async function fetchItemByUserId(userId) {
+export async function fetchItemByUserId() {
   try {
     let res = await axios({
-      url: `http://localhost:8080/cart/${userId}`,
+      url: `http://localhost:8080/cart`,
       method: "get",
     });
     return res.data;

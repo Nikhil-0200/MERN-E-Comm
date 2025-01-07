@@ -9,7 +9,7 @@ const UserOrder = () => {
   
 
   useEffect(() => {
-    dispatch(fetchLoggedInUserOrderAsync(user.id));  
+    dispatch(fetchLoggedInUserOrderAsync());  
   }, []);
 
   return (
