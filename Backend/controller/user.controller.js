@@ -14,14 +14,15 @@ const userModel = require("../model/user.model")
 
 exports.fetchUser = async(req, res)=>{
 
-    const {id} = req.params;
+    const userId = req.body.userId;
+    const userRole = req.body.role;
     
 
     try {
-        const user = await userModel.findById(id);
+        const user = await userModel.findById(userId);
         delete user.password;
         delete user.salt;
-        res.status(200).json({id: user.id, email: user.email, addresses: user.addresses})
+        res.status(200).json({id: user.id, email: user.email, addresses: user.addresses, role: userRole})
 
     } catch (error) {
         res.status(400).json({msg: `Error occurred while fetching user ${error}`})

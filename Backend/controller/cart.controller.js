@@ -12,11 +12,16 @@ exports.addToCart = async (req, res) => {
     }
 }
 
+
+
+
 exports.fetchCartByUser = async(req, res)=>{
-    
-    const {id} = req.params
+
+    const userId = req.body.userId;
+        
+
     try {
-        const cartItems = await cartModel.find({user: id}).populate("product") 
+        const cartItems = await cartModel.find({user: userId}).populate("product") 
         res.status(200).json(cartItems)
     } catch (error) {
         res.status(400).json({msg: `Error occurred while fetching cart items by user ${error}`})

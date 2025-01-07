@@ -10,7 +10,7 @@ const cartRouter = express.Router();
 
 cartRouter
   .post("/", addToCart)
-  .get("/:id", fetchCartByUser)
+  .get("/", fetchCartByUser)
   .delete("/:id", deleteItems)
   .patch("/:id", updateItems);
 

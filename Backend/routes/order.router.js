@@ -3,6 +3,6 @@ const { addOrderData, fetchLoggedInUserOrder, fetchAllOrders, updateOrders } = r
 
 const orderRouter = express.Router();
 
-orderRouter.post("/", addOrderData).get("/user/:userId", fetchLoggedInUserOrder).get("/", fetchAllOrders).patch("/:id", updateOrders);
+orderRouter.post("/", addOrderData).get("/own", fetchLoggedInUserOrder).get("/", fetchAllOrders).patch("/:id", updateOrders);
 
 module.exports = orderRouter;

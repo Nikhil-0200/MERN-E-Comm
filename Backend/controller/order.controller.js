@@ -14,7 +14,7 @@ exports.addOrderData = async (req, res) => {
 };
 
 exports.fetchLoggedInUserOrder = async (req, res) => {
-  const { userId  } = req.params;
+  const userId = req.body.userId;
 
   try {
     const orderDetails = await orderModel.find({user: userId });
