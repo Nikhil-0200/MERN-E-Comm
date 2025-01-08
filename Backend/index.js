@@ -37,6 +37,29 @@ server.get("/", (req, res)=>{
   res.send(`Server is running`);
 });
 
+server.get("/newAccessToken", (req, res)=>{
+  const refreshToken = req.cookies.refreshToken;
+
+  if(!refreshToken){
+    return res.status(401).json({ message: "No refresh token provided" });
+  }
+
+  jwt.verify(refreshToken, process.env.JWT_SCERETKEY_2, (err, decoded)=>{
+    if(err){
+      return res.status(403).json({ message: "Invalid refresh token" });
+     }
+
+     const newAccessToken = jwt.sign(
+      { id: decoded.id, role: decoded.role }, // Payload (modify as per your needs)
+      process.env.JWT_SCERETKEY_2,
+      { expiresIn: "15m" } // Set the expiration time for the access token
+    );
+
+    res.status(200).json({ accessToken: newAccessToken });
+  })
+
+})
+
 server.listen(PORT, async () => {
   try {
     await connection;

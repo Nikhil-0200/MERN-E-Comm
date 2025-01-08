@@ -54,7 +54,7 @@ exports.loginUser = async (req, res) => {
         const accessToken = jwt.sign(
           { id: findUser._id, role: findUser.role },
           process.env.JWT_SCERETKEY_1,
-          { expiresIn: "15m" }
+          { expiresIn: "1day" }
         );
 
         const refreshToken = jwt.sign(
@@ -67,7 +67,7 @@ exports.loginUser = async (req, res) => {
           httpOnly: true,
           secure: false, // Change to true in production (HTTPS)
           sameSite: "lax", // Use "none" for cross-origin
-          maxAge: 900000, // 15 minutes
+          maxAge: 86400000, // 1 day 
         };
 
         res.cookie("accessToken", accessToken, cookieOptions);
@@ -76,15 +76,13 @@ exports.loginUser = async (req, res) => {
           maxAge: 86400000,
         }); // 1 day
 
-        res
-          .status(201)
-          .json({
-            msg: `Login successful`,
-            accessToken,
-            refreshToken,
-            // id: findUser._id,
-            // role: findUser.role,
-          });
+        res.status(201).json({
+          msg: `Login successful`,
+          accessToken,
+          refreshToken,
+          id: findUser._id,
+          role: findUser.role,
+        });
       } else {
         res.status(404).json({ msg: `Invalid Password` });
       }
@@ -95,15 +93,20 @@ exports.loginUser = async (req, res) => {
 };
 
 exports.checkUser = async (req, res) => {
-  const { email, password } = req.body;
+  const { userId, role } = req.body; // Extract userId and role from the request body
 
   try {
-    const findUser = await userModel.findOne({ email }).exec();
-
-    if (!findUser) {
-      res.status(404).json({ msg: `Invalid Credentials` });
+    // Check if both userId and role are provided
+    if (!userId || !role) {
+      return res.status(400).json({ msg: "User ID and role are required." }); // Bad request if either is missing
     }
 
-    res.json({ status: "success", user: findUser });
-  } catch (error) {}
+    // If both are present, send them back in the response
+    return res.status(200).json({ userId, role }); // Return userId and role
+
+  } catch (error) {
+    // Catch any other errors and respond with a generic error message
+    return res.status(500).json({ msg: `Error occurred, please try again later.`, error });
+  }
 };
+
