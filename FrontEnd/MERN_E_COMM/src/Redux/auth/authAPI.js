@@ -15,7 +15,7 @@ export async function createUser(data){
     }
 }
 
-export async function checkUser(loginInfo){
+export async function loginUser(loginInfo){
     
     try {
         let res = await axios({
@@ -30,6 +30,22 @@ export async function checkUser(loginInfo){
     } catch (error) {
         throw new Error(error.response?.data?.msg || `Invalid Login Credentials`)
         
+    }
+}
+
+export async function checkUser(){
+    
+    try {
+        let res = await axios({
+            url: `http://localhost:8080/auth/check`,
+            method: "get",
+        })
+
+        
+        return res
+
+    } catch (error) {
+        return error
     }
 }
 

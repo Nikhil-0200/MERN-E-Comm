@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
-import { checkUser, createUser, logout} from "./authAPI"
+import { loginUser, createUser, logout, checkUser} from "./authAPI"
 
 export const initialState = {
     loggedIn: null, // Will be used only for user ID and Auth
@@ -17,10 +17,18 @@ export const createUserAsync = createAsyncThunk(
 
 // loggedInUserToken
 
+export const loginUserAsync = createAsyncThunk(
+    "user/loginUser",
+    async (loginInfo)=>{
+        const response = await loginUser(loginInfo);
+        return response
+    } 
+)
+
 export const checkUserAsync = createAsyncThunk(
     "user/checkUser",
-    async (loginInfo)=>{
-        const response = await checkUser(loginInfo);
+    async ()=>{
+        const response = await checkUser();
         return response
     } 
 )
@@ -57,16 +65,16 @@ const authSlice = createSlice({
             state.loggedIn= action.payload;
         })
 
-        builder.addCase(checkUserAsync.pending, (state)=>{
+        builder.addCase(loginUserAsync.pending, (state)=>{
             state.status= "loading";
         })
 
-        builder.addCase(checkUserAsync.fulfilled, (state, action)=>{
+        builder.addCase(loginUserAsync.fulfilled, (state, action)=>{
             state.status= "idle";
             state.loggedIn= action.payload;
         })
 
-        builder.addCase(checkUserAsync.rejected, (state,action)=>{
+        builder.addCase(loginUserAsync.rejected, (state,action)=>{
             state.status= "idle";
             state.error = action.error;
         });
@@ -81,6 +89,20 @@ const authSlice = createSlice({
         })
 
         builder.addCase(logoutAsync.rejected, (state,action)=>{
+            state.status= "idle";
+            state.error = action.error;
+        })
+
+        builder.addCase(checkUserAsync.pending, (state)=>{
+            state.status= "loading";
+        })
+
+        builder.addCase(checkUserAsync.fulfilled, (state, action)=>{
+            state.status= "idle";
+            state.loggedIn= action.payload;
+        })
+
+        builder.addCase(checkUserAsync.rejected, (state,action)=>{
             state.status= "idle";
             state.error = action.error;
         });

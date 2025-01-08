@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, Navigate } from "react-router-dom";
-import { checkUserAsync } from "../Redux/auth/authSlice";
+import { loginUserAsync } from "../Redux/auth/authSlice";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -39,7 +39,7 @@ const Login = () => {
             noValidate
             className="space-y-6"
             onSubmit={handleSubmit(async (data) => {
-              await dispatch(checkUserAsync({email: data.email, password: data.password}))
+              await dispatch(loginUserAsync({email: data.email, password: data.password}))
             })}
           >
             <div>
