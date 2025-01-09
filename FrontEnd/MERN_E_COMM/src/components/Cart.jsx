@@ -6,6 +6,7 @@ const Cart = () => {
 
   const dispatch = useDispatch()
   const items = useSelector((state)=> state.cart.items)
+  const cartLoaded = useSelector((state)=> state.cart.cartLoaded)
   const totalAmount = (items.reduce((acc, curr)=> curr.product.price * curr.quantity + acc, 0)).toFixed(2);
 
   const totalItems = items.reduce((acc, curr)=> curr.quantity + acc, 0);
@@ -24,7 +25,7 @@ const Cart = () => {
   
   return (
     <div>
-      {items.length < 1 && <Navigate to="/" />}
+      {items.length < 1 && cartLoaded && <Navigate to="/" replace={true} />}
       <div className="mx-auto max-w-5xl px-2 sm:px-6 lg:px-8 my-10">
         <div className="flex h-full flex-col bg-white shadow-xl">
           <div className="flex-1 overflow-y-auto px-4 py-6 sm:px-6">

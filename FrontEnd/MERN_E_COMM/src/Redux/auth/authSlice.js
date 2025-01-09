@@ -4,7 +4,8 @@ import { loginUser, createUser, logout, checkUser} from "./authAPI"
 export const initialState = {
     loggedIn: null, // Will be used only for user ID and Auth
     status: "idle",
-    error: null
+    error: null,
+    userChecked: false
 }
 
 export const createUserAsync = createAsyncThunk(
@@ -100,11 +101,13 @@ const authSlice = createSlice({
         builder.addCase(checkUserAsync.fulfilled, (state, action)=>{
             state.status= "idle";
             state.loggedIn= action.payload;
+            state.userChecked = true;
         })
 
         builder.addCase(checkUserAsync.rejected, (state,action)=>{
             state.status= "idle";
             state.error = action.error;
+            state.userChecked = true;
         });
 
         // builder.addCase(updateUserAsync.pending, (state)=>{

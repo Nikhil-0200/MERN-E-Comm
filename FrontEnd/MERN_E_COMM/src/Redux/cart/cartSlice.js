@@ -4,6 +4,7 @@ import { addToCart, deleteItems, fetchItemByUserId, resetCart, updateItems } fro
 export const initialState = {
     status: "idle",
     items:[],
+    cartLoaded: false
 }
 
 
@@ -70,6 +71,12 @@ const cartSlice = createSlice({
         builder.addCase(fetchItemByUserIdAsync.fulfilled, (state, action)=>{
             state.status = "idle";
             state.items = action.payload;
+            state.cartLoaded = true;
+        })
+
+        builder.addCase(fetchItemByUserIdAsync.rejected, (state, action)=>{
+            state.status = "idle";
+            state.cartLoaded = true;
         })
 
         builder.addCase(updateItemsAsync.pending, (state)=>{

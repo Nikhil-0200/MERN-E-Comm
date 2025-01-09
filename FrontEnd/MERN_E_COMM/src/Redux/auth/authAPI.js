@@ -42,7 +42,7 @@ export async function checkUser(){
         })
 
         
-        return res
+        return res.data
 
     } catch (error) {
         return error
