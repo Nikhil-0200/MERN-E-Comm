@@ -57,6 +57,23 @@ export async function logout(userId){
     }
 }
 
+export async function resetPassword(email){
+    
+    try {
+        let res = await axios({
+            url: `http://localhost:8080/auth/resetPassword`,
+            method: "post",
+            data: {email: email}
+        })
+
+        
+        return res.data
+
+    } catch (error) {
+        return error
+    }
+}
+
 // export async function updateUser(update){
 //     try {
 //         let res = await axios({
