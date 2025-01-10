@@ -14,6 +14,10 @@ const cartRouter = require("./routes/cart.router.js");
 const orderRouter = require("./routes/order.router.js");
 const authMiddleware = require("./middleware/auth.middleware.js");
 
+// Emails
+
+
+
 
 // middleware
 
@@ -36,6 +40,8 @@ server.use("/orders", authMiddleware, orderRouter)
 server.get("/", (req, res)=>{
   res.send(`Server is running`);
 });
+
+
 
 server.get("/newAccessToken", (req, res)=>{
   const refreshToken = req.cookies.refreshToken;

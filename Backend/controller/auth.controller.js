@@ -2,6 +2,7 @@ const userModel = require("../model/user.model");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const cookie = require("cookie");
+const { sendMail } = require("../services/common");
 
 exports.createUser = async (req, res) => {
   const { email, password, role, addresses, name } = req.body;
@@ -110,3 +111,14 @@ exports.checkUser = async (req, res) => {
   }
 };
 
+exports.resetPassword = async (req, res) => {
+
+  const resetPage = "http://localhost:8080/reset-password"
+  const subject = "reset password for e-commerce"
+  const html = `<p>Click <a href="${resetPage}">here <a> to Reset Password</p>`
+
+  if(req.body.email){
+    const response = await sendMail({to: req.body.email, subject, html});
+    res.json(response)
+  }
+};
