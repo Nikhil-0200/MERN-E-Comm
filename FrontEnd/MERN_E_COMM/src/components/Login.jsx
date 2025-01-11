@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, Navigate } from "react-router-dom";
 import { loginUserAsync } from "../Redux/auth/authSlice";
+import { InfinitySpin } from "react-loader-spinner";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -13,10 +14,21 @@ const Login = () => {
     watch,
     formState: { errors },
   } = useForm();
+  const status = useSelector((state) => state.auth.status); 
 
 
   return (
     <div>
+      {status === "loading" && (
+        <div className="flex justify-center items-center">
+          <InfinitySpin
+            visible={true}
+            width="200"
+            color="#4fa94d"
+            ariaLabel="infinity-spin-loading"
+          />
+        </div>
+      )}
       {user && <Navigate to="/" />}
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8 ">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">

@@ -33,6 +33,7 @@ import {
   fetchBrandsAsync,
 } from "../Redux/product-list/productListSlice";
 import { fetchCategory } from "../Redux/product-list/productListAPI";
+import { InfinitySpin } from "react-loader-spinner";
 
 const AdminProductList = () => {
   const dispatch = useDispatch();
@@ -44,15 +45,20 @@ const AdminProductList = () => {
   const [sort, setSort] = useState({});
   const [page, setPage] = useState(1);
   const limit = 8;
-
-
+  const status = useSelector((state) => state.product.status);
 
   const totalPages = Math.ceil(totalItems / limit);
   const indexOfLastItem = limit * page;
   const indexOfFirstItem = indexOfLastItem - limit;
 
   const centralFn = () => {
-    const queryData = { ...filterData, ...sort, _page: page, _limit: limit, admin: true };
+    const queryData = {
+      ...filterData,
+      ...sort,
+      _page: page,
+      _limit: limit,
+      admin: true,
+    };
 
     dispatch(fetchAllProductsFilterAsync(queryData));
   };
@@ -380,6 +386,16 @@ const AdminProductList = () => {
                       >
                         Add New Product
                       </Link>
+                      {status === "loading" && (
+                        <div className="flex justify-center items-center">
+                          <InfinitySpin
+                            visible={true}
+                            width="200"
+                            color="#4fa94d"
+                            ariaLabel="infinity-spin-loading"
+                          />
+                        </div>
+                      )}
                       {products ? (
                         <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8">
                           {products.map((product) => (
@@ -425,15 +441,18 @@ const AdminProductList = () => {
                                       </p>
                                     </div>
                                   </div>
-                                  {product.deleted &&
-                                  <p className="text-red-700 font-semibold">Product Is Deleted</p>
-                                  }
+                                  {product.deleted && (
+                                    <p className="text-red-700 font-semibold">
+                                      Product Is Deleted
+                                    </p>
+                                  )}
                                 </div>
                               </Link>
 
                               <Link
-                              to={`/admin/AdminProductForm/Edit/${product.id}`}
-                              className="mt-4 flex w-[45%] items-center justify-center rounded-md border border-transparent bg-indigo-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                                to={`/admin/AdminProductForm/Edit/${product.id}`}
+                                className="mt-4 flex w-[45%] items-center justify-center rounded-md border border-transparent bg-indigo-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                              >
                                 Edit Product
                               </Link>
                             </div>

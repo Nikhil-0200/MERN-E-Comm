@@ -2,12 +2,15 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchLoggedInUserOrderAsync } from "../Redux/user/userSlice";
 import {Footer} from "./Footer"
+import { InfinitySpin } from "react-loader-spinner";
+
 
 const UserOrder = () => {
   const user = useSelector((state) => state.auth.loggedIn);
   const dispatch = useDispatch();
   const orders = useSelector((state) => state.user.order);
   const userChecked = useSelector((state) => state.auth.userChecked);
+  const status = useSelector((state) => state.user.status);
   
 
   useEffect(() => {
@@ -16,6 +19,16 @@ const UserOrder = () => {
 
   return (
     <div>
+      {status === "loading" && (
+              <div className="flex justify-center items-center">
+                <InfinitySpin
+                  visible={true}
+                  width="200"
+                  color="#4fa94d"
+                  ariaLabel="infinity-spin-loading"
+                />
+              </div>
+            )}
       <h1 className="text-4xl font-bold tracking-tight text-gray-900 px-20 pt-20">
               My Orders
       </h1>

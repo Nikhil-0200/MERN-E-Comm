@@ -6,6 +6,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import { fetchSelectedProductAsync } from "../Redux/product-list/productListSlice";
 import { addToCartAsync } from "../Redux/cart/cartSlice";
 import { checkUserAsync } from "../Redux/auth/authSlice";
+import { InfinitySpin } from "react-loader-spinner";
+
 
  const colors = [
     { name: "White", class: "bg-white", selectedClass: "ring-gray-400" },
@@ -35,7 +37,9 @@ const AdminProductDetails = () => {
   const [selectedSize, setSelectedSize] = useState(sizes[2]);
   const dispatch = useDispatch();
   const product = useSelector((state)=> state.product.selectedProduct);
-  const params = useParams()
+  const params = useParams();
+  const status = useSelector((state) => state.user.status);
+
 
   function handleCart(e){
     e.preventDefault()

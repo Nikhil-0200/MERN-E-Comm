@@ -2,7 +2,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { updateUserAsync } from "../Redux/user/userSlice";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
-import {Footer} from "./Footer"
+import { Footer } from "./Footer";
+import { InfinitySpin } from "react-loader-spinner";
 
 const UserProfile = () => {
   const {
@@ -17,6 +18,7 @@ const UserProfile = () => {
   const [showAddForm, setShowAddForm] = useState(false);
   const dispatch = useDispatch();
   const userDetails = useSelector((state) => state.user.userInfo);
+  const status = useSelector((state) => state.user.status);
 
   function handleEdit(addressUpdate, index) {
     const newUser = JSON.parse(JSON.stringify(userDetails));
@@ -82,6 +84,16 @@ const UserProfile = () => {
 
   return (
     <div>
+      {status === "loading" && (
+        <div className="flex justify-center items-center">
+          <InfinitySpin
+            visible={true}
+            width="200"
+            color="#4fa94d"
+            ariaLabel="infinity-spin-loading"
+          />
+        </div>
+      )}
       <div className="mx-auto max-w-5xl px-2 sm:px-7 lg:px-8 my-10">
         <div className="flex h-full flex-col bg-white shadow-xl">
           <div className="flex-1 overflow-y-auto px-4 py-6 sm:px-6 border-b border-black">

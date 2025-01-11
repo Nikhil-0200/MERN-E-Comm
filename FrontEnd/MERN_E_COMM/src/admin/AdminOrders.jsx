@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { InfinitySpin } from "react-loader-spinner";
+
 import {
   fetchAllOrdersAsync,
   updateOrdersAsync,
@@ -24,6 +26,7 @@ const AdminOrders = () => {
   const [page, setPage] = useState(1);
   const limit = 4;
   const [sort, setSort] = useState({});
+  const status = useSelector((state) => state.order.status);
 
   console.log(orderDetails);
 
@@ -79,6 +82,16 @@ const AdminOrders = () => {
 
   return (
     <div>
+      {status === "loading" && (
+        <div className="flex justify-center items-center">
+          <InfinitySpin
+            visible={true}
+            width="200"
+            color="#4fa94d"
+            ariaLabel="infinity-spin-loading"
+          />
+        </div>
+      )}
       <div className="overflow-x-auto">
         <div className="min-w-screen min-h-screen bg-white flex items-start justify-center font-sans overflow-hidden">
           <div className="w-full lg:w-full px-10">

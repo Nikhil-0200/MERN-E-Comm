@@ -8,7 +8,7 @@ import { addToCartAsync } from "../Redux/cart/cartSlice";
 import { checkUserAsync } from "../Redux/auth/authSlice";
 import { useAlert } from "react-alert";
 import { Footer } from "./Footer";
-
+import { InfinitySpin } from "react-loader-spinner";
 
 const colors = [
   { name: "White", class: "bg-white", selectedClass: "ring-gray-400" },
@@ -43,6 +43,7 @@ const ProductDetails = () => {
   const items = useSelector((state) => state.cart.items);
   const product = useSelector((state) => state.product.selectedProduct);
   const params = useParams();
+  const status = useSelector((state) => state.product.status);
 
   function handleCart(e) {
     e.preventDefault();
@@ -66,6 +67,16 @@ const ProductDetails = () => {
 
   return product ? (
     <div>
+      {status === "loading" && (
+        <div className="flex justify-center items-center">
+          <InfinitySpin
+            visible={true}
+            width="200"
+            color="#4fa94d"
+            ariaLabel="infinity-spin-loading"
+          />
+        </div>
+      )}
       <div className="mx-auto max-w-5xl px-2 sm:px-6 lg:px-8 my-10">
         <div className="bg-white">
           <div className="pt-6">
@@ -340,14 +351,11 @@ const ProductDetails = () => {
           </div>
         </div>
       </div>
-  <Footer/>
-
+      <Footer />
     </div>
-    
   ) : (
     <div>Loading...</div>
   );
-  
 };
 
 export default ProductDetails;
