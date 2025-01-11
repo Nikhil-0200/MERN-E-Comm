@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchLoggedInUserOrderAsync } from "../Redux/user/userSlice";
+import {Footer} from "./Footer"
 
 const UserOrder = () => {
   const user = useSelector((state) => state.auth.loggedIn);
@@ -111,6 +112,7 @@ const UserOrder = () => {
             </div>
           </div>
         ))}
+        <Footer/>
     </div>
   );
 };

@@ -7,6 +7,7 @@ import { fetchSelectedProductAsync } from "../Redux/product-list/productListSlic
 import { addToCartAsync } from "../Redux/cart/cartSlice";
 import { checkUserAsync } from "../Redux/auth/authSlice";
 import { useAlert } from "react-alert";
+import { Footer } from "./Footer";
 
 
 const colors = [
@@ -48,7 +49,8 @@ const ProductDetails = () => {
     if (items.findIndex((item) => item.product.id === product.id) < 0) {
       const newItem = { product: product.id, quantity: 1, user: userInfo.id };
       dispatch(addToCartAsync(newItem));
-      alert.s("Item Already Added");
+      // TO DO: Have to manage alert as per the backend msg.
+      alert.show("Item Added To Cart");
     } else {
       alert.show("Item Already Added");
     }
@@ -292,14 +294,6 @@ const ProductDetails = () => {
                     Add to Cart
                   </button>
                 </form>
-
-                <button
-                  onClick={() => {
-                    alert.show("Oh look, an alert!");
-                  }}
-                >
-                  Show Alert
-                </button>
               </div>
 
               <div className="py-10 lg:col-span-2 lg:col-start-1 lg:border-r lg:border-gray-200 lg:pb-16 lg:pr-8 lg:pt-6">
@@ -346,10 +340,14 @@ const ProductDetails = () => {
           </div>
         </div>
       </div>
+  <Footer/>
+
     </div>
+    
   ) : (
     <div>Loading...</div>
   );
+  
 };
 
 export default ProductDetails;

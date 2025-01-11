@@ -3,6 +3,7 @@ import { Link, Navigate, useParams } from "react-router-dom";
 import { resetCartAsync } from "../Redux/cart/cartSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { resetOrder } from "../Redux/order/orderSlice";
+import { Footer } from "../components/Footer";
 
 const OrderSuccessPage = () =>{
   const user = useSelector((state)=> state.auth.loggedIn)
@@ -40,6 +41,8 @@ const OrderSuccessPage = () =>{
               </div>
             </div>
           </main>
+      <Footer />
+
         </>
       )
 }

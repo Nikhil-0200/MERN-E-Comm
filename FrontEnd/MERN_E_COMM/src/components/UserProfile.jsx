@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { updateUserAsync } from "../Redux/user/userSlice";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
+import {Footer} from "./Footer"
 
 const UserProfile = () => {
   const {
@@ -16,8 +17,6 @@ const UserProfile = () => {
   const [showAddForm, setShowAddForm] = useState(false);
   const dispatch = useDispatch();
   const userDetails = useSelector((state) => state.user.userInfo);
-  
-  
 
   function handleEdit(addressUpdate, index) {
     const newUser = JSON.parse(JSON.stringify(userDetails));
@@ -100,10 +99,11 @@ const UserProfile = () => {
 
                 {userDetails.role == "admin" ? (
                   <p className="flex justify-between text-base font-medium text-black-900 pb-4">
-                  Role: {userDetails.role}
-                </p>
-                ) : ("")}
-                
+                    Role: {userDetails.role}
+                  </p>
+                ) : (
+                  ""
+                )}
               </div>
             </div>
           </div>
@@ -597,6 +597,7 @@ const UserProfile = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

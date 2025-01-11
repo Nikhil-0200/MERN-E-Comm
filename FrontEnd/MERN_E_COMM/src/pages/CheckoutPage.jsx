@@ -5,6 +5,7 @@ import { deleteItemsAsync } from "../Redux/cart/cartSlice";
 import { useForm } from "react-hook-form";
 import { updateUserAsync } from "../Redux/user/userSlice";
 import { addOrderDataAsync } from "../Redux/order/orderSlice";
+import { Footer } from "../components/Footer";
 
 const CheckoutPage = () => {
   const {
@@ -452,6 +453,8 @@ const CheckoutPage = () => {
         </div>
       </div>
     </div>
+  <Footer/>
+
     </>
     
   );
