@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, Navigate } from "react-router-dom";
-import { checkUserAsync, resetPasswordAsync } from "../Redux/auth/authSlice";
+import { checkUserAsync, resetPasswordRequestAsync } from "../Redux/auth/authSlice";
 
 const ForgotPass = () => {
   const dispatch = useDispatch();
@@ -44,7 +44,7 @@ const ForgotPass = () => {
             noValidate
             className="space-y-6"
             onSubmit={handleSubmit(async (data) => {
-                dispatch(resetPasswordAsync(data.email));
+                dispatch(resetPasswordRequestAsync(data.email));
             })}
           >
             <div>

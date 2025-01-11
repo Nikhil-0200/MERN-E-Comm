@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
-import { loginUser, createUser, logout, checkUser, resetPassword} from "./authAPI"
+import { loginUser, createUser, logout, checkUser, resetPasswordRequest} from "./authAPI"
 
 export const initialState = {
     loggedIn: null, // Will be used only for user ID and Auth
@@ -43,10 +43,10 @@ export const logoutAsync = createAsyncThunk(
     }
 )
 
-export const resetPasswordAsync = createAsyncThunk(
-    "user/resetPassword",
+export const resetPasswordRequestAsync = createAsyncThunk(
+    "user/resetPasswordRequest",
     async (email)=>{
-        const response = await resetPassword(email);
+        const response = await resetPasswordRequest(email);
         return response
     } 
 )
@@ -119,11 +119,11 @@ const authSlice = createSlice({
             state.userChecked = true;
         })
 
-        builder.addCase(resetPasswordAsync.pending, (state)=>{
+        builder.addCase(resetPasswordRequestAsync.pending, (state)=>{
             state.status= "loading";
         })
 
-        builder.addCase(resetPasswordAsync.fulfilled, (state, action)=>{
+        builder.addCase(resetPasswordRequestAsync.fulfilled, (state, action)=>{
             state.status= "idle";
             state.mailSent= true;
         });

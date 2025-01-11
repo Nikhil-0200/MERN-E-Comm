@@ -6,22 +6,24 @@ import { useNavigate, useParams } from "react-router-dom";
 import { fetchSelectedProductAsync } from "../Redux/product-list/productListSlice";
 import { addToCartAsync } from "../Redux/cart/cartSlice";
 import { checkUserAsync } from "../Redux/auth/authSlice";
+import { useAlert } from "react-alert";
 
- const colors = [
-    { name: "White", class: "bg-white", selectedClass: "ring-gray-400" },
-    { name: "Gray", class: "bg-gray-200", selectedClass: "ring-gray-400" },
-    { name: "Black", class: "bg-gray-900", selectedClass: "ring-gray-900" },
-  ]
-  const sizes = [
-    { name: "XXS", inStock: false },
-    { name: "XS", inStock: true },
-    { name: "S", inStock: true },
-    { name: "M", inStock: true },
-    { name: "L", inStock: true },
-    { name: "XL", inStock: true },
-    { name: "2XL", inStock: true },
-    { name: "3XL", inStock: true },
-  ]
+
+const colors = [
+  { name: "White", class: "bg-white", selectedClass: "ring-gray-400" },
+  { name: "Gray", class: "bg-gray-200", selectedClass: "ring-gray-400" },
+  { name: "Black", class: "bg-gray-900", selectedClass: "ring-gray-900" },
+];
+const sizes = [
+  { name: "XXS", inStock: false },
+  { name: "XS", inStock: true },
+  { name: "S", inStock: true },
+  { name: "M", inStock: true },
+  { name: "L", inStock: true },
+  { name: "XL", inStock: true },
+  { name: "2XL", inStock: true },
+  { name: "3XL", inStock: true },
+];
 
 const reviews = { href: "#", average: 4, totalCount: 117 };
 
@@ -30,42 +32,38 @@ function classNames(...classes) {
 }
 
 const ProductDetails = () => {
-  const navigate = useNavigate()
+  const alert = useAlert();
+  const navigate = useNavigate();
   const [selectedColor, setSelectedColor] = useState(colors[0]);
   const [selectedSize, setSelectedSize] = useState(sizes[2]);
   const dispatch = useDispatch();
-  const user = useSelector((state)=> state.auth.loggedIn);
+  const user = useSelector((state) => state.auth.loggedIn);
   const userInfo = useSelector((state) => state.user.userInfo);
-  const items = useSelector((state)=> state.cart.items)
-  const product = useSelector((state)=> state.product.selectedProduct);
-  const params = useParams()
+  const items = useSelector((state) => state.cart.items);
+  const product = useSelector((state) => state.product.selectedProduct);
+  const params = useParams();
 
-  function handleCart(e){
-    e.preventDefault()
-    if(items.findIndex((item)=> item.product.id === product.id) < 0){
-      const newItem = {product: product.id, quantity:1, user: userInfo.id};
-      dispatch(addToCartAsync(newItem))
-    }
-    else{
-      console.log(`Already Added`);
-      
+  function handleCart(e) {
+    e.preventDefault();
+    if (items.findIndex((item) => item.product.id === product.id) < 0) {
+      const newItem = { product: product.id, quantity: 1, user: userInfo.id };
+      dispatch(addToCartAsync(newItem));
+      alert.s("Item Already Added");
+    } else {
+      alert.show("Item Already Added");
     }
   }
 
-
-  
-
-  // Earlier what we were doing here is we were creating a shallow copy of product and additionally adding quantity & userId who is adding the item in cart. and storing this data in cart array. But at that time we were also sending items real id and when someone else logs in and try to add the same item which is already added by someone else then we were facing error (500 duplicate id). 
+  // Earlier what we were doing here is we were creating a shallow copy of product and additionally adding quantity & userId who is adding the item in cart. and storing this data in cart array. But at that time we were also sending items real id and when someone else logs in and try to add the same item which is already added by someone else then we were facing error (500 duplicate id).
 
   // So did we solve this is by, creating an object name = newItem and from that object deleting the id key with its values and passing that into dispatch.
 
-  useEffect(()=>{    
-    dispatch(fetchSelectedProductAsync(params.id))
-  }, [dispatch, params.id])
+  useEffect(() => {
+    dispatch(fetchSelectedProductAsync(params.id));
+  }, [dispatch, params.id]);
 
-  return (
-    
-    product ? (<div>
+  return product ? (
+    <div>
       <div className="mx-auto max-w-5xl px-2 sm:px-6 lg:px-8 my-10">
         <div className="bg-white">
           <div className="pt-6">
@@ -74,26 +72,30 @@ const ProductDetails = () => {
                 role="list"
                 className="mx-auto flex max-w-2xl items-center space-x-2 px-4 sm:px-6 lg:max-w-7xl lg:px-8"
               >
-                {product.breadcrumbs && product.breadcrumbs.map((breadcrumb) => (
-              <li key={breadcrumb.id}>
-                <div className="flex items-center">
-                  <a href={breadcrumb.href} className="mr-2 text-sm font-medium text-gray-900">
-                    {breadcrumb.name}
-                  </a>
-                  <svg
-                    fill="currentColor"
-                    width={16}
-                    height={20}
-                    viewBox="0 0 16 20"
-                    aria-hidden="true"
-                    className="h-5 w-4 text-gray-300"
-                  >
-                    <path d="M5.697 4.34L8.98 16.532h1.327L7.025 4.341H5.697z" />
-                  </svg>
-                </div>
-              </li>
-            ))}
-                
+                {product.breadcrumbs &&
+                  product.breadcrumbs.map((breadcrumb) => (
+                    <li key={breadcrumb.id}>
+                      <div className="flex items-center">
+                        <a
+                          href={breadcrumb.href}
+                          className="mr-2 text-sm font-medium text-gray-900"
+                        >
+                          {breadcrumb.name}
+                        </a>
+                        <svg
+                          fill="currentColor"
+                          width={16}
+                          height={20}
+                          viewBox="0 0 16 20"
+                          aria-hidden="true"
+                          className="h-5 w-4 text-gray-300"
+                        >
+                          <path d="M5.697 4.34L8.98 16.532h1.327L7.025 4.341H5.697z" />
+                        </svg>
+                      </div>
+                    </li>
+                  ))}
+
                 <li className="text-sm">
                   <a
                     href={product.id}
@@ -283,13 +285,21 @@ const ProductDetails = () => {
                   </div>
 
                   <button
-                  onClick={handleCart}
+                    onClick={handleCart}
                     type="submit"
                     className="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                   >
                     Add to Cart
                   </button>
                 </form>
+
+                <button
+                  onClick={() => {
+                    alert.show("Oh look, an alert!");
+                  }}
+                >
+                  Show Alert
+                </button>
               </div>
 
               <div className="py-10 lg:col-span-2 lg:col-start-1 lg:border-r lg:border-gray-200 lg:pb-16 lg:pr-8 lg:pt-6">
@@ -314,11 +324,12 @@ const ProductDetails = () => {
                       role="list"
                       className="list-disc space-y-2 pl-4 text-sm"
                     >
-                      {product.highlights && product.highlights.map((highlight) => (
-                        <li key={highlight} className="text-gray-400">
-                          <span className="text-gray-600">{highlight}</span>
-                        </li>
-                      ))}
+                      {product.highlights &&
+                        product.highlights.map((highlight) => (
+                          <li key={highlight} className="text-gray-400">
+                            <span className="text-gray-600">{highlight}</span>
+                          </li>
+                        ))}
                     </ul>
                   </div>
                 </div>
@@ -335,10 +346,9 @@ const ProductDetails = () => {
           </div>
         </div>
       </div>
-    </div>) : <div>Loading...</div>
-
-    
-
+    </div>
+  ) : (
+    <div>Loading...</div>
   );
 };
 

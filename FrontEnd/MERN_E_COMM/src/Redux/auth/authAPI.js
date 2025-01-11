@@ -57,11 +57,11 @@ export async function logout(userId){
     }
 }
 
-export async function resetPassword(email){
+export async function resetPasswordRequest(email){
     
     try {
         let res = await axios({
-            url: `http://localhost:8080/auth/resetPassword`,
+            url: `http://localhost:8080/auth/resetPasswordRequest`,
             method: "post",
             data: {email: email}
         })
