@@ -28,14 +28,11 @@ const AdminOrders = () => {
   const [sort, setSort] = useState({});
   const status = useSelector((state) => state.order.status);
 
-  console.log(orderDetails);
 
   const totalPages = Math.ceil(totalOrders / limit);
   const indexOfLastItem = limit * page;
   const indexOfFirstItem = indexOfLastItem - limit;
 
-  // console.log(totalOrders);
-  // console.log(orderDetails);
 
   const centralFn = () => {
     const queryData = { ...sort, _page: page, _limit: limit };

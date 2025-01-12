@@ -1802,5 +1802,4 @@ const products = [
 
     const brandData = brand.map((ele)=> ({value:ele, label:ele.split("-").join(" ") , checked: false}))
 
-    console.log(brandData);
     

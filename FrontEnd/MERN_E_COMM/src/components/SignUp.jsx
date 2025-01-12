@@ -56,7 +56,6 @@ const SignUp = () => {
                   role: "user"
                 })
               );
-              console.log(data);
             })}
           >
             <div>

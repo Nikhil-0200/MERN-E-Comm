@@ -157,6 +157,7 @@ const productSlice = createSlice({
             if(index != -1){
                 state.products[index] = updatedItem
             }
+            state.selectedProduct = action.payload;
       });
 
   },

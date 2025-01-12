@@ -74,7 +74,6 @@ const UserProfile = () => {
   }
 
   function handleAdd(data) {
-    console.log(data);
     const newUser = JSON.parse(JSON.stringify(userDetails));
     newUser.addresses.push(data);
     dispatch(updateUserAsync(newUser));
