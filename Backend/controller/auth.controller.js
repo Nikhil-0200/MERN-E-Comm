@@ -111,9 +111,9 @@ exports.checkUser = async (req, res) => {
   }
 };
 
-exports.resetPassword = async (req, res) => {
+exports.resetPasswordRequest = async (req, res) => {
 
-  const resetPage = "http://localhost:8080/reset-password"
+  const resetPage = "http://localhost:8080/resetPassword"
   const subject = "reset password for e-commerce"
   const html = `<p>Click <a href="${resetPage}">here <a> to Reset Password</p>`
 

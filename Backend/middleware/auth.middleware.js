@@ -3,8 +3,8 @@ const jwt = require("jsonwebtoken");
 
 
 const authMiddleware = (req, res, next) =>{
-    // const accessToken = req.cookies.accessToken;
-    const accessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3N2NlMWI0MDdmNWY2MzRhY2JhY2U2ZSIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzM2NTQyNzAyLCJleHAiOjE3MzY2MjkxMDJ9.AXIbZxihqRDB76FFk0e-vvWe2NSy1QnIL76IiQLraJE";
+    const accessToken = req.cookies.accessToken;
+    // const accessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3N2QzMWE3ZmNmZDNmYjc4ZDlmNTIyNyIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTczNjcyMTE1NCwiZXhwIjoxNzM2ODA3NTU0fQ.Aesn-p5m83_izdPKrNqt05quq_s2eIZb0mCQb-pS1Q0";
 
     if(blacklistedToken.includes(accessToken)){
         res.status(401).json({msg: "Unauthorized"});
