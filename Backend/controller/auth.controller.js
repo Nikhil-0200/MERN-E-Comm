@@ -3,6 +3,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const cookie = require("cookie");
 const { sendMail } = require("../services/common");
+const blacklistedToken = require("../blacklist");
 
 exports.createUser = async (req, res) => {
   const { email, password, role, addresses, name } = req.body;
@@ -110,4 +111,18 @@ exports.resetPasswordRequest = async (req, res) => {
     const response = await sendMail({to: req.body.email, subject, html});
     res.json(response)
   }
+};
+
+
+exports.blacklistToken = async (req, res) => {
+  const { token } = req.body;
+
+  if (!token) {
+    return res.status(400).json({ msg: "Token is required." });
+  }
+
+  // Add the token to the blacklist
+  blacklistedToken.push(token);
+
+  res.status(200).json({ msg: "Token blacklisted successfully" });
 };
