@@ -23,7 +23,7 @@ const authMiddleware = require("./middleware/auth.middleware.js");
 
 server.use(
   cors({
-    credentials: true,
+    origin: "*",
     exposedHeaders: ["x-total-count"],
   })
 );
