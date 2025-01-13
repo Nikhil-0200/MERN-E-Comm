@@ -23,7 +23,6 @@ const authMiddleware = require("./middleware/auth.middleware.js");
 
 server.use(
   cors({
-    origin: "https://mern-e-comm-6bh8.onrender.com", 
     credentials: true,
     exposedHeaders: ["x-total-count"],
   })
