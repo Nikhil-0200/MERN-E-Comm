@@ -23,12 +23,12 @@ const authMiddleware = require("./middleware/auth.middleware.js");
 
 server.use(
   cors({
-    origin: ["http://localhost:8080", "https://mern-e-comm-6bh8.onrender.com"], 
+    origin: "https://mern-e-comm-6bh8.onrender.com", 
     credentials: true,
     exposedHeaders: ["x-total-count"],
   })
 );
-server.use(express.static("dist"));
+
 server.use(express.json());
 server.use(cookieParser());
 server.use("/products", authMiddleware, productRouter)
