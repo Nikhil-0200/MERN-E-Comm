@@ -55,27 +55,16 @@ exports.loginUser = async (req, res) => {
         const accessToken = jwt.sign(
           { id: findUser._id, role: findUser.role },
           process.env.JWT_SCERETKEY_1,
-          { expiresIn: "1day" }
+          { expiresIn: "1d" }
         );
 
         const refreshToken = jwt.sign(
           { id: findUser._id, role: findUser.role },
           process.env.JWT_SCERETKEY_2,
-          { expiresIn: "1day" }
+          { expiresIn: "7d" }
         );
 
-        const cookieOptions = {
-          httpOnly: true,
-          secure: false, // Change to true in production (HTTPS)
-          sameSite: "lax", // Use "none" for cross-origin
-          maxAge: 86400000, // 1 day 
-        };
 
-        res.cookie("accessToken", accessToken, cookieOptions);
-        res.cookie("refreshToken", refreshToken, {
-          ...cookieOptions,
-          maxAge: 86400000,
-        }); // 1 day
 
         res.status(201).json({
           msg: `Login successful`,
