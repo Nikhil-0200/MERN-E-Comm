@@ -1,14 +1,35 @@
 import axios from "axios";
 
-export async function fetchAllProducts() {
-  let res = await axios({
-    url: "http://localhost:8080/products",
-    method: "get",
-  });
+// Function to get the access token from localStorage
+const getAccessToken = () => {
+  return localStorage.getItem('accessToken');
+};
 
-  return res;
+// Function to get the headers for API requests, attaching the access token if available
+const getAuthHeaders = () => {
+  const token = getAccessToken();
+  if (token) {
+    return { Authorization: `Bearer ${token}` };
+  }
+  return {};
+};
+
+// Fetch All Products
+export async function fetchAllProducts() {
+  try {
+    let res = await axios({
+      url: "https://mern-e-comm-6bh8.onrender.com/products",
+      method: "get",
+      headers: getAuthHeaders(),  // Attach the access token here
+    });
+
+    return res;
+  } catch (error) {
+    throw new Error(`Error fetching all products: ${error}`);
+  }
 }
 
+// Fetch Filtered Products based on query
 export async function fetchAllProductsFilter(queryData) {
   let queryString = "";
 
@@ -24,8 +45,9 @@ export async function fetchAllProductsFilter(queryData) {
 
   try {
     let res = await axios({
-      url: `http://localhost:8080/products?${queryString}`,
+      url: `https://mern-e-comm-6bh8.onrender.com/products?${queryString}`,
       method: "get",
+      headers: getAuthHeaders(),  // Attach the access token here
     });
     const totalItems = res.headers["x-total-count"];
 
@@ -39,8 +61,9 @@ export async function fetchAllProductsFilter(queryData) {
 export async function fetchCategory() {
   try {
     let res = await axios({
-      url: "http://localhost:8080/category",
+      url: "https://mern-e-comm-6bh8.onrender.com/category",
       method: "get",
+      headers: getAuthHeaders(),  // Attach the access token here
     });
     return res;
   } catch (error) {
@@ -50,55 +73,58 @@ export async function fetchCategory() {
 
 // Fetching Brands Data
 export async function fetchBrands() {
-  
   try {
     let res = await axios({
-      url: "http://localhost:8080/brands",
+      url: "https://mern-e-comm-6bh8.onrender.com/brands",
       method: "get",
+      headers: getAuthHeaders(),  // Attach the access token here
     });
-    return res;  
+    return res;
   } catch (error) {
     throw new Error(`Error fetching brands: ${error}`);
-  }  
-}
-
-// SelectedProduct
-
-export async function fetchSelectedProduct(id) {
-
-  try {
-    let res = await axios({
-      url: `http://localhost:8080/products/${id}`,
-      method: "get",
-    });
-    return res;  
-  } catch (error) {
-    throw new Error(`Error fetching productByID: ${error}`);
   }
 }
 
+// Fetching a Single Product by ID
+export async function fetchSelectedProduct(id) {
+  try {
+    let res = await axios({
+      url: `https://mern-e-comm-6bh8.onrender.com/products/${id}`,
+      method: "get",
+      headers: getAuthHeaders(),  // Attach the access token here
+    });
+    return res;
+  } catch (error) {
+    throw new Error(`Error fetching product by ID: ${error}`);
+  }
+}
+
+// Create a new Product
 export async function createProduct(product) {
   try {
     let res = await axios({
-      url: "http://localhost:8080/products",
+      url: "https://mern-e-comm-6bh8.onrender.com/products",
       method: "post",
       data: product,
+      headers: getAuthHeaders(),  // Attach the access token here
     });
     return res.data;
   } catch (error) {
-    throw new Error(`Failed to create product ${error}`);
+    throw new Error(`Failed to create product: ${error}`);
   }
 }
 
+// Update an Existing Product
 export async function updateProduct(update) {
   try {
     let res = await axios({
-      url: `http://localhost:8080/products/${update.id}`,
+      url: `https://mern-e-comm-6bh8.onrender.com/products/${update.id}`,
       method: "patch",
       data: update,
+      headers: getAuthHeaders(),  // Attach the access token here
     });
     return res.data;
   } catch (error) {
-    throw new Error(`Error getting update item: ${error}`);
+    throw new Error(`Error updating product: ${error}`);
   }
 }

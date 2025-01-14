@@ -1,11 +1,24 @@
 import axios from "axios";
 
+const getAccessToken = () => {
+    return localStorage.getItem('accessToken');
+};
+
+const getAuthHeaders = () => {
+    const token = getAccessToken();
+    if (token) {
+      return { Authorization: `Bearer ${token}` };
+    }
+    return {};
+}
+
 export async function addOrderData(data){
     try {
         let res = await axios({
-            url: "http://localhost:8080/orders",
+            url: "https://mern-e-comm-6bh8.onrender.com/orders",
             method: "post",
-            data: data
+            data: data,
+            headers: getAuthHeaders(),
         })
         return res
     } catch (error) {
@@ -31,8 +44,9 @@ export async function fetchAllOrders(queryData){
 
     try {
         let res = await axios({
-            url: `http://localhost:8080/orders?${queryString}`,
-            method: "get"
+            url: `https://mern-e-comm-6bh8.onrender.com/orders?${queryString}`,
+            method: "get",
+            headers: getAuthHeaders(),
         })
         const orders = res.data;
         const totalOrders = parseInt(res.headers['x-total-count'], 10) || 0;
@@ -46,9 +60,10 @@ export async function fetchAllOrders(queryData){
 export async function updateOrders(OrderData){
   try {
       let res = await axios({
-          url: `http://localhost:8080/orders/${OrderData.id}`,
+          url: `https://mern-e-comm-6bh8.onrender.com/orders/${OrderData.id}`,
           method: "patch",
-          data: {status: OrderData.status}
+          data: {status: OrderData.status},
+          headers: getAuthHeaders(),
       })
       return res
   } catch (error) {

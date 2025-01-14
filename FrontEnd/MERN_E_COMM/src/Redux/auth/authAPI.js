@@ -2,82 +2,99 @@ import { data } from "autoprefixer";
 import axios from "axios";
 import { Navigate } from "react-router-dom";
 
-export async function createUser(data){
-    try {
-        let res = await axios({
-            url:"http://localhost:8080/auth/signup",
-            method: "post",
-            data: data
-        })
-        return res.data
-    } catch (error) {
-        throw new Error(`Failed to create user`)
+export async function createUser(data) {
+  try {
+    let res = await axios({
+      url: "https://mern-e-comm-6bh8.onrender.com/auth/signup",
+      method: "post",
+      data: data,
+    });
+    if (res.status === 201) {
+      // After signup, navigate to login page
+      navigate("/login");
+      return res.data; // Return the response in case you need it for further use
     }
+  } catch (error) {
+    throw new Error(`Failed to create user`);
+  }
 }
 
-export async function loginUser(loginInfo){
-    
-    try {
-        let res = await axios({
-            url: `http://localhost:8080/auth/login`,
-            method: "post",
-            data: loginInfo
-        })
+export async function loginUser(loginInfo) {
+  try {
+    let res = await axios({
+      url: `https://mern-e-comm-6bh8.onrender.com/auth/login`,
+      method: "post",
+      data: loginInfo,
+    });
 
-        
-        return res.data
+    // Store tokens in localStorage
+    localStorage.setItem("accessToken", res.data.accessToken);
+    localStorage.setItem("refreshToken", res.data.refreshToken);
 
-    } catch (error) {
-        throw new Error(error.response?.data?.msg || `Invalid Login Credentials`)
-        
-    }
+    return res.data;
+  } catch (error) {
+    throw new Error(error.response?.data?.msg || `Invalid Login Credentials`);
+  }
 }
 
-export async function checkUser(){
-    
-    try {
-        let res = await axios({
-            url: `http://localhost:8080/auth/check`,
-            method: "get",
-        })
+export async function checkUser() {
+  try {
+    const token = localStorage.getItem("accessToken");
 
-        
-        return res.data
-
-    } catch (error) {
-        return error
+    if (!token) {
+      return null; // No token means the user is not logged in
     }
+
+    let res = await axios({
+      url: `https://mern-e-comm-6bh8.onrender.com/auth/check`,
+      method: "get",
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+
+    return res.data;  // Assuming this contains user info when authenticated
+  } catch (error) {
+    return null; // If an error occurs (e.g., token expired), assume user is not logged in
+  }
 }
 
-export async function logout(userId){
+  
+
+  export async function logout() {
     try {
-        return `User Logout Successfully`
+      const token = localStorage.getItem("accessToken");
+
+      await axios.post("https://mern-e-comm-6bh8.onrender.com/auth/blacklist", { token });
+
+      localStorage.removeItem("accessToken");
+      localStorage.removeItem("refreshToken");
+  
+      // Redirect to login page
+      Navigate("/login");
+      return "User Logout Successfully";
     } catch (error) {
-        throw new Error(`Failed to Logout`)
+      throw new Error(`Failed to Logout`);
     }
-}
+  }
+export async function resetPasswordRequest(email) {
+  try {
+    let res = await axios({
+      url: `https://mern-e-comm-6bh8.onrender.com/auth/resetPasswordRequest`,
+      method: "post",
+      data: { email: email },
+    });
 
-export async function resetPasswordRequest(email){
-    
-    try {
-        let res = await axios({
-            url: `http://localhost:8080/auth/resetPasswordRequest`,
-            method: "post",
-            data: {email: email}
-        })
-
-        
-        return res.data
-
-    } catch (error) {
-        return error
-    }
+    return res.data;
+  } catch (error) {
+    return error;
+  }
 }
 
 // export async function updateUser(update){
 //     try {
 //         let res = await axios({
-//             url: `http://localhost:8080/users/${update.id}`,
+//             url: `https://mern-e-comm-6bh8.onrender.com/users/${update.id}`,
 //             method: "patch",
 //             data: update
 //         })
@@ -87,4 +104,4 @@ export async function resetPasswordRequest(email){
 //     }
 // }
 
-// We were using updateUser first in Auth but now have moved to userAPI. 
+// We were using updateUser first in Auth but now have moved to userAPI.

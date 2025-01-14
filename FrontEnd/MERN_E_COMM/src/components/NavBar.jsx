@@ -15,6 +15,7 @@ import {
 import { useSelector } from "react-redux";
 import { Link, Navigate, useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import image from '../assets/7931845.jpg';
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -65,8 +66,8 @@ const NavBar = () => {
                 <img
                 onClick={()=> navigate("/")}
                   alt="Your Company"
-                  src="https://tailwindui.com/plus/img/logos/mark.svg?color=indigo&shade=500"
-                  className="h-8 w-auto"
+                  src="https://img.icons8.com/?size=100&id=5_UP3A7vjD06&format=png&color=000000"
+                  className="h-10 w-auto"
                 />
               </div>
               <div className="hidden sm:ml-6 sm:block">

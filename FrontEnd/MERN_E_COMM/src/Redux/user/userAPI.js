@@ -1,39 +1,60 @@
 import axios from "axios"
 
-export async function fetchLoggedInUserOrder(){
-    try {
-        let res = await axios({
-            url: `http://localhost:8080/orders/own`,
-            method: "get"  
-        })
-        return res
-    } catch (error) {
-        throw new Error(`Failed to fetch order data: ${error}`)
-    }
-} 
+const getAccessToken = () => {
+    return localStorage.getItem('accessToken');
+};
 
-export async function fetchLoggedInUser(){
-    try {
-        let res = await axios({
-            url: `http://localhost:8080/users`,
-            method: "get"  
-        })
-        return res
-    } catch (error) {
-        throw new Error(`Failed to fetch order data: ${error}`)
+const getAuthHeaders = () => {
+    const token = getAccessToken();
+    if (token) {
+      return { Authorization: `Bearer ${token}` };
     }
-} 
-
-
-export async function updateUser(update){
-    try {
-        let res = await axios({
-            url: `http://localhost:8080/users/${update.id}`,
-            method: "patch",
-            data: update
-        })
-        return res.data
-    } catch (error) {
-        throw new Error(`Failed to update address`)
-    }
+    return {};
 }
+
+export async function fetchLoggedInUserOrder() {
+    try {
+      const token = localStorage.getItem("accessToken");
+  
+      let res = await axios({
+        url: `https://mern-e-comm-6bh8.onrender.com/orders/own`,
+        method: "get",
+        headers: getAuthHeaders(),
+      });
+      return res;
+    } catch (error) {
+      throw new Error(`Failed to fetch order data: ${error}`);
+    }
+  }
+
+  export async function fetchLoggedInUser() {
+    try {
+      const token = localStorage.getItem("accessToken");
+  
+      let res = await axios({
+        url: `https://mern-e-comm-6bh8.onrender.com/users`,
+        method: "get",
+        headers: getAuthHeaders(),
+      });
+      return res;
+    } catch (error) {
+      throw new Error(`Failed to fetch user data: ${error}`);
+    }
+  }
+
+
+  export async function updateUser(update) {
+    try {
+      const token = localStorage.getItem("accessToken");
+  
+      let res = await axios({
+        url: `https://mern-e-comm-6bh8.onrender.com/users/${update.id}`,
+        method: "patch",
+        headers: getAuthHeaders(),
+        data: update,
+      });
+      return res.data;
+    } catch (error) {
+      throw new Error(`Failed to update user information: ${error}`);
+    }
+  }

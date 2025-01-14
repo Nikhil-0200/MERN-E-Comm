@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
-import { loginUser, createUser, logout, checkUser, resetPasswordRequest} from "./authAPI"
+import { loginUser, createUser, logout, resetPasswordRequest, checkUser} from "./authAPI"
 
 export const initialState = {
     loggedIn: null, // Will be used only for user ID and Auth
@@ -37,11 +37,17 @@ export const checkUserAsync = createAsyncThunk(
 
 export const logoutAsync = createAsyncThunk(
     "user/logout",
-    async (loginInfo) =>{
-        const response = await logout(loginInfo);
-        return response
+    async (loginInfo, { dispatch }) => {
+      await logout(loginInfo);
+      // After logout, check if the user is still logged in
+      const response = await dispatch(checkUserAsync());
+      if (!response.payload) {
+        // If no user is found, navigate to the login page
+        Navigate("/login");
+      }
+      return "User Logout Successfully";  // Optional message
     }
-)
+  );
 
 export const resetPasswordRequestAsync = createAsyncThunk(
     "user/resetPasswordRequest",

@@ -9,7 +9,7 @@ const UserOrder = () => {
   const user = useSelector((state) => state.auth.loggedIn);
   const dispatch = useDispatch();
   const orders = useSelector((state) => state.user.order);
-  const userChecked = useSelector((state) => state.auth.userChecked);
+  // const userChecked = useSelector((state) => state.auth.userChecked);
   const status = useSelector((state) => state.user.status);
   
 

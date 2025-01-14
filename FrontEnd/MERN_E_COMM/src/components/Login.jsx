@@ -6,16 +6,15 @@ import { InfinitySpin } from "react-loader-spinner";
 
 const Login = () => {
   const dispatch = useDispatch();
-  const error = useSelector((state)=> state.auth.error)
-  const user = useSelector((state)=> state.auth.loggedIn)
+  const error = useSelector((state) => state.auth.error);
+  const user = useSelector((state) => state.auth.loggedIn);
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors },
   } = useForm();
-  const status = useSelector((state) => state.auth.status); 
-
+  const status = useSelector((state) => state.auth.status);
 
   return (
     <div>
@@ -29,12 +28,12 @@ const Login = () => {
           />
         </div>
       )}
-      {user && <Navigate to="/" />}
+      {user ? <Navigate to="/" replace /> : null}
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8 ">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <img
             alt="Your Company"
-            src="https://tailwindui.com/plus/img/logos/mark.svg?color=indigo&shade=600"
+            src="https://img.icons8.com/?size=100&id=5_UP3A7vjD06&format=png&color=000000"
             className="mx-auto h-10 w-auto"
           />
           <h2 className="mt-10 text-center text-2xl/9 font-bold tracking-tight text-gray-900">
@@ -43,15 +42,15 @@ const Login = () => {
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-
           {error && <p>{error.message}</p>}
-
 
           <form
             noValidate
             className="space-y-6"
             onSubmit={handleSubmit(async (data) => {
-              await dispatch(loginUserAsync({email: data.email, password: data.password}))
+              await dispatch(
+                loginUserAsync({ email: data.email, password: data.password })
+              );
             })}
           >
             <div>
