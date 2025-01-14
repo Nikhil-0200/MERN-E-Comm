@@ -37,17 +37,13 @@ export const checkUserAsync = createAsyncThunk(
 
 export const logoutAsync = createAsyncThunk(
     "user/logout",
-    async (loginInfo, { dispatch }) => {
-      await logout(loginInfo);
-      // After logout, check if the user is still logged in
+    async (_, { dispatch }) => {
+      await logout();
       const response = await dispatch(checkUserAsync());
-      if (!response.payload) {
-        // If no user is found, navigate to the login page
-        Navigate("/login");
-      }
-      return "User Logout Successfully";  // Optional message
+      return response.payload;
     }
   );
+  
 
 export const resetPasswordRequestAsync = createAsyncThunk(
     "user/resetPasswordRequest",

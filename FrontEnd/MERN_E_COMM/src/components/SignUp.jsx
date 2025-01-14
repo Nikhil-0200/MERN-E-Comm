@@ -15,8 +15,8 @@ const SignUp = () => {
 
   const user = useSelector((state) => state.auth.loggedIn);
   const dispatch = useDispatch();
-  const status = useSelector((state) => state.auth.status);  // Assuming the status is in auth slice
-  const [redirectToLogin, setRedirectToLogin] = useState(false); // State to control redirection after signup
+  const status = useSelector((state) => state.auth.status);  
+  const [redirectToLogin, setRedirectToLogin] = useState(false); 
 
   const onSubmit = async (data) => {
     try {
@@ -29,20 +29,17 @@ const SignUp = () => {
         })
       );
 
-      // After successful signup, redirect to login page
       setRedirectToLogin(true); 
     } catch (err) {
       console.error("Signup error:", err);
-      // Handle error if necessary
     }
   };
 
   if (redirectToLogin) {
-    return <Navigate to="/login" />; // Redirect to login page after successful signup
+    return <Navigate to="/login" />;
   }
 
   if (user) {
-    // Redirect to home page if already logged in
     return <Navigate to="/" />;
   }
 
@@ -75,7 +72,7 @@ const SignUp = () => {
           <form
             noValidate
             className="space-y-6"
-            onSubmit={handleSubmit(onSubmit)} // Use onSubmit handler for form submission
+            onSubmit={handleSubmit(onSubmit)}
           >
             <div>
               <label htmlFor="email" className="block text-sm font-medium text-gray-900">

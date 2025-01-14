@@ -10,9 +10,8 @@ export async function createUser(data) {
       data: data,
     });
     if (res.status === 201) {
-      // After signup, navigate to login page
       navigate("/login");
-      return res.data; // Return the response in case you need it for further use
+      return res.data;
     }
   } catch (error) {
     throw new Error(`Failed to create user`);
@@ -61,22 +60,27 @@ export async function checkUser() {
 
   
 
-  export async function logout() {
-    try {
-      const token = localStorage.getItem("accessToken");
+export async function logout() {
+  try {
+    const token = localStorage.getItem("accessToken");
 
-      await axios.post("https://mern-e-comm-6bh8.onrender.com/auth/blacklist", { token });
-
-      localStorage.removeItem("accessToken");
-      localStorage.removeItem("refreshToken");
-  
-      // Redirect to login page
-      Navigate("/login");
-      return "User Logout Successfully";
-    } catch (error) {
-      throw new Error(`Failed to Logout`);
+    if (!token) {
+      throw new Error("No token found");
     }
+
+    await axios.post("https://mern-e-comm-6bh8.onrender.com/auth/blacklist", { token });
+
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("refreshToken");
+
+    // Return a success message or flag
+    return "User Logout Successfully";
+  } catch (error) {
+    throw new Error(`Failed to Logout: ${error.message}`);
   }
+}
+
+
 export async function resetPasswordRequest(email) {
   try {
     let res = await axios({
