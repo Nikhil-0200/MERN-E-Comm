@@ -112,7 +112,9 @@ exports.resetPasswordRequest = async (req, res) => {
 
     bcrypt.hash(email, 10, async function (err, hash) {
       if (err) {
-        return res.status(404).json({ msg: `Error generating reset password token ${err}` });
+        return res
+          .status(404)
+          .json({ msg: `Error generating reset password token ${err}` });
       }
 
       // Update existing user instead of creating new one
@@ -133,7 +135,52 @@ exports.resetPasswordRequest = async (req, res) => {
       }
     });
   } catch (error) {
-    res.status(500).json({ msg: `Error occurred during password reset request: ${error}` });
+    res
+      .status(500)
+      .json({ msg: `Error occurred during password reset request: ${error}` });
+  }
+};
+
+exports.resetPassword = async (req, res) => {
+  const { email, password, token } = req.body;
+
+  try {
+    let findUser = await userModel
+      .findOne({ email: email, resetPasswordToken: token })
+      .exec();
+
+    if (!findUser) {
+      return res.status(404).json({ msg: "User not found" });
+    }
+
+    bcrypt.hash(password, 10, async function (err, hash) {
+      if (err) {
+        return res
+          .status(404)
+          .json({ msg: `Error generating reset password token ${err}` });
+      }
+
+        findUser.password = hash;
+        await findUser.save();
+
+        const subject = "Password Reset Confirmation";
+        const html = `<p>Your password has been successfully reset.</p>`;
+
+        if (email) {
+          const response = await sendMail({
+            to: email,
+            subject,
+            html,
+          });
+          res.json(response);
+        }
+
+        res.status(200).json({ msg: "Password reset successfully" });
+    });
+  } catch (error) {
+    res
+      .status(500)
+      .json({ msg: `Error occurred during password reset request: ${error}` });
   }
 };
 

@@ -8,6 +8,7 @@ authRouter
   .post("/login", loginUser)
   .get("/check", authMiddleware, checkUser)
   .post("/resetPasswordRequest", resetPasswordRequest)
+  .post("/resetPassword", resetPassword)
   .post("/blacklist", blacklistToken);
 
 module.exports = authRouter;
