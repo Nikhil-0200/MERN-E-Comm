@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, Navigate } from "react-router-dom";
 import {
   checkUserAsync,
+  resetPasswordAsync,
   resetPasswordRequestAsync,
 } from "../Redux/auth/authSlice";
 
@@ -10,6 +11,13 @@ const ResetPassword = () => {
   const dispatch = useDispatch();
   const error = useSelector((state) => state.auth.error);
   const user = useSelector((state) => state.auth.loggedIn);
+  const passwordReset = useSelector((state)=> state.auth.passwordReset);
+  const query = new URLSearchParams(window.location.search);
+  const token = query.get("token");
+  const email = query.get("email");
+
+  console.log(token, email);
+
   const {
     register,
     handleSubmit,
@@ -18,7 +26,8 @@ const ResetPassword = () => {
   } = useForm();
 
   return (
-    <div>
+    <>
+    {(email && token) ? (<div>
       {user && <Navigate to="/" />}
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8 ">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
@@ -33,13 +42,19 @@ const ResetPassword = () => {
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          {error && <p>{error.message}</p>} 
+        {error && (<p>{error.message}</p>
+          )}
+          {
+            passwordReset && (<p>Password Reset Successfully</p>)
+          }
+
 
           <form
             noValidate
             className="space-y-6"
             onSubmit={handleSubmit(async (data) => {
-              // dispatch(resetPasswordRequestAsync(data.email));
+              // console.log(data.password);
+              dispatch(resetPasswordAsync({email, token, password: data.password}));
             })}
           >
             <div>
@@ -115,7 +130,9 @@ const ResetPassword = () => {
 
         </div>
       </div>
-    </div>
+    </div>)
+    : (<p>Incorrect Link</p>)}
+    </>
   );
 };
 

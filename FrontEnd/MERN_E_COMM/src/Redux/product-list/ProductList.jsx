@@ -401,8 +401,8 @@ const ProductList = () => {
                                 >
                                   <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-64">
                                     <img
-                                      alt={product.images}
-                                      src={product.images}
+                                      alt={product.title}
+                                      src={Array.isArray(product.images) ? product.images[0] : product.thumbnail}
                                       className="h-full w-full object-cover object-center lg:h-full lg:w-full"
                                     />
                                   </div>

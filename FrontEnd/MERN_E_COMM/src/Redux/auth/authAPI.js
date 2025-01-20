@@ -95,6 +95,20 @@ export async function resetPasswordRequest(email) {
   }
 }
 
+export async function resetPassword(data) {
+  try {
+    let res = await axios({
+      url: `https://mern-e-comm-6bh8.onrender.com/auth/resetPassword`,
+      method: "post",
+      data: data,
+    });
+
+    return res.data;
+  } catch (error) {
+    return error;
+  }
+}
+
 // export async function updateUser(update){
 //     try {
 //         let res = await axios({
