@@ -8,6 +8,7 @@ const userSchema = mongoose.Schema(
         addresses: {type: [Schema.Types.Mixed]},
         // We can make a separate schema for this.
         name:{type: String},
+        resetPasswordToken: {type: String, default: ""}
     },{
         versionKey: false,
         timestamps: true,

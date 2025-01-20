@@ -14,12 +14,6 @@ const cartRouter = require("./routes/cart.router.js");
 const orderRouter = require("./routes/order.router.js");
 const authMiddleware = require("./middleware/auth.middleware.js");
 
-// Emails
-
-
-
-
-// middleware
 
 server.use(
   cors({
@@ -58,9 +52,9 @@ server.get("/newAccessToken", (req, res)=>{
      }
 
      const newAccessToken = jwt.sign(
-      { id: decoded.id, role: decoded.role }, // Payload (modify as per your needs)
+      { id: decoded.id, role: decoded.role }, 
       process.env.JWT_SCERETKEY_2,
-      { expiresIn: "15m" } // Set the expiration time for the access token
+      { expiresIn: "15m" }
     );
 
     res.status(200).json({ accessToken: newAccessToken });

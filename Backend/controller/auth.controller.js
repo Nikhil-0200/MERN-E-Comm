@@ -65,8 +65,6 @@ exports.loginUser = async (req, res) => {
           { expiresIn: "7d" }
         );
 
-
-
         res.status(201).json({
           msg: `Login successful`,
           accessToken,
@@ -94,25 +92,54 @@ exports.checkUser = async (req, res) => {
 
     // If both are present, send them back in the response
     return res.status(200).json({ userId, role }); // Return userId and role
-
   } catch (error) {
     // Catch any other errors and respond with a generic error message
-    return res.status(500).json({ msg: `Error occurred, please try again later.`, error });
+    return res
+      .status(500)
+      .json({ msg: `Error occurred, please try again later.`, error });
   }
 };
 
 exports.resetPasswordRequest = async (req, res) => {
+  const email = req.body.email;
 
-  const resetPage = "http://localhost:8080/resetPassword"
-  const subject = "reset password for e-commerce"
-  const html = `<p>Click <a href="${resetPage}">here <a> to Reset Password</p>`
+  const user = await userModel.findOne({ email }).exec();
 
-  if(req.body.email){
-    const response = await sendMail({to: req.body.email, subject, html});
-    res.json(response)
+  if (!user) {
+    return res.status(404).json({ msg: "User not found" });
+  }
+
+  if (user) {
+    bcrypt.hash(email, 10, async function (err, hash) {
+      if (err) {
+        res
+          .status(404)
+          .json({ msg: `Error generating reset password token ${err}` });
+      } else {
+        const user = new userModel({
+          resetPasswordToken: hash,
+        });
+
+        await user.save();
+
+        const resetPage = `http://localhost:8080/resetPassword?token=${hash}&email=${email}`;
+        const subject = "reset password for e-commerce";
+        const html = `<p>Click <a href="${resetPage}">here <a> to Reset Password</p>`;
+
+        // lets send email and resetToken in the mail body so that we can verify that the user has clicked right link
+
+        if (email) {
+          const response = await sendMail({
+            to: email,
+            subject,
+            html,
+          });
+          res.json(response);
+        }
+      }
+    });
   }
 };
-
 
 exports.blacklistToken = async (req, res) => {
   const { token } = req.body;
