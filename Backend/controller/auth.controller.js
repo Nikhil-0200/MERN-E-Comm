@@ -103,41 +103,37 @@ exports.checkUser = async (req, res) => {
 exports.resetPasswordRequest = async (req, res) => {
   const email = req.body.email;
 
-  const user = await userModel.findOne({ email }).exec();
+  try {
+    const user = await userModel.findOne({ email }).exec();
 
-  if (!user) {
-    return res.status(404).json({ msg: "User not found" });
-  }
+    if (!user) {
+      return res.status(404).json({ msg: "User not found" });
+    }
 
-  if (user) {
     bcrypt.hash(email, 10, async function (err, hash) {
       if (err) {
-        res
-          .status(404)
-          .json({ msg: `Error generating reset password token ${err}` });
-      } else {
-        const user = new userModel({
-          resetPasswordToken: hash,
+        return res.status(404).json({ msg: `Error generating reset password token ${err}` });
+      }
+
+      // Update existing user instead of creating new one
+      user.resetPasswordToken = hash;
+      await user.save();
+
+      const resetPage = `http://localhost:8080/resetPassword?token=${hash}&email=${email}`;
+      const subject = "reset password for e-commerce";
+      const html = `<p>Click <a href="${resetPage}">here</a> to Reset Password</p>`;
+
+      if (email) {
+        const response = await sendMail({
+          to: email,
+          subject,
+          html,
         });
-
-        await user.save();
-
-        const resetPage = `http://localhost:8080/resetPassword?token=${hash}&email=${email}`;
-        const subject = "reset password for e-commerce";
-        const html = `<p>Click <a href="${resetPage}">here <a> to Reset Password</p>`;
-
-        // lets send email and resetToken in the mail body so that we can verify that the user has clicked right link
-
-        if (email) {
-          const response = await sendMail({
-            to: email,
-            subject,
-            html,
-          });
-          res.json(response);
-        }
+        res.json(response);
       }
     });
+  } catch (error) {
+    res.status(500).json({ msg: `Error occurred during password reset request: ${error}` });
   }
 };
 
