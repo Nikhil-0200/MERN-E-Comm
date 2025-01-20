@@ -167,18 +167,17 @@ exports.resetPassword = async (req, res) => {
         const html = `<p>Your password has been successfully reset.</p>`;
 
         if (email) {
-          const response = await sendMail({
+          await sendMail({
             to: email,
             subject,
             html,
           });
-          res.json(response);
         }
 
-        res.status(200).json({ msg: "Password reset successfully" });
+        return res.status(200).json({ msg: "Password reset successfully" });
     });
   } catch (error) {
-    res
+    return res
       .status(500)
       .json({ msg: `Error occurred during password reset request: ${error}` });
   }
