@@ -6,10 +6,10 @@ exports.addOrderData = async (req, res) => {
   const orderData = new orderModel(req.body);
 
   try {
-    const user = userModel.findById(orderData.user);
+    const user = await userModel.findById(orderData.user);
     await orderData.save();
 
-    sendMail({
+    await sendMail({
       to: user.email,
       subject: "Order Placed Successfully",
       html: invoiceTemplate(orderData),
