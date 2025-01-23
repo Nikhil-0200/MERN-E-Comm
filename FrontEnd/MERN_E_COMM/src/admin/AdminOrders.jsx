@@ -111,10 +111,25 @@ const AdminOrders = () => {
                           <ArrowUpCircleIcon className="w-4 h-4" />
                         ) : (
                           <ArrowDownCircleIcon className="w-4 h-4" />
-                        ))}
+                        ))} 
                     </th>
                     <th className="py-3 px-6 text-left">Items</th>
-                    <th className="py-3 px-6 text-center">total amount</th>
+                    <th className="py-3 px-6 text-center"
+                    onClick={(e) =>
+                      handleSort({
+                        sort: "totalAmount",
+                        order: sort?._order == "desc" ? "asc" : "desc",
+                      })
+                    }
+                    >
+                      total amount
+                    {sort._sort === "totalAmount" &&
+                        (sort._order === "desc" ? (
+                          <ArrowUpCircleIcon className="w-4 h-4" />
+                        ) : (
+                          <ArrowDownCircleIcon className="w-4 h-4" />
+                        ))} 
+                    </th>
                     <th className="py-3 px-6 text-center">Shipping address</th>
                     <th className="py-3 px-6 text-center">Status</th>
                     <th className="py-3 px-6 text-center">Actions</th>
