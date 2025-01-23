@@ -1,10 +1,20 @@
 const orderModel = require("../model/order.model");
+const userModel = require("../model/user.model");
+const { sendMail, invoiceTemplate } = require("../services/common");
 
 exports.addOrderData = async (req, res) => {
   const orderData = new orderModel(req.body);
 
   try {
+    const user = userModel.findById(orderData.user);
     await orderData.save();
+
+    sendMail({
+      to: user.email,
+      subject: "Order Placed Successfully",
+      html: invoiceTemplate(orderData),
+    })
+
     res.status(201).json(orderData);
   } catch (error) {
     res
