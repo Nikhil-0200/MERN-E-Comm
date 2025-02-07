@@ -34,7 +34,7 @@ const NavBar = () => {
   const navigation = [
     { name: "Dashboard", to: "/", current: location.pathname === "/", role: "user" },
     { name: "LogIn", to: "/login", current: location.pathname === "/login", role: "guest"},
-    { name: "SignUp", to: "/signUp", current: location.pathname === "/signUp", role: "guest" },
+    // { name: "SignUp", to: "/signUp", current: location.pathname === "/signUp", role: "guest" },
     { name: "Admin", to: "/admin", current: location.pathname === "/admin", role: "admin" },
     { name: "Orders", to: "/admin/orders", current: location.pathname === "/orders", role: "admin" },
   ];

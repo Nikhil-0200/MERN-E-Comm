@@ -7,11 +7,12 @@ import {
   fetchSelectedProductAsync,
   updateProductAsync,
 } from "../Redux/product-list/productListSlice";
-import { useParams } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Modal from "./Modal";
 
 const AdminProductForm = () => {
+  const navigate = useNavigate();
   const { id } = useParams();
   const dispatch = useDispatch();
   const category = useSelector((state) => state.product.category);
@@ -36,7 +37,7 @@ const AdminProductForm = () => {
   }, [id, dispatch]);
 
   useEffect(() => {
-    if (selectedProduct) {
+    if (id && selectedProduct) {
       setValue("title", selectedProduct.title);
       setValue("description", selectedProduct.description);
       setValue("brand", selectedProduct.brand);
@@ -55,6 +56,7 @@ const AdminProductForm = () => {
     const product = { ...selectedProduct };
     product.deleted = true;
     dispatch(updateProductAsync(product));
+    navigate("/admin");
   }
 
   return (
@@ -79,8 +81,9 @@ const AdminProductForm = () => {
             reset();
           } else {
             dispatch(createProductAsync(product));
-            reset();
           }
+          reset();
+          navigate("/admin");
         })}
         className="border-2 border-black"
       >
@@ -538,7 +541,7 @@ const AdminProductForm = () => {
         <div className="mt-6 flex items-center justify-end gap-x-6">
           <button
             type="button"
-            onClick={()=> reset()}
+            onClick={()=> navigate("/admin")}
             className="text-sm/6 font-semibold text-gray-900"
           >
             Cancel

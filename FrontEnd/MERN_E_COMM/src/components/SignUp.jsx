@@ -1,7 +1,7 @@
 import { Link, Navigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useSelector, useDispatch } from "react-redux";
-import { createUserAsync } from "../Redux/auth/authSlice";
+import { createUserAsync, loginUserAsync } from "../Redux/auth/authSlice";
 import { InfinitySpin } from "react-loader-spinner";
 import { useState } from "react";
 
@@ -28,6 +28,11 @@ const SignUp = () => {
           role: "user",
         })
       );
+
+      await dispatch(loginUserAsync({
+        email: data.email,
+        password: data.password,
+      }));
 
       setRedirectToLogin(true); 
     } catch (err) {

@@ -63,6 +63,9 @@ const ProductList = () => {
     // Shallow Copy Of filterData Object
     const newFilterData = { ...filterData };
 
+
+    console.log(filterData)
+
     if (checkedStatus) {
       // Now in this object we have to store data like this -> {category: ["beauty", "groceries"]}
 
@@ -180,6 +183,8 @@ const ProductList = () => {
                 {/* Filters */}
                 <form className="mt-4 border-t border-gray-200">
                   <h3 className="sr-only">Categories</h3>
+
+                  
 
                   {filters.map((section) => (
                     <Disclosure
