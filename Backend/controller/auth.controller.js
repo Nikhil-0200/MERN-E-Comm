@@ -121,7 +121,7 @@ exports.resetPasswordRequest = async (req, res) => {
       user.resetPasswordToken = hash;
       await user.save();
 
-      const resetPage = `http://localhost:8080/resetPassword?token=${hash}&email=${email}`;
+      const resetPage = `http://splendid-cuchufli-0a268f.netlify.app/resetPassword?token=${hash}&email=${email}`;
       const subject = "reset password for e-commerce";
       const html = `<p>Click <a href="${resetPage}">here</a> to Reset Password</p>`;
 
